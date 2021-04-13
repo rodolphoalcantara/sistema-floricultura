@@ -8,10 +8,7 @@ package br.com.floricultura.sistema.model;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author Rodolpho Alcântara
- */
+
 public class Produto {
     private int id;
     private String nome;
@@ -19,4 +16,7 @@ public class Produto {
     private int estoque;
     private String tipo;
     private String descricao;
+    
+    
+    
 }

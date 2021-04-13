@@ -5,10 +5,9 @@
  */
 package br.com.floricultura.sistema.view;
 
-import javax.security.auth.callback.ConfirmationCallback;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 /**
  *
@@ -19,11 +18,15 @@ public class VendaView extends javax.swing.JFrame {
     /**
      * Creates new form VendaView
      */
+    
+    private DefaultTableModel tableModel;
+    
     public VendaView() {
         initComponents();
         cboProduto.setEnabled(false);
         btnAlterarCliente.setEnabled(false);
-             
+        btnDeletar.setEnabled(false);
+        tableModel = (DefaultTableModel)tblCarrinho.getModel();
     }
 
     /**
@@ -40,18 +43,17 @@ public class VendaView extends javax.swing.JFrame {
         lblCliente = new javax.swing.JLabel();
         lblProduto = new javax.swing.JLabel();
         lblQuantidade = new javax.swing.JLabel();
-        spnQuantidade = new javax.swing.JSpinner();
         cboCliente = new javax.swing.JComboBox<>();
         cboProduto = new javax.swing.JComboBox<>();
         cboTipo = new javax.swing.JComboBox<>();
         lblTipo = new javax.swing.JLabel();
         btnAlterarCliente = new javax.swing.JButton();
+        txtQuantidade = new javax.swing.JFormattedTextField();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCarrinho = new javax.swing.JTable();
         btnDeletar = new javax.swing.JButton();
-        btnAlterarItemCarrinho = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        lblTotal = new javax.swing.JLabel();
         txtTotal = new javax.swing.JTextField();
         btnConfirmar = new javax.swing.JButton();
 
@@ -73,7 +75,7 @@ public class VendaView extends javax.swing.JFrame {
 
         lblQuantidade.setText("Quantidade");
 
-        cboCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Selecione um cliente --", "joao", "maria" }));
+        cboCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Selecione um cliente --", "Joao", "Maria" }));
         cboCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboClienteActionPerformed(evt);
@@ -81,11 +83,6 @@ public class VendaView extends javax.swing.JFrame {
         });
 
         cboProduto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Selecione o produto --", "Tulipa", "Rosa", "Lírio", " " }));
-        cboProduto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cboProdutoActionPerformed(evt);
-            }
-        });
 
         cboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Selecione o tipo --", "Buque", "Unidade" }));
         cboTipo.addActionListener(new java.awt.event.ActionListener() {
@@ -100,6 +97,14 @@ public class VendaView extends javax.swing.JFrame {
         btnAlterarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAlterarClienteActionPerformed(evt);
+            }
+        });
+
+        txtQuantidade.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtQuantidade.setText("0");
+        txtQuantidade.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtQuantidadeKeyTyped(evt);
             }
         });
 
@@ -118,7 +123,7 @@ public class VendaView extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(cboTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(spnQuantidade))
+                            .addComponent(txtQuantidade))
                         .addGap(15, 15, 15)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -137,10 +142,11 @@ public class VendaView extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCliente)
-                    .addComponent(cboCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAlterarCliente))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAlterarCliente, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblCliente)
+                        .addComponent(cboCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(27, 27, 27)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cboProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -149,9 +155,9 @@ public class VendaView extends javax.swing.JFrame {
                     .addComponent(lblTipo))
                 .addGap(24, 24, 24)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(spnQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblQuantidade)
-                    .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -182,7 +188,14 @@ public class VendaView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblCarrinho.setColumnSelectionAllowed(true);
+        tblCarrinho.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tblCarrinhoFocusGained(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblCarrinho);
+        tblCarrinho.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         if (tblCarrinho.getColumnModel().getColumnCount() > 0) {
             tblCarrinho.getColumnModel().getColumn(0).setResizable(false);
             tblCarrinho.getColumnModel().getColumn(0).setPreferredWidth(150);
@@ -195,10 +208,13 @@ public class VendaView extends javax.swing.JFrame {
         }
 
         btnDeletar.setText("Deletar");
+        btnDeletar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeletarActionPerformed(evt);
+            }
+        });
 
-        btnAlterarItemCarrinho.setText("Alterar");
-
-        jLabel1.setText("Total:     R$");
+        lblTotal.setText("Total:     R$");
 
         txtTotal.setEditable(false);
         txtTotal.addActionListener(new java.awt.event.ActionListener() {
@@ -216,12 +232,10 @@ public class VendaView extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(lblTotal)
                         .addGap(3, 3, 3)
                         .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(54, 54, 54)
-                        .addComponent(btnAlterarItemCarrinho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(242, 242, 242)
                         .addComponent(btnDeletar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -232,18 +246,21 @@ public class VendaView extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnDeletar)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnDeletar)
-                        .addComponent(btnAlterarItemCarrinho))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1)
+                        .addComponent(lblTotal)
                         .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnAlterarItemCarrinho, btnDeletar, txtTotal});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnDeletar, txtTotal});
 
         btnConfirmar.setText("Confirmar");
+        btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -273,22 +290,23 @@ public class VendaView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
-       DefaultTableModel tableModel = (DefaultTableModel)tblCarrinho.getModel();
+        if((cboTipo.getSelectedIndex()!= 0)&&(cboProduto.getSelectedIndex()!= 0)&&(Integer.parseInt(txtQuantidade.getText())!= 0)){
+            tableModel.addRow(new Object[] {
+                cboTipo.getSelectedItem().toString(),
+                cboProduto.getSelectedItem().toString(),
+                Integer.parseInt(txtQuantidade.getText()), 
+                5.00
+            });
         
-       tableModel.addRow(new Object[] {cboTipo.getSelectedItem().toString(),cboProduto.getSelectedItem().toString(),spnQuantidade.getValue(), 5.00});
-        
-        cboTipo.setSelectedIndex(0);
-        spnQuantidade.setValue(0);
-        
-        //System.out.println("3 " + tableModel.getValueAt(0, 2));
-        //System.out.println("4 " + tableModel.getValueAt(0, 3));
-        txtTotalActionPerformed(evt);
-        
+            cboTipo.setSelectedIndex(0);
+            txtQuantidade.setValue(0);
+    
+            txtTotalActionPerformed(evt);  
+        }else{
+            JOptionPane.showMessageDialog(this, "Por favor, realize o preenchimento dos dados corretamente","Preenchimento Incompleto",JOptionPane.ERROR_MESSAGE);
+        }
+    
     }//GEN-LAST:event_btnAdicionarActionPerformed
-
-    private void cboProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboProdutoActionPerformed
-        
-    }//GEN-LAST:event_cboProdutoActionPerformed
 
     private void cboTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTipoActionPerformed
         if(cboTipo.getSelectedIndex() != 0){
@@ -309,7 +327,7 @@ public class VendaView extends javax.swing.JFrame {
 
     private void btnAlterarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarClienteActionPerformed
         
-        int dialogoConfirmacao = JOptionPane.showConfirmDialog(this, "Confirme a alteração do cliente.","Confirmar alteração", ConfirmationCallback.OK_CANCEL_OPTION);
+        int dialogoConfirmacao = JOptionPane.showConfirmDialog(this, "Confirme a alteração do cliente.","Confirmar alteração", JOptionPane.OK_CANCEL_OPTION);
         
         if(dialogoConfirmacao == 0){
             cboCliente.setEnabled(true);
@@ -320,8 +338,7 @@ public class VendaView extends javax.swing.JFrame {
 
     private void txtTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalActionPerformed
         double total = 0.0;
-        DefaultTableModel tableModel = (DefaultTableModel)tblCarrinho.getModel();
-        
+         
         for (int i = 0; i < tableModel.getRowCount(); i++) {
             int quantidade = (int)tableModel.getValueAt(i, 2);
             double preco = (double)tableModel.getValueAt(i, 3);
@@ -332,6 +349,53 @@ public class VendaView extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_txtTotalActionPerformed
+
+    private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
+        int linhaSelecionada = tblCarrinho.getSelectedRow();
+        if(tblCarrinho.getSelectedRow() >= 0){
+            tableModel.removeRow(linhaSelecionada);
+        }else{
+            JOptionPane.showMessageDialog(this, "Selecione uma linha","Erro ao Deletar", JOptionPane.ERROR_MESSAGE);
+        }
+        txtTotalActionPerformed(evt);
+        btnDeletar.setEnabled(false);
+        
+    }//GEN-LAST:event_btnDeletarActionPerformed
+
+    private void tblCarrinhoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tblCarrinhoFocusGained
+        btnDeletar.setEnabled(true);
+    }//GEN-LAST:event_tblCarrinhoFocusGained
+
+    private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
+        
+        if(tableModel.getRowCount() != 0){
+            int dialogConfirmacao = JOptionPane.showConfirmDialog(this, "Deseja finalizar venda ?","Finalização de venda", JOptionPane.YES_NO_OPTION);
+            if(dialogConfirmacao == 0 /*yes*/){
+                JOptionPane.showMessageDialog(this, "Venda Finalizada");
+                this.dispose();
+            }
+        }else{
+            JOptionPane.showMessageDialog(this, "Não é possível finalizar uma venda sem itens no carrinho !","Erro ao finalizar venda.", JOptionPane.ERROR_MESSAGE);
+        }
+        
+   
+        
+    }//GEN-LAST:event_btnConfirmarActionPerformed
+
+    private void txtQuantidadeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQuantidadeKeyTyped
+        
+        char c = evt.getKeyChar();
+        
+        if( ((c < '0') || (c > '9')) && ((c !=KeyEvent.VK_BACK_SPACE) || (c !=KeyEvent.VK_DELETE))){
+            evt.consume(); 
+            JOptionPane.showMessageDialog(this, "O campo quantidade aceita apenas números","Formato incorreto", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        if(txtQuantidade.getText().length() >= 4){
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Você ultrapassou o limite de 4 digitos","Limite ultrapassado", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_txtQuantidadeKeyTyped
 
     /**
      * @param args the command line arguments
@@ -371,13 +435,11 @@ public class VendaView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
     private javax.swing.JButton btnAlterarCliente;
-    private javax.swing.JButton btnAlterarItemCarrinho;
     private javax.swing.JButton btnConfirmar;
     private javax.swing.JButton btnDeletar;
     private javax.swing.JComboBox<String> cboCliente;
     private javax.swing.JComboBox<String> cboProduto;
     private javax.swing.JComboBox<String> cboTipo;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -385,8 +447,9 @@ public class VendaView extends javax.swing.JFrame {
     private javax.swing.JLabel lblProduto;
     private javax.swing.JLabel lblQuantidade;
     private javax.swing.JLabel lblTipo;
-    private javax.swing.JSpinner spnQuantidade;
+    private javax.swing.JLabel lblTotal;
     private javax.swing.JTable tblCarrinho;
+    private javax.swing.JFormattedTextField txtQuantidade;
     private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables
 }
