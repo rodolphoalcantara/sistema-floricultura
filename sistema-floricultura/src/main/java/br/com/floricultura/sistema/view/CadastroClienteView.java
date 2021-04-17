@@ -623,7 +623,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_PesquisarActionPerformed
 
     private void btn_SairPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SairPesquisarActionPerformed
-        // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_btn_SairPesquisarActionPerformed
 
     private void jFormattedTextDataNascimKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFormattedTextDataNascimKeyTyped
