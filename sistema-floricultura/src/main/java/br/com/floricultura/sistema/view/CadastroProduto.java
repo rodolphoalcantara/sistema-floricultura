@@ -41,12 +41,14 @@ public class CadastroProduto extends javax.swing.JFrame {
         txtQuantidade = new javax.swing.JTextField();
         btnCadastrar = new javax.swing.JButton();
         cboTipo = new javax.swing.JComboBox<>();
-        txtDscProduto = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblCadastro = new javax.swing.JTable();
         lblPreço = new javax.swing.JLabel();
         btnRomever = new javax.swing.JButton();
         btnAlterar = new javax.swing.JButton();
+        txtPreco = new javax.swing.JFormattedTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtDescricao = new javax.swing.JTextArea();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -62,6 +64,7 @@ public class CadastroProduto extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastro Produto", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
 
@@ -98,10 +101,9 @@ public class CadastroProduto extends javax.swing.JFrame {
         });
 
         cboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Seleciona tipo --", "Buquês", "Arranjos", "Orquídeas ", "Unidade" }));
-
-        txtDscProduto.addActionListener(new java.awt.event.ActionListener() {
+        cboTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDscProdutoActionPerformed(evt);
+                cboTipoActionPerformed(evt);
             }
         });
 
@@ -149,48 +151,67 @@ public class CadastroProduto extends javax.swing.JFrame {
             }
         });
 
+        txtPreco.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtPreco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPrecoActionPerformed(evt);
+            }
+        });
+
+        txtDescricao.setColumns(20);
+        txtDescricao.setRows(5);
+        jScrollPane1.setViewportView(txtDescricao);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.CENTER, jPanel1Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(lblDscProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(10, 10, 10))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(29, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 559, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 562, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 563, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDscProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 562, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(lblNome))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGap(4, 4, 4)
-                        .addComponent(lblQuantidade))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGap(142, 142, 142)
-                        .addComponent(btnRomever)
-                        .addGap(119, 119, 119)
-                        .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnAlterar))
+                        .addComponent(lblQuantidade)))
                 .addContainerGap(30, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addComponent(lblTipo)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane3)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnAlterar)
+                        .addGap(52, 52, 52)
+                        .addComponent(btnRomever)
+                        .addGap(41, 41, 41)
+                        .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblDscProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(29, 29, 29))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(297, 297, 297)
+                .addGap(226, 226, 226)
+                .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(271, 271, 271)
                 .addComponent(lblPreço)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(44, Short.MAX_VALUE)
+                .addGap(29, 29, 29)
                 .addComponent(lblNome)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -202,20 +223,21 @@ public class CadastroProduto extends javax.swing.JFrame {
                 .addComponent(lblTipo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
+                .addGap(28, 28, 28)
                 .addComponent(lblDscProduto)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtDscProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblPreço)
-                .addGap(55, 55, 55)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnCadastrar)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnRomever)
-                        .addComponent(btnAlterar)))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRomever)
+                    .addComponent(btnAlterar)
+                    .addComponent(btnCadastrar))
                 .addGap(24, 24, 24))
         );
 
@@ -236,28 +258,31 @@ public class CadastroProduto extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtDscProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDscProdutoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDscProdutoActionPerformed
-
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+
         txtNomeActionPerformed(evt);
         txtQuantidadeActionPerformed(evt);
+        cboTipoActionPerformed(evt);
+        txtPrecoActionPerformed(evt);
 
-        
+        txtNome.setText("");
+        cboTipo.setSelectedIndex(0);
+        txtQuantidade.setText("");
+        txtPreco.setText("");
+        txtDescricao.setText("");
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
         // TODO add your handling code here:
-        if ( txtNome.getText().trim().equals("") ){
-            JOptionPane.showMessageDialog(this,"Precisa preencher o campo nome");           
+        if (txtNome.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(this, "Precisa preencher o campo nome");
 
-}
+        }
     }//GEN-LAST:event_txtNomeActionPerformed
 
     private void txtQuantidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQuantidadeActionPerformed
-        if ( txtQuantidade.getText().trim().equals("") ){
-            JOptionPane.showMessageDialog(this,"Precisa preencher o campo quantidade");  
+        if (txtQuantidade.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(this, "Precisa preencher o campo quantidade");
     }//GEN-LAST:event_txtQuantidadeActionPerformed
     }
     private void btnRomeverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRomeverActionPerformed
@@ -265,19 +290,45 @@ public class CadastroProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRomeverActionPerformed
 
     private void txtQuantidadeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQuantidadeKeyTyped
-        
+
         char c = evt.getKeyChar();
-        if( ((c < '0') || (c > '9')) && (c !=KeyEvent.VK_BACK_SPACE)){
-            evt.consume(); 
-            JOptionPane.showMessageDialog(this, "O campo quantidade aceita apenas números","Formato incorreto", JOptionPane.ERROR_MESSAGE);
+        if (((c < '0') || (c > '9')) && (c != KeyEvent.VK_BACK_SPACE)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "O campo quantidade aceita apenas números", "Formato incorreto", JOptionPane.ERROR_MESSAGE);
         }
-        
+
     }//GEN-LAST:event_txtQuantidadeKeyTyped
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAlterarActionPerformed
-    
+
+    private void txtPrecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecoActionPerformed
+        if (txtPreco.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(this, "Precisa preencher o campo preço");
+
+        }
+
+        try {
+//Tento executar um código passível de erro 
+            double retorno = Double.parseDouble(txtPreco.getText().replace(",", "."));
+        } catch (Exception e) {
+//Ocorreu um erro, informo o usuáro sobre o erro.
+            JOptionPane.showMessageDialog(this, "Apenas digite numeros no campo preço");
+        } finally {
+//Limpo os dados de entrada
+            this.txtPreco.setText("");
+        }
+
+
+    }//GEN-LAST:event_txtPrecoActionPerformed
+
+    private void cboTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTipoActionPerformed
+        if (cboTipo.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this, "Por favor selecione um tipo");
+        }
+    }//GEN-LAST:event_cboTipoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -311,8 +362,7 @@ public class CadastroProduto extends javax.swing.JFrame {
                 new CadastroProduto().setVisible(true);
             }
         });
-}
-
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -321,6 +371,7 @@ public class CadastroProduto extends javax.swing.JFrame {
     private javax.swing.JButton btnRomever;
     private javax.swing.JComboBox<String> cboTipo;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
@@ -330,8 +381,9 @@ public class CadastroProduto extends javax.swing.JFrame {
     private javax.swing.JLabel lblQuantidade;
     private javax.swing.JLabel lblTipo;
     private javax.swing.JTable tblCadastro;
-    private javax.swing.JTextField txtDscProduto;
+    private javax.swing.JTextArea txtDescricao;
     private javax.swing.JTextField txtNome;
+    private javax.swing.JFormattedTextField txtPreco;
     private javax.swing.JTextField txtQuantidade;
     // End of variables declaration//GEN-END:variables
 }
