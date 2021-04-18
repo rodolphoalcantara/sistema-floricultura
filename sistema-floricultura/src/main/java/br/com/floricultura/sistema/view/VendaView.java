@@ -368,14 +368,18 @@ public class VendaView extends javax.swing.JFrame {
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         
-        if(tableModel.getRowCount() != 0){
+        if(tableModel.getRowCount() != 0 && cboCliente.getSelectedIndex() != 0){
             int dialogConfirmacao = JOptionPane.showConfirmDialog(this, "Deseja finalizar venda ?","Finalização de venda", JOptionPane.YES_NO_OPTION);
             if(dialogConfirmacao == 0 /*yes*/){
                 JOptionPane.showMessageDialog(this, "Venda Finalizada");
                 this.dispose();
             }
         }else{
-            JOptionPane.showMessageDialog(this, "Não é possível finalizar uma venda sem itens no carrinho !","Erro ao finalizar venda.", JOptionPane.ERROR_MESSAGE);
+            if(tableModel.getRowCount() == 0){
+                JOptionPane.showMessageDialog(this, "Não é possível finalizar uma venda sem itens no carrinho !","Erro ao finalizar venda.", JOptionPane.ERROR_MESSAGE);
+            }else{
+                JOptionPane.showMessageDialog(this, "Não é possível finalizar uma venda sem um cliente !","Erro ao finalizar venda.", JOptionPane.ERROR_MESSAGE); 
+            }
         }
         
    
