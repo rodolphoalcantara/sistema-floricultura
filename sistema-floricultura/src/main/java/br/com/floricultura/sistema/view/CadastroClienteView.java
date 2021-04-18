@@ -46,12 +46,12 @@ public class CadastroClienteView extends javax.swing.JFrame {
         jLabel_CPF = new javax.swing.JLabel();
         jFormattedTextCPF = new javax.swing.JFormattedTextField();
         jLabel_EstadoCivil = new javax.swing.JLabel();
-        jComboBox_Estadocivil = new javax.swing.JComboBox<>();
+        jComboBox_Estadocivil = new javax.swing.JComboBox<String>();
         jLabel_Email = new javax.swing.JLabel();
         jTextFieldEmail = new javax.swing.JTextField();
         jLabel_Telefone = new javax.swing.JLabel();
         telefone_Cliente_jFormattedText = new javax.swing.JFormattedTextField();
-        tipo_Teledone_jComboBox = new javax.swing.JComboBox<>();
+        tipo_Teledone_jComboBox = new javax.swing.JComboBox<String>();
         jPanelDadosEndereco1 = new javax.swing.JPanel();
         jLabelRua1 = new javax.swing.JLabel();
         jTextFieldRua1 = new javax.swing.JTextField();
@@ -60,9 +60,9 @@ public class CadastroClienteView extends javax.swing.JFrame {
         jLabelBairro1 = new javax.swing.JLabel();
         jTextFieldBairro1 = new javax.swing.JTextField();
         jLabelCidade1 = new javax.swing.JLabel();
-        jComboBoxCidade1 = new javax.swing.JComboBox<>();
+        jComboBoxCidade1 = new javax.swing.JComboBox<String>();
         jLabelEstado1 = new javax.swing.JLabel();
-        jComboBoxEstado1 = new javax.swing.JComboBox<>();
+        jComboBoxEstado1 = new javax.swing.JComboBox<String>();
         btn_Salvar = new javax.swing.JButton();
         btn_AbaPesquisar = new javax.swing.JButton();
         btn_Sair = new javax.swing.JButton();
@@ -77,8 +77,9 @@ public class CadastroClienteView extends javax.swing.JFrame {
         btnEditar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
         menuTelaCadastroCliente = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        jMenu_Arquivo = new javax.swing.JMenu();
+        jMenu_Sair = new javax.swing.JMenu();
+        jMenuItem_Sair = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -136,7 +137,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
 
         jLabel_EstadoCivil.setText("Estado Civil :");
 
-        jComboBox_Estadocivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione seu estado civil", "Casado", "Divorciado", "Solteiro", "Separado", "Viúvo" }));
+        jComboBox_Estadocivil.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione seu estado civil", "Casado", "Divorciado", "Solteiro", "Separado", "Viúvo" }));
 
         jLabel_Email.setText("E-mail :");
 
@@ -148,7 +149,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
-        tipo_Teledone_jComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tipo", "Celular", "Comercial", "Residencial", " " }));
+        tipo_Teledone_jComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tipo", "Celular", "Comercial", "Residencial", " " }));
 
         javax.swing.GroupLayout painelDadosClienteLayout = new javax.swing.GroupLayout(painelDadosCliente);
         painelDadosCliente.setLayout(painelDadosClienteLayout);
@@ -240,11 +241,11 @@ public class CadastroClienteView extends javax.swing.JFrame {
 
         jLabelCidade1.setText("Cidade : ");
 
-        jComboBoxCidade1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cidade", "São Paulo", "Guarulhos", "Campinas", "São Bernardo do Campo\t", "São José dos Campos\t", "Santo André\t", "Ribeirão Preto\t", "Osasco\t", "Sorocaba\t", "Mauá\t", "São José do Rio Preto\t", "Mogi das Cruzes\t", "Santos\t", "Diadema\t", "Jundiaí\t", "Piracicaba\t", "Carapicuíba\t", "Bauru\t", "Itaquaquecetuba\t", "São Vicente\t", "Franca\t", "Praia Grande\t", "Guarujá\t", "Taubaté\t\t", "Suzano\t", "Taboão da Serra" }));
+        jComboBoxCidade1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cidade", "São Paulo", "Guarulhos", "Campinas", "São Bernardo do Campo\t", "São José dos Campos\t", "Santo André\t", "Ribeirão Preto\t", "Osasco\t", "Sorocaba\t", "Mauá\t", "São José do Rio Preto\t", "Mogi das Cruzes\t", "Santos\t", "Diadema\t", "Jundiaí\t", "Piracicaba\t", "Carapicuíba\t", "Bauru\t", "Itaquaquecetuba\t", "São Vicente\t", "Franca\t", "Praia Grande\t", "Guarujá\t", "Taubaté\t\t", "Suzano\t", "Taboão da Serra" }));
 
         jLabelEstado1.setText("Estado : ");
 
-        jComboBoxEstado1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Estado", "São Paulo", " " }));
+        jComboBoxEstado1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Estado", "São Paulo", " " }));
 
         javax.swing.GroupLayout jPanelDadosEndereco1Layout = new javax.swing.GroupLayout(jPanelDadosEndereco1);
         jPanelDadosEndereco1.setLayout(jPanelDadosEndereco1Layout);
@@ -481,11 +482,20 @@ public class CadastroClienteView extends javax.swing.JFrame {
 
         telaCadastroCliente.addTab("Pesquisar", painelPesquisar);
 
-        jMenu1.setText("File");
-        menuTelaCadastroCliente.add(jMenu1);
+        jMenu_Arquivo.setText("Arquivo");
+        menuTelaCadastroCliente.add(jMenu_Arquivo);
 
-        jMenu2.setText("Edit");
-        menuTelaCadastroCliente.add(jMenu2);
+        jMenu_Sair.setText("Edit");
+
+        jMenuItem_Sair.setText("jMenuItem1");
+        jMenuItem_Sair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_SairActionPerformed(evt);
+            }
+        });
+        jMenu_Sair.add(jMenuItem_Sair);
+
+        menuTelaCadastroCliente.add(jMenu_Sair);
 
         setJMenuBar(menuTelaCadastroCliente);
 
@@ -511,7 +521,8 @@ public class CadastroClienteView extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(jTextFieldNomeCliente.getText().length()>60){
             evt.consume();
-            JOptionPane.showMessageDialog(this, " Favor abrevie seu sobre nome ");
+            JOptionPane.showMessageDialog(this,"Ops! Parece que o nome está um pouco grande, tente abrevia - lo ok!"
+                         ,"Dados Pessoais ",JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jTextFieldNomeClienteKeyTyped
 
@@ -524,7 +535,8 @@ public class CadastroClienteView extends javax.swing.JFrame {
         
                if(((CPF<'0')||(CPF>'9'))&&(CPF != KeyEvent.VK_BACK_SPACE)){
                    evt.consume();
-                 JOptionPane.showMessageDialog(this,"Insira Apenas numeros!");
+                 JOptionPane.showMessageDialog(this,"Ops! Informe apenas os numeros do seu CPF ok!"
+                         ,"Dados Pessoais ",JOptionPane.WARNING_MESSAGE);
                }
     }//GEN-LAST:event_jFormattedTextCPFKeyTyped
 
@@ -537,7 +549,8 @@ public class CadastroClienteView extends javax.swing.JFrame {
         
                if(((numero<'0')||(numero>'9'))&&(numero != KeyEvent.VK_BACK_SPACE)){
                    evt.consume();
-                 JOptionPane.showMessageDialog(this,"Insira Apenas numeros!");
+                 JOptionPane.showMessageDialog(this,"Vamos tentar de novo!Informe apenas números!"
+                         ,"Endereço ",JOptionPane.WARNING_MESSAGE);
                }
     }//GEN-LAST:event_jTextFieldNumero1KeyTyped
 
@@ -573,7 +586,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
 
         if(cpfRecebido.trim().equals("")|| nome.trim().equals("")||dataRecebida.trim().equals("")
             ||cpfRecebido.trim().equals("")||rua.trim().equals("")||numero.trim().equals("") || bairro.trim().equals("")){
-            JOptionPane.showMessageDialog(null, "Por Favor Preencha campos Obrigatorio");
+            JOptionPane.showMessageDialog(this, "Por Favor Preencha campos Obrigatorio"," Campos Obrigatórios",JOptionPane.WARNING_MESSAGE);
             jFormattedTextCPF.setBackground(Color.yellow);
             jTextFieldNomeCliente.setBackground(Color.yellow);
             jFormattedTextDataNascim.setBackground(Color.yellow);
@@ -607,7 +620,8 @@ public class CadastroClienteView extends javax.swing.JFrame {
         char c = evt.getKeyChar();
                if(((c<'0')||(c>'9'))&&(c != KeyEvent.VK_BACK_SPACE)){
                    evt.consume();
-                 JOptionPane.showMessageDialog(this,"Para Pesquisar insira APENAS numeros!");
+                 JOptionPane.showMessageDialog(this,"Vamos tentar de novo!Informe apenas números para pesquisar o CPF do cliente"
+                         ,"Informe o CPF ",JOptionPane.WARNING_MESSAGE);
                }
                      
     }//GEN-LAST:event_jTextFieldCPFPesquisaKeyTyped
@@ -631,9 +645,15 @@ public class CadastroClienteView extends javax.swing.JFrame {
         
                if(((datanasci<'0')||(datanasci>'9'))&&(datanasci != KeyEvent.VK_BACK_SPACE)){
                    evt.consume();
-                 JOptionPane.showMessageDialog(this,"Insira Apenas numeros!");
+                 JOptionPane.showMessageDialog(this,"Vamos tentar de novo!Informe apenas a data de seu nascimento, sem pontuação ou traços!"
+                         ,"Formato de Data Incorreto ",JOptionPane.WARNING_MESSAGE);
+                 
                }        
     }//GEN-LAST:event_jFormattedTextDataNascimKeyTyped
+
+    private void jMenuItem_SairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_SairActionPerformed
+       System.exit(0);
+    }//GEN-LAST:event_jMenuItem_SairActionPerformed
 
     /**
      * @param args the command line arguments
@@ -699,8 +719,9 @@ public class CadastroClienteView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel_Email;
     private javax.swing.JLabel jLabel_EstadoCivil;
     private javax.swing.JLabel jLabel_Telefone;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuItem jMenuItem_Sair;
+    private javax.swing.JMenu jMenu_Arquivo;
+    private javax.swing.JMenu jMenu_Sair;
     private javax.swing.JPanel jPanelDadosEndereco1;
     private javax.swing.JPanel jPanelPesquisa;
     private javax.swing.JRadioButton jRadioButtonFemino;
