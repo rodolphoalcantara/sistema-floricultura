@@ -8,7 +8,6 @@ package br.com.floricultura.sistema.view;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 import br.com.floricultura.sistema.model.CadastroCliente;
 /**
  *
@@ -70,15 +69,16 @@ public class CadastroClienteView extends javax.swing.JFrame {
         jPanelPesquisa = new javax.swing.JPanel();
         jLabelPesquisaCPF = new javax.swing.JLabel();
         jTextFieldCPFPesquisa = new javax.swing.JTextField();
+        btn_Pesquisar = new javax.swing.JButton();
         jScrollPane_Pesquisar = new javax.swing.JScrollPane();
         jTable_Pesquisa = new javax.swing.JTable();
-        btn_Pesquisar = new javax.swing.JButton();
         btn_SairPesquisar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
         menuTelaCadastroCliente = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        jMenu_Arquivo = new javax.swing.JMenu();
+        jMenu_Sair = new javax.swing.JMenu();
+        jMenuItem_Sair = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -370,6 +370,13 @@ public class CadastroClienteView extends javax.swing.JFrame {
             }
         });
 
+        btn_Pesquisar.setText("Pesquisar");
+        btn_Pesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_PesquisarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelPesquisaLayout = new javax.swing.GroupLayout(jPanelPesquisa);
         jPanelPesquisa.setLayout(jPanelPesquisaLayout);
         jPanelPesquisaLayout.setHorizontalGroup(
@@ -379,7 +386,9 @@ public class CadastroClienteView extends javax.swing.JFrame {
                 .addComponent(jLabelPesquisaCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jTextFieldCPFPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(42, 42, 42)
+                .addComponent(btn_Pesquisar)
+                .addContainerGap(443, Short.MAX_VALUE))
         );
         jPanelPesquisaLayout.setVerticalGroup(
             jPanelPesquisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -387,7 +396,8 @@ public class CadastroClienteView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanelPesquisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelPesquisaCPF)
-                    .addComponent(jTextFieldCPFPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldCPFPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_Pesquisar))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
 
@@ -417,13 +427,6 @@ public class CadastroClienteView extends javax.swing.JFrame {
         });
         jScrollPane_Pesquisar.setViewportView(jTable_Pesquisa);
 
-        btn_Pesquisar.setText("Pesquisar");
-        btn_Pesquisar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_PesquisarActionPerformed(evt);
-            }
-        });
-
         btn_SairPesquisar.setText("Sair");
         btn_SairPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -439,32 +442,31 @@ public class CadastroClienteView extends javax.swing.JFrame {
         painelPesquisar.setLayout(painelPesquisarLayout);
         painelPesquisarLayout.setHorizontalGroup(
             painelPesquisarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(painelPesquisarLayout.createSequentialGroup()
-                .addGap(466, 466, 466)
-                .addComponent(btn_Pesquisar)
-                .addContainerGap(547, Short.MAX_VALUE))
-            .addGroup(painelPesquisarLayout.createSequentialGroup()
-                .addGap(86, 86, 86)
-                .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_SairPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelPesquisarLayout.createSequentialGroup()
+                .addGroup(painelPesquisarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(painelPesquisarLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanelPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(painelPesquisarLayout.createSequentialGroup()
+                        .addGap(86, 86, 86)
+                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 616, Short.MAX_VALUE)
+                        .addComponent(btn_SairPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(92, 92, 92))
             .addGroup(painelPesquisarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(painelPesquisarLayout.createSequentialGroup()
                     .addGap(87, 87, 87)
-                    .addGroup(painelPesquisarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jScrollPane_Pesquisar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 937, Short.MAX_VALUE)
-                        .addComponent(jPanelPesquisa, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane_Pesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 937, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(88, Short.MAX_VALUE)))
         );
         painelPesquisarLayout.setVerticalGroup(
             painelPesquisarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelPesquisarLayout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addComponent(btn_Pesquisar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 458, Short.MAX_VALUE)
+                .addGap(8, 8, 8)
+                .addComponent(jPanelPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 422, Short.MAX_VALUE)
                 .addGroup(painelPesquisarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEditar)
                     .addComponent(btnExcluir)
@@ -472,20 +474,27 @@ public class CadastroClienteView extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(painelPesquisarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelPesquisarLayout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanelPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addContainerGap(132, Short.MAX_VALUE)
                     .addComponent(jScrollPane_Pesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(138, 138, 138)))
         );
 
         telaCadastroCliente.addTab("Pesquisar", painelPesquisar);
 
-        jMenu1.setText("File");
-        menuTelaCadastroCliente.add(jMenu1);
+        jMenu_Arquivo.setText("Arquivo");
+        menuTelaCadastroCliente.add(jMenu_Arquivo);
 
-        jMenu2.setText("Edit");
-        menuTelaCadastroCliente.add(jMenu2);
+        jMenu_Sair.setText("Opções");
+
+        jMenuItem_Sair.setText("Sair");
+        jMenuItem_Sair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_SairActionPerformed(evt);
+            }
+        });
+        jMenu_Sair.add(jMenuItem_Sair);
+
+        menuTelaCadastroCliente.add(jMenu_Sair);
 
         setJMenuBar(menuTelaCadastroCliente);
 
@@ -511,7 +520,8 @@ public class CadastroClienteView extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(jTextFieldNomeCliente.getText().length()>60){
             evt.consume();
-            JOptionPane.showMessageDialog(this, " Favor abrevie seu sobre nome ");
+            JOptionPane.showMessageDialog(this,"Ops! Parece que o nome está um pouco grande, tente abrevia - lo ok!"
+                         ,"Dados Pessoais ",JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jTextFieldNomeClienteKeyTyped
 
@@ -524,7 +534,8 @@ public class CadastroClienteView extends javax.swing.JFrame {
         
                if(((CPF<'0')||(CPF>'9'))&&(CPF != KeyEvent.VK_BACK_SPACE)){
                    evt.consume();
-                 JOptionPane.showMessageDialog(this,"Insira Apenas numeros!");
+                 JOptionPane.showMessageDialog(this,"Ops! Informe apenas os numeros do seu CPF ok!"
+                         ,"Dados Pessoais ",JOptionPane.WARNING_MESSAGE);
                }
     }//GEN-LAST:event_jFormattedTextCPFKeyTyped
 
@@ -537,12 +548,16 @@ public class CadastroClienteView extends javax.swing.JFrame {
         
                if(((numero<'0')||(numero>'9'))&&(numero != KeyEvent.VK_BACK_SPACE)){
                    evt.consume();
-                 JOptionPane.showMessageDialog(this,"Insira Apenas numeros!");
+                 JOptionPane.showMessageDialog(this,"Vamos tentar de novo!Informe apenas números!"
+                         ,"Endereço ",JOptionPane.WARNING_MESSAGE);
                }
     }//GEN-LAST:event_jTextFieldNumero1KeyTyped
 
     private void btn_SairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SairActionPerformed
-        System.exit(0);       // Botão para sair do sistema
+        int retorno = JOptionPane.showConfirmDialog(null, "Deseja realmente SAIR ? Os dados não salvos serão perdidos!", " Deseja Sair ?",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if ( retorno ==0 ){
+            System.exit(0);
+        }
     }//GEN-LAST:event_btn_SairActionPerformed
 
     private void btn_AbaPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AbaPesquisarActionPerformed
@@ -573,7 +588,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
 
         if(cpfRecebido.trim().equals("")|| nome.trim().equals("")||dataRecebida.trim().equals("")
             ||cpfRecebido.trim().equals("")||rua.trim().equals("")||numero.trim().equals("") || bairro.trim().equals("")){
-            JOptionPane.showMessageDialog(null, "Por Favor Preencha campos Obrigatorio");
+            JOptionPane.showMessageDialog(this, "Por Favor Preencha campos Obrigatorio"," Campos Obrigatórios",JOptionPane.WARNING_MESSAGE);
             jFormattedTextCPF.setBackground(Color.yellow);
             jTextFieldNomeCliente.setBackground(Color.yellow);
             jFormattedTextDataNascim.setBackground(Color.yellow);
@@ -607,23 +622,21 @@ public class CadastroClienteView extends javax.swing.JFrame {
         char c = evt.getKeyChar();
                if(((c<'0')||(c>'9'))&&(c != KeyEvent.VK_BACK_SPACE)){
                    evt.consume();
-                 JOptionPane.showMessageDialog(this,"Para Pesquisar insira APENAS numeros!");
+                 JOptionPane.showMessageDialog(this,"Vamos tentar de novo!Informe apenas números para pesquisar o CPF do cliente"
+                         ,"Informe o CPF ",JOptionPane.WARNING_MESSAGE);
                }
                      
     }//GEN-LAST:event_jTextFieldCPFPesquisaKeyTyped
 
     private void btn_PesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_PesquisarActionPerformed
-       DefaultTableModel tmcliente = new DefaultTableModel();
-       
-       tmcliente.addColumn("ID CLIENTE");
-       tmcliente.addColumn("Nome");
-       tmcliente.addColumn("CPF");
-       tmcliente.addColumn("E-Mail");
-       
+             
     }//GEN-LAST:event_btn_PesquisarActionPerformed
 
     private void btn_SairPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SairPesquisarActionPerformed
-        System.exit(0);
+        int retorno = JOptionPane.showConfirmDialog(null, "Deseja realmente SAIR ? Os dados não salvos serão perdidos!", " Deseja Sair ?",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if ( retorno == 0 ){
+            System.exit(0);
+        }
     }//GEN-LAST:event_btn_SairPesquisarActionPerformed
 
     private void jFormattedTextDataNascimKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFormattedTextDataNascimKeyTyped
@@ -631,9 +644,19 @@ public class CadastroClienteView extends javax.swing.JFrame {
         
                if(((datanasci<'0')||(datanasci>'9'))&&(datanasci != KeyEvent.VK_BACK_SPACE)){
                    evt.consume();
-                 JOptionPane.showMessageDialog(this,"Insira Apenas numeros!");
+                 JOptionPane.showMessageDialog(this,"Vamos tentar de novo! Informe apenas a data de seu nascimento, sem pontuação ou traços!"
+                         ,"Formato de Data Incorreto ",JOptionPane.WARNING_MESSAGE);
+                 
                }        
     }//GEN-LAST:event_jFormattedTextDataNascimKeyTyped
+
+    private void jMenuItem_SairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_SairActionPerformed
+      int retorno = JOptionPane.showConfirmDialog(null, "Deseja realmente SAIR ? Os dados não salvos serão perdidos!", " Deseja Sair ?",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if ( retorno ==0 ){
+            System.exit(0);
+        }
+        
+    }//GEN-LAST:event_jMenuItem_SairActionPerformed
 
     /**
      * @param args the command line arguments
@@ -699,8 +722,9 @@ public class CadastroClienteView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel_Email;
     private javax.swing.JLabel jLabel_EstadoCivil;
     private javax.swing.JLabel jLabel_Telefone;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuItem jMenuItem_Sair;
+    private javax.swing.JMenu jMenu_Arquivo;
+    private javax.swing.JMenu jMenu_Sair;
     private javax.swing.JPanel jPanelDadosEndereco1;
     private javax.swing.JPanel jPanelPesquisa;
     private javax.swing.JRadioButton jRadioButtonFemino;
