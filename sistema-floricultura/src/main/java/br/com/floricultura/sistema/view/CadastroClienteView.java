@@ -46,12 +46,12 @@ public class CadastroClienteView extends javax.swing.JFrame {
         jLabel_CPF = new javax.swing.JLabel();
         jFormattedTextCPF = new javax.swing.JFormattedTextField();
         jLabel_EstadoCivil = new javax.swing.JLabel();
-        jComboBox_Estadocivil = new javax.swing.JComboBox<String>();
+        jComboBox_Estadocivil = new javax.swing.JComboBox<>();
         jLabel_Email = new javax.swing.JLabel();
         jTextFieldEmail = new javax.swing.JTextField();
         jLabel_Telefone = new javax.swing.JLabel();
         telefone_Cliente_jFormattedText = new javax.swing.JFormattedTextField();
-        tipo_Teledone_jComboBox = new javax.swing.JComboBox<String>();
+        tipo_Teledone_jComboBox = new javax.swing.JComboBox<>();
         jPanelDadosEndereco1 = new javax.swing.JPanel();
         jLabelRua1 = new javax.swing.JLabel();
         jTextFieldRua1 = new javax.swing.JTextField();
@@ -60,9 +60,9 @@ public class CadastroClienteView extends javax.swing.JFrame {
         jLabelBairro1 = new javax.swing.JLabel();
         jTextFieldBairro1 = new javax.swing.JTextField();
         jLabelCidade1 = new javax.swing.JLabel();
-        jComboBoxCidade1 = new javax.swing.JComboBox<String>();
+        jComboBoxCidade1 = new javax.swing.JComboBox<>();
         jLabelEstado1 = new javax.swing.JLabel();
-        jComboBoxEstado1 = new javax.swing.JComboBox<String>();
+        jComboBoxEstado1 = new javax.swing.JComboBox<>();
         btn_Salvar = new javax.swing.JButton();
         btn_AbaPesquisar = new javax.swing.JButton();
         btn_Sair = new javax.swing.JButton();
@@ -137,7 +137,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
 
         jLabel_EstadoCivil.setText("Estado Civil :");
 
-        jComboBox_Estadocivil.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione seu estado civil", "Casado", "Divorciado", "Solteiro", "Separado", "Viúvo" }));
+        jComboBox_Estadocivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione seu estado civil", "Casado", "Divorciado", "Solteiro", "Separado", "Viúvo" }));
 
         jLabel_Email.setText("E-mail :");
 
@@ -149,7 +149,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
-        tipo_Teledone_jComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tipo", "Celular", "Comercial", "Residencial", " " }));
+        tipo_Teledone_jComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tipo", "Celular", "Comercial", "Residencial", " " }));
 
         javax.swing.GroupLayout painelDadosClienteLayout = new javax.swing.GroupLayout(painelDadosCliente);
         painelDadosCliente.setLayout(painelDadosClienteLayout);
@@ -241,11 +241,11 @@ public class CadastroClienteView extends javax.swing.JFrame {
 
         jLabelCidade1.setText("Cidade : ");
 
-        jComboBoxCidade1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cidade", "São Paulo", "Guarulhos", "Campinas", "São Bernardo do Campo\t", "São José dos Campos\t", "Santo André\t", "Ribeirão Preto\t", "Osasco\t", "Sorocaba\t", "Mauá\t", "São José do Rio Preto\t", "Mogi das Cruzes\t", "Santos\t", "Diadema\t", "Jundiaí\t", "Piracicaba\t", "Carapicuíba\t", "Bauru\t", "Itaquaquecetuba\t", "São Vicente\t", "Franca\t", "Praia Grande\t", "Guarujá\t", "Taubaté\t\t", "Suzano\t", "Taboão da Serra" }));
+        jComboBoxCidade1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cidade", "São Paulo", "Guarulhos", "Campinas", "São Bernardo do Campo\t", "São José dos Campos\t", "Santo André\t", "Ribeirão Preto\t", "Osasco\t", "Sorocaba\t", "Mauá\t", "São José do Rio Preto\t", "Mogi das Cruzes\t", "Santos\t", "Diadema\t", "Jundiaí\t", "Piracicaba\t", "Carapicuíba\t", "Bauru\t", "Itaquaquecetuba\t", "São Vicente\t", "Franca\t", "Praia Grande\t", "Guarujá\t", "Taubaté\t\t", "Suzano\t", "Taboão da Serra" }));
 
         jLabelEstado1.setText("Estado : ");
 
-        jComboBoxEstado1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Estado", "São Paulo", " " }));
+        jComboBoxEstado1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Estado", "São Paulo", " " }));
 
         javax.swing.GroupLayout jPanelDadosEndereco1Layout = new javax.swing.GroupLayout(jPanelDadosEndereco1);
         jPanelDadosEndereco1.setLayout(jPanelDadosEndereco1Layout);
@@ -487,7 +487,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
 
         jMenu_Sair.setText("Edit");
 
-        jMenuItem_Sair.setText("jMenuItem1");
+        jMenuItem_Sair.setText("Sair");
         jMenuItem_Sair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem_SairActionPerformed(evt);
@@ -555,7 +555,10 @@ public class CadastroClienteView extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldNumero1KeyTyped
 
     private void btn_SairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SairActionPerformed
-        System.exit(0);       // Botão para sair do sistema
+        int retorno = JOptionPane.showConfirmDialog(null, "Deseja realmente SAIR ? Os dados não salvos serão perdidos!", " Deseja Sair ?",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if ( retorno ==0 ){
+            System.exit(0);
+        }
     }//GEN-LAST:event_btn_SairActionPerformed
 
     private void btn_AbaPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AbaPesquisarActionPerformed
@@ -637,7 +640,10 @@ public class CadastroClienteView extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_PesquisarActionPerformed
 
     private void btn_SairPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SairPesquisarActionPerformed
-        System.exit(0);
+        int retorno = JOptionPane.showConfirmDialog(null, "Deseja realmente SAIR ? Os dados não salvos serão perdidos!", " Deseja Sair ?",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if ( retorno == 0 ){
+            System.exit(0);
+        }
     }//GEN-LAST:event_btn_SairPesquisarActionPerformed
 
     private void jFormattedTextDataNascimKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFormattedTextDataNascimKeyTyped
@@ -645,14 +651,18 @@ public class CadastroClienteView extends javax.swing.JFrame {
         
                if(((datanasci<'0')||(datanasci>'9'))&&(datanasci != KeyEvent.VK_BACK_SPACE)){
                    evt.consume();
-                 JOptionPane.showMessageDialog(this,"Vamos tentar de novo!Informe apenas a data de seu nascimento, sem pontuação ou traços!"
+                 JOptionPane.showMessageDialog(this,"Vamos tentar de novo! Informe apenas a data de seu nascimento, sem pontuação ou traços!"
                          ,"Formato de Data Incorreto ",JOptionPane.WARNING_MESSAGE);
                  
                }        
     }//GEN-LAST:event_jFormattedTextDataNascimKeyTyped
 
     private void jMenuItem_SairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_SairActionPerformed
-       System.exit(0);
+      int retorno = JOptionPane.showConfirmDialog(null, "Deseja realmente SAIR ? Os dados não salvos serão perdidos!", " Deseja Sair ?",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if ( retorno ==0 ){
+            System.exit(0);
+        }
+        
     }//GEN-LAST:event_jMenuItem_SairActionPerformed
 
     /**
