@@ -53,6 +53,7 @@ public class CadastroProduto extends javax.swing.JFrame {
         btn_Sair = new javax.swing.JButton();
         menuTelaCadastroCliente = new javax.swing.JMenuBar();
         jMenu_Arquivo = new javax.swing.JMenu();
+        menu = new javax.swing.JMenuItem();
         jMenu_Sair = new javax.swing.JMenu();
         jMenuItem_Sair = new javax.swing.JMenuItem();
 
@@ -262,6 +263,15 @@ public class CadastroProduto extends javax.swing.JFrame {
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnAlterar, btnCadastrar, btnRomever, btn_Sair});
 
         jMenu_Arquivo.setText("Arquivo");
+
+        menu.setText("Menu");
+        menu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuActionPerformed(evt);
+            }
+        });
+        jMenu_Arquivo.add(menu);
+
         menuTelaCadastroCliente.add(jMenu_Arquivo);
 
         jMenu_Sair.setText("Opções");
@@ -381,6 +391,10 @@ public class CadastroProduto extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_SairActionPerformed
 
+    private void menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_menuActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -436,6 +450,7 @@ public class CadastroProduto extends javax.swing.JFrame {
     private javax.swing.JLabel lblPreço;
     private javax.swing.JLabel lblQuantidade;
     private javax.swing.JLabel lblTipo;
+    private javax.swing.JMenuItem menu;
     private javax.swing.JMenuBar menuTelaCadastroCliente;
     private javax.swing.JTable tblCadastro;
     private javax.swing.JTextArea txtDescricao;

@@ -20,7 +20,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
      */
     public CadastroClienteView() {
         initComponents();
-        setExtendedState(MAXIMIZED_BOTH);
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -77,6 +77,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
         btnExcluir = new javax.swing.JButton();
         menuTelaCadastroCliente = new javax.swing.JMenuBar();
         jMenu_Arquivo = new javax.swing.JMenu();
+        menu = new javax.swing.JMenuItem();
         jMenu_Sair = new javax.swing.JMenu();
         jMenuItem_Sair = new javax.swing.JMenuItem();
 
@@ -493,6 +494,15 @@ public class CadastroClienteView extends javax.swing.JFrame {
         telaCadastroCliente.addTab("Pesquisar", painelPesquisar);
 
         jMenu_Arquivo.setText("Arquivo");
+
+        menu.setText("Menu");
+        menu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuActionPerformed(evt);
+            }
+        });
+        jMenu_Arquivo.add(menu);
+
         menuTelaCadastroCliente.add(jMenu_Arquivo);
 
         jMenu_Sair.setText("Opções");
@@ -513,11 +523,11 @@ public class CadastroClienteView extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(telaCadastroCliente, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(telaCadastroCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(telaCadastroCliente)
+            .addComponent(telaCadastroCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -681,6 +691,10 @@ public class CadastroClienteView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTextFieldEmailKeyTyped
 
+    private void menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_menuActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -764,6 +778,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldNomeCliente;
     private javax.swing.JTextField jTextFieldNumero1;
     private javax.swing.JTextField jTextFieldRua1;
+    private javax.swing.JMenuItem menu;
     private javax.swing.JMenuBar menuTelaCadastroCliente;
     private javax.swing.JPanel painelCadastrar;
     private javax.swing.JPanel painelDadosCliente;

@@ -18,7 +18,7 @@ public class MenuApp extends javax.swing.JFrame {
      */
     public MenuApp() {
         initComponents();
-        setExtendedState(MAXIMIZED_BOTH);
+        setLocationRelativeTo(null);
     }
          /**
      * This method is called from within the constructor to initialize the form.
@@ -40,6 +40,7 @@ public class MenuApp extends javax.swing.JFrame {
         jMenuItem_Sair = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         btnCadastroCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Users.png"))); // NOI18N
         btnCadastroCliente.setText("Cadastro Cliente");
@@ -120,7 +121,7 @@ public class MenuApp extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(526, 526, 526)
                         .addComponent(btn_Sair, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnCadastroCliente, btnCadastroProduto, btnRelatorio, btnVenda});
