@@ -585,7 +585,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldNumero1KeyTyped
 
     private void btn_SairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SairActionPerformed
-        int retorno = JOptionPane.showConfirmDialog(null, "Deseja realmente SAIR ? Os dados não salvos serão perdidos !", " Deseja Sair ?",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        int retorno = JOptionPane.showConfirmDialog(this, "Deseja realmente SAIR ? Os dados não salvos serão perdidos !", " Deseja Sair ?",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if ( retorno ==0 ){
             this.dispose();
         }
@@ -671,7 +671,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_PesquisarActionPerformed
 
     private void btn_SairPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SairPesquisarActionPerformed
-        int retorno = JOptionPane.showConfirmDialog(null, "Deseja realmente SAIR ?", " Deseja Sair ?",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        int retorno = JOptionPane.showConfirmDialog(this, "Deseja realmente SAIR ?", " Deseja Sair ?",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if ( retorno == 0 ){
           this.dispose();
         }
@@ -689,7 +689,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
     }//GEN-LAST:event_jFormattedTextDataNascimKeyTyped
 
     private void jMenuItem_SairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_SairActionPerformed
-      int retorno = JOptionPane.showConfirmDialog(null, "Deseja realmente SAIR ? Os dados não salvos serão perdidos!", " Deseja Sair ?",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+      int retorno = JOptionPane.showConfirmDialog(this, "Deseja realmente SAIR ? Os dados não salvos serão perdidos!", " Deseja Sair ?",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if ( retorno ==0 ){
             System.exit(0);
         }
