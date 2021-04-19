@@ -23,6 +23,8 @@ public class VendaView extends javax.swing.JFrame {
     
     public VendaView() {
         initComponents();
+        
+        setLocationRelativeTo(null);
         cboProduto.setEnabled(false);
         btnAlterarCliente.setEnabled(false);
         btnDeletar.setEnabled(false);
@@ -56,11 +58,16 @@ public class VendaView extends javax.swing.JFrame {
         lblTotal = new javax.swing.JLabel();
         txtTotal = new javax.swing.JTextField();
         btnConfirmar = new javax.swing.JButton();
+        btn_Sair = new javax.swing.JButton();
+        menuTelaCadastroCliente = new javax.swing.JMenuBar();
+        jMenu_Arquivo = new javax.swing.JMenu();
+        jMenu_Sair = new javax.swing.JMenu();
+        jMenuItem_Sair = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Venda de Flores", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Venda de Flores", javax.swing.border.TitledBorder.LEADING, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 1, 16))); // NOI18N
 
         btnAdicionar.setText("Adicionar");
         btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
@@ -135,7 +142,7 @@ public class VendaView extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(cboCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnAlterarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(btnAlterarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -262,6 +269,30 @@ public class VendaView extends javax.swing.JFrame {
             }
         });
 
+        btn_Sair.setText("Sair");
+        btn_Sair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SairActionPerformed(evt);
+            }
+        });
+
+        jMenu_Arquivo.setText("Arquivo");
+        menuTelaCadastroCliente.add(jMenu_Arquivo);
+
+        jMenu_Sair.setText("Opções");
+
+        jMenuItem_Sair.setText("Sair");
+        jMenuItem_Sair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_SairActionPerformed(evt);
+            }
+        });
+        jMenu_Sair.add(jMenuItem_Sair);
+
+        menuTelaCadastroCliente.add(jMenu_Sair);
+
+        setJMenuBar(menuTelaCadastroCliente);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -269,10 +300,17 @@ public class VendaView extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 636, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 636, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(88, 88, 88)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_Sair, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(73, 73, 73))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -281,9 +319,11 @@ public class VendaView extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btn_Sair)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -401,6 +441,21 @@ public class VendaView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtQuantidadeKeyTyped
 
+    private void btn_SairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SairActionPerformed
+        int retorno = JOptionPane.showConfirmDialog(null, "Deseja realmente SAIR ? ", " Deseja Sair ?",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if ( retorno == 0 ){
+            this.dispose();
+        }
+    }//GEN-LAST:event_btn_SairActionPerformed
+
+    private void jMenuItem_SairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_SairActionPerformed
+        int retorno = JOptionPane.showConfirmDialog(null, "Deseja realmente SAIR ? Os dados não salvos serão perdidos!", " Deseja Sair ?",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if ( retorno ==0 ){
+            System.exit(0);
+        }
+
+    }//GEN-LAST:event_jMenuItem_SairActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -427,6 +482,7 @@ public class VendaView extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(VendaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -441,9 +497,13 @@ public class VendaView extends javax.swing.JFrame {
     private javax.swing.JButton btnAlterarCliente;
     private javax.swing.JButton btnConfirmar;
     private javax.swing.JButton btnDeletar;
+    private javax.swing.JButton btn_Sair;
     private javax.swing.JComboBox<String> cboCliente;
     private javax.swing.JComboBox<String> cboProduto;
     private javax.swing.JComboBox<String> cboTipo;
+    private javax.swing.JMenuItem jMenuItem_Sair;
+    private javax.swing.JMenu jMenu_Arquivo;
+    private javax.swing.JMenu jMenu_Sair;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -452,6 +512,7 @@ public class VendaView extends javax.swing.JFrame {
     private javax.swing.JLabel lblQuantidade;
     private javax.swing.JLabel lblTipo;
     private javax.swing.JLabel lblTotal;
+    private javax.swing.JMenuBar menuTelaCadastroCliente;
     private javax.swing.JTable tblCarrinho;
     private javax.swing.JFormattedTextField txtQuantidade;
     private javax.swing.JTextField txtTotal;

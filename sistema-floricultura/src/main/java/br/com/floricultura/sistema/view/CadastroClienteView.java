@@ -20,7 +20,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
      */
     public CadastroClienteView() {
         initComponents();
-        setLocationRelativeTo(this);
+        setExtendedState(MAXIMIZED_BOTH);
     }
 
     /**
@@ -82,7 +82,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        painelDadosCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Dados Cliente"));
+        painelDadosCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Dados Cliente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 16))); // NOI18N
 
         jLabelNomeCliente.setText("Nome :");
 
@@ -139,6 +139,17 @@ public class CadastroClienteView extends javax.swing.JFrame {
         jComboBox_Estadocivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione seu estado civil", "Casado", "Divorciado", "Solteiro", "Separado", "Viúvo" }));
 
         jLabel_Email.setText("E-mail :");
+
+        jTextFieldEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldEmailActionPerformed(evt);
+            }
+        });
+        jTextFieldEmail.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldEmailKeyTyped(evt);
+            }
+        });
 
         jLabel_Telefone.setText("Telefone : ");
 
@@ -219,7 +230,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
-        jPanelDadosEndereco1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Dados de Endereço\n"));
+        jPanelDadosEndereco1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Dados de Endereço\n", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 16))); // NOI18N
 
         jLabelRua1.setText("Rua :");
 
@@ -554,9 +565,9 @@ public class CadastroClienteView extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldNumero1KeyTyped
 
     private void btn_SairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SairActionPerformed
-        int retorno = JOptionPane.showConfirmDialog(null, "Deseja realmente SAIR ? Os dados não salvos serão perdidos!", " Deseja Sair ?",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        int retorno = JOptionPane.showConfirmDialog(null, "Deseja realmente SAIR ? Os dados não salvos serão perdidos !", " Deseja Sair ?",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if ( retorno ==0 ){
-            System.exit(0);
+            this.dispose();
         }
     }//GEN-LAST:event_btn_SairActionPerformed
 
@@ -633,9 +644,9 @@ public class CadastroClienteView extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_PesquisarActionPerformed
 
     private void btn_SairPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SairPesquisarActionPerformed
-        int retorno = JOptionPane.showConfirmDialog(null, "Deseja realmente SAIR ? Os dados não salvos serão perdidos!", " Deseja Sair ?",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        int retorno = JOptionPane.showConfirmDialog(null, "Deseja realmente SAIR ?", " Deseja Sair ?",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if ( retorno == 0 ){
-            System.exit(0);
+          this.dispose();
         }
     }//GEN-LAST:event_btn_SairPesquisarActionPerformed
 
@@ -657,6 +668,18 @@ public class CadastroClienteView extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_jMenuItem_SairActionPerformed
+
+    private void jTextFieldEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldEmailActionPerformed
+
+    private void jTextFieldEmailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldEmailKeyTyped
+        if(jTextFieldEmail.getText().length()>60){
+            evt.consume();
+            JOptionPane.showMessageDialog(this,"Ops!! Algo deu errado, tente informar um e-mail menor"
+                         ,"Dados Pessoais ",JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jTextFieldEmailKeyTyped
 
     /**
      * @param args the command line arguments
@@ -683,6 +706,10 @@ public class CadastroClienteView extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(CadastroClienteView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
