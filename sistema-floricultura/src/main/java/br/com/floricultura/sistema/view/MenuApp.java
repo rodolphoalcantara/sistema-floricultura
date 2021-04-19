@@ -78,6 +78,11 @@ public class MenuApp extends javax.swing.JFrame {
         btnRelatorio.setText("Relatorio");
         btnRelatorio.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnRelatorio.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnRelatorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRelatorioActionPerformed(evt);
+            }
+        });
 
         btn_Sair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Users-Exit-icon.png"))); // NOI18N
         btn_Sair.setText("Sair");
@@ -115,10 +120,6 @@ public class MenuApp extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(526, 526, 526)
-<<<<<<< HEAD
-                        .addComponent(btn_Sair, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(30, Short.MAX_VALUE))
-=======
                         .addComponent(btn_Sair, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(35, 35, 35)
@@ -132,8 +133,7 @@ public class MenuApp extends javax.swing.JFrame {
                                 .addComponent(btnCadastroProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(124, Short.MAX_VALUE))
->>>>>>> 90f41b1d043b895095682a9e95fd2a1f75e55ba7
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnCadastroCliente, btnCadastroProduto, btnRelatorio, btnVenda});
@@ -185,6 +185,10 @@ public class MenuApp extends javax.swing.JFrame {
     private void btnCadastroProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroProdutoActionPerformed
         new VendaView().setVisible(true);
     }//GEN-LAST:event_btnCadastroProdutoActionPerformed
+
+    private void btnRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioActionPerformed
+        new RelatorioSinteticoView().setVisible(true);
+    }//GEN-LAST:event_btnRelatorioActionPerformed
 
     /**
      * @param args the command line arguments

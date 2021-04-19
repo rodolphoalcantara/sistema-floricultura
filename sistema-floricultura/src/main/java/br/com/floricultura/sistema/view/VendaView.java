@@ -25,6 +25,7 @@ public class VendaView extends javax.swing.JFrame {
         initComponents();
         
         setLocationRelativeTo(null);
+        //setando para alguns campos ficarem desabilitados
         cboProduto.setEnabled(false);
         btnAlterarCliente.setEnabled(false);
         btnDeletar.setEnabled(false);
@@ -65,7 +66,7 @@ public class VendaView extends javax.swing.JFrame {
         jMenu_Sair = new javax.swing.JMenu();
         jMenuItem_Sair = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Venda de Flores", javax.swing.border.TitledBorder.LEADING, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 1, 16))); // NOI18N
@@ -339,6 +340,7 @@ public class VendaView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
+        //checa se os campos estão preenchidos corretamente e adiciona na tabela de carrinho
         if((cboTipo.getSelectedIndex()!= 0)&&(cboProduto.getSelectedIndex()!= 0)&&(Integer.parseInt(txtQuantidade.getText())!= 0)){
             tableModel.addRow(new Object[] {
                 cboTipo.getSelectedItem().toString(),
@@ -346,7 +348,7 @@ public class VendaView extends javax.swing.JFrame {
                 Integer.parseInt(txtQuantidade.getText()), 
                 5.00
             });
-        
+            //reseta valores
             cboTipo.setSelectedIndex(0);
             txtQuantidade.setValue(0);
     
@@ -358,6 +360,7 @@ public class VendaView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void cboTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTipoActionPerformed
+        //verifica se foi escolhido algum tipo para que possa habilitar a escolha do produto
         if(cboTipo.getSelectedIndex() != 0){
             cboProduto.setEnabled(true);
         }else{
@@ -377,7 +380,7 @@ public class VendaView extends javax.swing.JFrame {
     private void btnAlterarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarClienteActionPerformed
         
         int dialogoConfirmacao = JOptionPane.showConfirmDialog(this, "Confirme a alteração do cliente.","Confirmar alteração", JOptionPane.OK_CANCEL_OPTION);
-        
+        //abre a possibilidade de alterar o cliente
         if(dialogoConfirmacao == 0){
             cboCliente.setEnabled(true);
             cboCliente.setSelectedIndex(0);
@@ -387,16 +390,14 @@ public class VendaView extends javax.swing.JFrame {
 
     private void txtTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalActionPerformed
         double total = 0.0;
-         
+        //atualiza o valor total de acordo com os itens do carrinho 
         for (int i = 0; i < tableModel.getRowCount(); i++) {
             int quantidade = (int)tableModel.getValueAt(i, 2);
             double preco = (double)tableModel.getValueAt(i, 3);
             total += preco*quantidade;
         }
         
-        txtTotal.setText(String.format("%.2f", total));
-        
-        
+        txtTotal.setText(String.format("%.2f", total));   
     }//GEN-LAST:event_txtTotalActionPerformed
 
     private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
@@ -416,7 +417,7 @@ public class VendaView extends javax.swing.JFrame {
     }//GEN-LAST:event_tblCarrinhoFocusGained
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        
+        //verifica se existe um cliente selecionado e se existe algum item no carrinho
         if(tableModel.getRowCount() != 0 && cboCliente.getSelectedIndex() != 0){
             int dialogConfirmacao = JOptionPane.showConfirmDialog(this, "Deseja finalizar venda ?","Finalização de venda", JOptionPane.YES_NO_OPTION);
             if(dialogConfirmacao == 0 /*yes*/){
@@ -436,14 +437,14 @@ public class VendaView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void txtQuantidadeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQuantidadeKeyTyped
-        
+        //validação do campo quantidade para aceitar apenas numeros
         char c = evt.getKeyChar();
         
         if( ((c < '0') || (c > '9')) && ((c !=KeyEvent.VK_BACK_SPACE) || (c !=KeyEvent.VK_DELETE))){
             evt.consume(); 
             JOptionPane.showMessageDialog(this, "O campo quantidade aceita apenas números","Formato incorreto", JOptionPane.ERROR_MESSAGE);
         }
-        
+        //validação do campo quantidade para ter um maximo de caracteres
         if(txtQuantidade.getText().length() >= 4){
             evt.consume();
             JOptionPane.showMessageDialog(this, "Você ultrapassou o limite de 4 digitos","Limite ultrapassado", JOptionPane.WARNING_MESSAGE);

@@ -83,7 +83,9 @@ public class CadastroClienteView extends javax.swing.JFrame {
         jMenu_Sair = new javax.swing.JMenu();
         jMenuItem_Sair = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setAlwaysOnTop(true);
+        setResizable(false);
 
         painelDadosCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Dados Cliente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 16))); // NOI18N
 
@@ -706,15 +708,15 @@ public class CadastroClienteView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTextFieldEmailKeyTyped
 
-<<<<<<< HEAD
+
     private void menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuActionPerformed
         this.dispose();
     }//GEN-LAST:event_menuActionPerformed
-=======
+
     private void btn_VoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_VoltarActionPerformed
               telaCadastroCliente.setSelectedIndex(0); 
     }//GEN-LAST:event_btn_VoltarActionPerformed
->>>>>>> 90f41b1d043b895095682a9e95fd2a1f75e55ba7
+
 
     /**
      * @param args the command line arguments
