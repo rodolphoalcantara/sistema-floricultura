@@ -311,8 +311,10 @@ public class CadastroProduto extends javax.swing.JFrame {
 
         txtNomeActionPerformed(evt);
         txtQuantidadeActionPerformed(evt);
-        cboTipoActionPerformed(evt);
         txtPrecoActionPerformed(evt);
+        if (cboTipo.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this, "Por favor selecione um tipo");
+        }
 
         txtNome.setText("");
         cboTipo.setSelectedIndex(0);
@@ -360,7 +362,9 @@ public class CadastroProduto extends javax.swing.JFrame {
 
         try {
 //Tento executar um código passível de erro 
-            double retorno = Double.parseDouble(txtPreco.getText().replace(",", "."));
+            if(!txtPreco.getText().trim().isEmpty()){
+                double retorno = Double.parseDouble(txtPreco.getText().replace(",", "."));
+            }
         } catch (Exception e) {
 //Ocorreu um erro, informo o usuáro sobre o erro.
             JOptionPane.showMessageDialog(this, "Apenas digite numeros no campo preço");
@@ -373,9 +377,7 @@ public class CadastroProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPrecoActionPerformed
 
     private void cboTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTipoActionPerformed
-        if (cboTipo.getSelectedIndex() == 0) {
-            JOptionPane.showMessageDialog(this, "Por favor selecione um tipo");
-        }
+        
     }//GEN-LAST:event_cboTipoActionPerformed
 
     private void jMenuItem_SairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_SairActionPerformed
