@@ -2,6 +2,8 @@
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
+    <Component class="javax.swing.ButtonGroup" name="btnGroupSexo">
+    </Component>
     <Menu class="javax.swing.JMenuBar" name="menuTelaCadastroCliente">
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="jMenu_Arquivo">
@@ -78,9 +80,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jPanelDadosEndereco1" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                       <Component id="btn_Salvar" linkSize="1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                       <Component id="btn_AbaPesquisar" linkSize="1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="btn_Sair" linkSize="1" min="-2" max="-2" attributes="0"/>
@@ -219,11 +221,17 @@
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="jRadioButtonMasculino">
                   <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="btnGroupSexo"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Masculino"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="jRadioButtonFemino">
                   <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="btnGroupSexo"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Feminino"/>
                   </Properties>
                 </Component>
@@ -529,49 +537,43 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jPanelPesquisa" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jPanelPesquisa" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane_Pesquisar" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
+                              <Component id="btn_Voltar" min="-2" pref="138" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                               <Component id="btnEditar" min="-2" pref="99" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                               <Component id="btnExcluir" min="-2" pref="100" max="-2" attributes="0"/>
-                              <EmptySpace pref="616" max="32767" attributes="0"/>
+                              <EmptySpace pref="445" max="32767" attributes="0"/>
                               <Component id="btn_SairPesquisar" min="-2" pref="101" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
-                          <Component id="jScrollPane_Pesquisar" min="-2" pref="937" max="-2" attributes="0"/>
-                          <EmptySpace pref="88" max="32767" attributes="0"/>
-                      </Group>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanelPesquisa" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="422" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane_Pesquisar" min="-2" pref="315" max="-2" attributes="0"/>
+                      <EmptySpace pref="90" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnEditar" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnExcluir" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btn_SairPesquisar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btn_Voltar" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace pref="132" max="32767" attributes="0"/>
-                          <Component id="jScrollPane_Pesquisar" min="-2" pref="315" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="138" max="-2" attributes="0"/>
-                      </Group>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -601,7 +603,7 @@
                           <Component id="jTextFieldCPFPesquisa" min="-2" pref="220" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                           <Component id="btn_Pesquisar" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="443" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -706,6 +708,14 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Excluir"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="btn_Voltar">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Voltar"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_VoltarActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

@@ -34,6 +34,7 @@ public class MenuApp extends javax.swing.JFrame {
         btnVenda = new javax.swing.JButton();
         btnRelatorio = new javax.swing.JButton();
         btn_Sair = new javax.swing.JButton();
+        tituloFloricultura = new javax.swing.JLabel();
         menuTelaCadastroCliente = new javax.swing.JMenuBar();
         jMenu_Arquivo = new javax.swing.JMenu();
         jMenu_Sair = new javax.swing.JMenu();
@@ -85,6 +86,9 @@ public class MenuApp extends javax.swing.JFrame {
             }
         });
 
+        tituloFloricultura.setFont(new java.awt.Font("Tahoma", 3, 36)); // NOI18N
+        tituloFloricultura.setText("Floricultura Mãe Terra");
+
         jMenu_Arquivo.setText("Arquivo");
         menuTelaCadastroCliente.add(jMenu_Arquivo);
 
@@ -109,17 +113,20 @@ public class MenuApp extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(btnCadastroCliente)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnVenda)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCadastroProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(526, 526, 526)
-                        .addComponent(btn_Sair, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btn_Sair, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tituloFloricultura, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnCadastroCliente)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnVenda)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnCadastroProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(124, Short.MAX_VALUE))
         );
 
@@ -128,7 +135,9 @@ public class MenuApp extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(96, 96, 96)
+                .addGap(40, 40, 40)
+                .addComponent(tituloFloricultura)
+                .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnVenda)
                     .addComponent(btnCadastroCliente)
@@ -217,5 +226,6 @@ public class MenuApp extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu_Arquivo;
     private javax.swing.JMenu jMenu_Sair;
     private javax.swing.JMenuBar menuTelaCadastroCliente;
+    private javax.swing.JLabel tituloFloricultura;
     // End of variables declaration//GEN-END:variables
 }

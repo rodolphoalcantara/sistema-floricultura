@@ -32,6 +32,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnGroupSexo = new javax.swing.ButtonGroup();
         telaCadastroCliente = new javax.swing.JTabbedPane();
         painelCadastrar = new javax.swing.JPanel();
         painelDadosCliente = new javax.swing.JPanel();
@@ -75,6 +76,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
         btn_SairPesquisar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
+        btn_Voltar = new javax.swing.JButton();
         menuTelaCadastroCliente = new javax.swing.JMenuBar();
         jMenu_Arquivo = new javax.swing.JMenu();
         jMenu_Sair = new javax.swing.JMenu();
@@ -99,8 +101,10 @@ public class CadastroClienteView extends javax.swing.JFrame {
 
         jLabelSexoCliente.setText("Sexo :");
 
+        btnGroupSexo.add(jRadioButtonMasculino);
         jRadioButtonMasculino.setText("Masculino");
 
+        btnGroupSexo.add(jRadioButtonFemino);
         jRadioButtonFemino.setText("Feminino");
 
         jLabelDataNascimento.setText("Data Nascim.:");
@@ -336,9 +340,9 @@ public class CadastroClienteView extends javax.swing.JFrame {
             painelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanelDadosEndereco1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(painelCadastrarLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(25, 25, 25)
                 .addComponent(btn_Salvar)
-                .addGap(18, 18, 18)
+                .addGap(34, 34, 34)
                 .addComponent(btn_AbaPesquisar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btn_Sair)
@@ -399,7 +403,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
                 .addComponent(jTextFieldCPFPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42)
                 .addComponent(btn_Pesquisar)
-                .addContainerGap(443, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelPesquisaLayout.setVerticalGroup(
             jPanelPesquisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -449,45 +453,49 @@ public class CadastroClienteView extends javax.swing.JFrame {
 
         btnExcluir.setText("Excluir");
 
+        btn_Voltar.setText("Voltar");
+        btn_Voltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_VoltarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout painelPesquisarLayout = new javax.swing.GroupLayout(painelPesquisar);
         painelPesquisar.setLayout(painelPesquisarLayout);
         painelPesquisarLayout.setHorizontalGroup(
             painelPesquisarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelPesquisarLayout.createSequentialGroup()
                 .addGroup(painelPesquisarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, painelPesquisarLayout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addGroup(painelPesquisarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanelPesquisa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane_Pesquisar)))
                     .addGroup(painelPesquisarLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanelPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(painelPesquisarLayout.createSequentialGroup()
-                        .addGap(86, 86, 86)
+                        .addGap(63, 63, 63)
+                        .addComponent(btn_Voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(46, 46, 46)
                         .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(28, 28, 28)
                         .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 616, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 445, Short.MAX_VALUE)
                         .addComponent(btn_SairPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(92, 92, 92))
-            .addGroup(painelPesquisarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(painelPesquisarLayout.createSequentialGroup()
-                    .addGap(87, 87, 87)
-                    .addComponent(jScrollPane_Pesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 937, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(88, Short.MAX_VALUE)))
         );
         painelPesquisarLayout.setVerticalGroup(
             painelPesquisarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelPesquisarLayout.createSequentialGroup()
-                .addGap(8, 8, 8)
+                .addContainerGap()
                 .addComponent(jPanelPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 422, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane_Pesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
                 .addGroup(painelPesquisarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEditar)
                     .addComponent(btnExcluir)
-                    .addComponent(btn_SairPesquisar))
+                    .addComponent(btn_SairPesquisar)
+                    .addComponent(btn_Voltar))
                 .addContainerGap())
-            .addGroup(painelPesquisarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelPesquisarLayout.createSequentialGroup()
-                    .addContainerGap(132, Short.MAX_VALUE)
-                    .addComponent(jScrollPane_Pesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(138, 138, 138)))
         );
 
         telaCadastroCliente.addTab("Pesquisar", painelPesquisar);
@@ -636,6 +644,13 @@ public class CadastroClienteView extends javax.swing.JFrame {
                  JOptionPane.showMessageDialog(this,"Vamos tentar de novo!Informe apenas números para pesquisar o CPF do cliente"
                          ,"Informe o CPF ",JOptionPane.WARNING_MESSAGE);
                }
+               
+            if(jTextFieldCPFPesquisa.getText().length()>11){
+                     evt.consume();
+                     JOptionPane.showMessageDialog(this,"Ops! Digite o CPF novamente!"
+                         ,"Dados Pessoais ",JOptionPane.WARNING_MESSAGE);
+                     jTextFieldCPFPesquisa.setText("");
+       }
                      
     }//GEN-LAST:event_jTextFieldCPFPesquisaKeyTyped
 
@@ -680,6 +695,10 @@ public class CadastroClienteView extends javax.swing.JFrame {
                          ,"Dados Pessoais ",JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jTextFieldEmailKeyTyped
+
+    private void btn_VoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_VoltarActionPerformed
+              telaCadastroCliente.setSelectedIndex(0); 
+    }//GEN-LAST:event_btn_VoltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -726,11 +745,13 @@ public class CadastroClienteView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
+    private javax.swing.ButtonGroup btnGroupSexo;
     private javax.swing.JButton btn_AbaPesquisar;
     private javax.swing.JButton btn_Pesquisar;
     private javax.swing.JButton btn_Sair;
     private javax.swing.JButton btn_SairPesquisar;
     private javax.swing.JButton btn_Salvar;
+    private javax.swing.JButton btn_Voltar;
     private javax.swing.JComboBox<String> jComboBoxCidade1;
     private javax.swing.JComboBox<String> jComboBoxEstado1;
     private javax.swing.JComboBox<String> jComboBox_Estadocivil;
