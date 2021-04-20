@@ -109,7 +109,7 @@
                       <Component id="painelDadosCliente" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                       <Component id="jPanelDadosEndereco1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="222" max="32767" attributes="0"/>
+                      <EmptySpace pref="210" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btn_Sair" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btn_AbaPesquisar" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -511,6 +511,9 @@
             </Container>
             <Component class="javax.swing.JButton" name="btn_Salvar">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/img/diskette_save_saveas_1514.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Salvar"/>
               </Properties>
               <Events>
@@ -519,6 +522,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="btn_AbaPesquisar">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/img/business_man_usersearch_thesearch_theclient_2356_1.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Pesquisar"/>
               </Properties>
               <Events>
@@ -527,6 +533,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="btn_Sair">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/img/Users-Exit-icon.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Sair"/>
               </Properties>
               <Events>
@@ -549,7 +558,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jPanelPesquisa" max="32767" attributes="0"/>
@@ -558,13 +567,13 @@
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
-                              <Component id="btn_Voltar" min="-2" pref="138" max="-2" attributes="0"/>
+                              <Component id="btn_Voltar" linkSize="3" min="-2" pref="138" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-                              <Component id="btnEditar" min="-2" pref="99" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                              <Component id="btnExcluir" min="-2" pref="100" max="-2" attributes="0"/>
-                              <EmptySpace pref="445" max="32767" attributes="0"/>
-                              <Component id="btn_SairPesquisar" min="-2" pref="101" max="-2" attributes="0"/>
+                              <Component id="btnEditar" linkSize="3" min="-2" pref="112" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="btnExcluir" linkSize="3" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="btn_SairPesquisar" linkSize="3" min="-2" pref="101" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
@@ -578,12 +587,12 @@
                       <Component id="jPanelPesquisa" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane_Pesquisar" min="-2" pref="315" max="-2" attributes="0"/>
-                      <EmptySpace pref="90" max="32767" attributes="0"/>
+                      <EmptySpace pref="66" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnEditar" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnExcluir" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btn_SairPesquisar" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btn_Voltar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnEditar" linkSize="4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnExcluir" linkSize="4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btn_SairPesquisar" linkSize="4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btn_Voltar" linkSize="4" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -615,7 +624,7 @@
                           <Component id="jTextFieldCPFPesquisa" min="-2" pref="220" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                           <Component id="btn_Pesquisar" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="450" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -647,6 +656,9 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="btn_Pesquisar">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/img/business_man_usersearch_thesearch_theclient_2356_1.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Pesquisar"/>
                   </Properties>
                   <Events>
@@ -665,8 +677,7 @@
                 <Component class="javax.swing.JTable" name="jTable_Pesquisa">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="4" rowCount="2">
-                        <Column editable="false" title="Id_Clinete" type="java.lang.Integer"/>
+                      <Table columnCount="3" rowCount="2">
                         <Column editable="false" title="Nome Cliente" type="java.lang.String"/>
                         <Column editable="false" title="CPF Cliente" type="java.lang.String"/>
                         <Column editable="false" title="E-mail" type="java.lang.String"/>
@@ -705,6 +716,9 @@
             </Container>
             <Component class="javax.swing.JButton" name="btn_SairPesquisar">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/img/Users-Exit-icon.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Sair"/>
               </Properties>
               <Events>
@@ -713,16 +727,25 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnEditar">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/img/businessapplication_edit_male_user_thepencil_theclient_negocio_2321.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Editar"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btnExcluir">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/img/delete_delete_deleteusers_delete_male_user_maleclient_2348.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Excluir"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btn_Voltar">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/img/ic_assignment_return_128_28215.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Voltar"/>
               </Properties>
               <Events>

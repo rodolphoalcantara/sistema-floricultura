@@ -19,6 +19,8 @@ public class MenuApp extends javax.swing.JFrame {
     public MenuApp() {
         initComponents();
         setLocationRelativeTo(null);
+        
+        
     }
          /**
      * This method is called from within the constructor to initialize the form.
@@ -35,6 +37,7 @@ public class MenuApp extends javax.swing.JFrame {
         btnRelatorio = new javax.swing.JButton();
         btn_Sair = new javax.swing.JButton();
         tituloFloricultura = new javax.swing.JLabel();
+        iconeFlor = new javax.swing.JLabel();
         menuTelaCadastroCliente = new javax.swing.JMenuBar();
         jMenu_Arquivo = new javax.swing.JMenu();
         jMenu_Sair = new javax.swing.JMenu();
@@ -43,7 +46,7 @@ public class MenuApp extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        btnCadastroCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Users.png"))); // NOI18N
+        btnCadastroCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/business_application_addmale_useradd_insert_add_user_client_2312.png"))); // NOI18N
         btnCadastroCliente.setText("Cadastro Cliente");
         btnCadastroCliente.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnCadastroCliente.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -92,8 +95,11 @@ public class MenuApp extends javax.swing.JFrame {
             }
         });
 
-        tituloFloricultura.setFont(new java.awt.Font("Tahoma", 3, 36)); // NOI18N
-        tituloFloricultura.setText("Floricultura Mãe Terra");
+        tituloFloricultura.setFont(new java.awt.Font("Segoe Script", 3, 36)); // NOI18N
+        tituloFloricultura.setForeground(new java.awt.Color(255, 51, 51));
+        tituloFloricultura.setText("Floricultura Mãe Terra ");
+
+        iconeFlor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/flowers-heart-roses_87130.png"))); // NOI18N
 
         jMenu_Arquivo.setText("Arquivo");
         menuTelaCadastroCliente.add(jMenu_Arquivo);
@@ -124,16 +130,19 @@ public class MenuApp extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tituloFloricultura, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnCadastroCliente)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnVenda)
+                                .addComponent(btnVenda))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(tituloFloricultura, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnCadastroProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(30, Short.MAX_VALUE))
+                                .addComponent(iconeFlor)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCadastroProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnCadastroCliente, btnCadastroProduto, btnRelatorio, btnVenda});
@@ -142,7 +151,9 @@ public class MenuApp extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(40, 40, 40)
-                .addComponent(tituloFloricultura)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tituloFloricultura)
+                    .addComponent(iconeFlor))
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnVenda)
@@ -232,6 +243,7 @@ public class MenuApp extends javax.swing.JFrame {
     private javax.swing.JButton btnRelatorio;
     private javax.swing.JButton btnVenda;
     private javax.swing.JButton btn_Sair;
+    private javax.swing.JLabel iconeFlor;
     private javax.swing.JMenuItem jMenuItem_Sair;
     private javax.swing.JMenu jMenu_Arquivo;
     private javax.swing.JMenu jMenu_Sair;
