@@ -6,13 +6,12 @@
 package br.com.floricultura.sistema.model;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 
 public class Venda {
     
+    private int id;
     private Cliente cliente;
-    private List<Produto> produtos;
     private LocalDateTime data;
 
     public Cliente getCliente() {
@@ -21,14 +20,6 @@ public class Venda {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
-    }
-
-    public List<Produto> getProdutos() {
-        return produtos;
-    }
-
-    public void setProdutos(List<Produto> produtos) {
-        this.produtos = produtos;
     }
 
     public LocalDateTime getData() {
