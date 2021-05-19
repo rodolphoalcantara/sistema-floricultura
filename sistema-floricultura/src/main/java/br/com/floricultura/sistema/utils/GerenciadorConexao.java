@@ -17,9 +17,9 @@ public class GerenciadorConexao {
     public static String STATUS = "Não conectado";
     public static String DRIVER = "com.mysql.cj.jdbc.Driver";
     public static String SERVER = "localhost";
-    public static String DATABASE = "lojainformatica";
+    public static String DATABASE = "sistema_floricultura";
     public static String LOGIN = "root";
-    public static String SENHA = "root"; //senha da minha conexao com mysql. Favor alterar
+    public static String SENHA = ""; //senha da minha conexao com mysql. Favor alterar
     public static String URL = "";
     public static Connection CONEXAO;
 

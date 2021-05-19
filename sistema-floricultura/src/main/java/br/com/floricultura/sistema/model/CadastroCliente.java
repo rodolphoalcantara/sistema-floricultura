@@ -1,6 +1,8 @@
 package br.com.floricultura.sistema.model;
 
 import java.awt.Color;
+import java.sql.Date;
+import java.time.LocalDate;
 import javax.swing.JOptionPane;
 
 /**
@@ -9,55 +11,108 @@ import javax.swing.JOptionPane;
  */
 public class CadastroCliente {
 
-    private String cpfCliente, nomeCliente, sexoCliente, dataNascimento, emailCliente, estadoCivil, ruaCliente, numeroC, bairroCliente, cidadeCliente, estadoCliente;
+    private String cpfCliente, nomeCliente, sexoCliente, emailCliente, estadoCivil, 
+                   tipotelefone,telefoneCliente, dataNascimento;
+    
+    private int id_cli;
 
-    public void setRuaCliente(String rua) {
-        this.ruaCliente = rua;
+    public int getId_cli() {
+        return id_cli;
     }
 
-    public void setNumeroC(String numero) {
-        this.numeroC = numero;
+    public void setId_cli(int id_cli) {
+        this.id_cli = id_cli;
     }
 
-    public void setBairroCliente(String bairro) {
-        this.bairroCliente = bairro;
+    public CadastroCliente() {
+        
+    }
+    
+    public String getCpfCliente() {
+        return cpfCliente;
     }
 
-    public void setCidadeCliente(String cidade) {
-        this.cidadeCliente = cidade;
+    public String getNomeCliente() {
+        return nomeCliente;
     }
 
-    public void setEstadoCliente(String estado) {
-        this.estadoCliente = estado;
+    public String getSexoCliente() {
+        return sexoCliente;
     }
 
-    public void setNomeCliente(String nome) {
-        this.nomeCliente = nome;
+    public String getDataNascimento() {
+        return dataNascimento;
     }
 
-    public void setSexoCliente(String sexo) {
-        this.sexoCliente = sexo;
+    public String getEmailCliente() {
+        return emailCliente;
     }
 
-    public void setDataNascimento(String data) {
-        this.dataNascimento = data;
-
+    public String getEstadoCivil() {
+        return estadoCivil;
     }
-   
-    public void setcpfCliente(String CPF) {
-        this.cpfCliente = CPF;
-       }
- 
 
-    public void setestadoCivil(String estadoCivil) {
+    public String getTipotelefone() {
+        return tipotelefone;
+    }
+
+    public String getTelefoneCliente() {
+        return telefoneCliente;
+    }
+
+    public void setCpfCliente(String cpfCliente) {
+        this.cpfCliente = cpfCliente;
+    }
+
+    public void setNomeCliente(String nomeCliente) {
+        this.nomeCliente = nomeCliente;
+    }
+
+    public void setSexoCliente(String sexoCliente) {
+        this.sexoCliente = sexoCliente;
+    }
+
+    public void setDataNascimento(String dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    public void setEmailCliente(String emailCliente) {
+        this.emailCliente = emailCliente;
+    }
+
+    public void setEstadoCivil(String estadoCivil) {
         this.estadoCivil = estadoCivil;
     }
 
-    public void setemailCliente(String email) {
-        this.emailCliente = email;
+    public void setTipotelefone(String tipotelefone) {
+        this.tipotelefone = tipotelefone;
     }
 
-   
-
+    public void setTelefoneCliente(String telefoneCliente) {
+        this.telefoneCliente = telefoneCliente;
+    }
+    
+    
+    public CadastroCliente(String nomeCliente,String cpfCliente,String sexoCliente,
+            String dataNascimento,String emailCliente,String estadoCivil,String ruaCliente,String numeroC,
+    String bairroCliente,String cidadeCliente,String estadoCliente,String tipotelefone,String telefoneCliente){
+        
+      this.cpfCliente = cpfCliente;
+      this.nomeCliente = nomeCliente;
+      this.sexoCliente = sexoCliente;
+      this.emailCliente = emailCliente; 
+      this.dataNascimento = dataNascimento;
+      this.estadoCivil = estadoCivil;
+      this.tipotelefone = tipotelefone;
+      this.telefoneCliente = telefoneCliente;
+      
+    }
+        
+        
+    
+    
+    
+ 
+    
     
 }

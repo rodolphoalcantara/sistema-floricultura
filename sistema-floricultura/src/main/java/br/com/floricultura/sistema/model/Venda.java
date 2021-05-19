@@ -11,24 +11,24 @@ import java.time.LocalDateTime;
 public class Venda {
     
     private int id;
-    private Cliente cliente;
-    private LocalDateTime data;
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    public LocalDateTime getData() {
-        return data;
-    }
-
-    public void setData(LocalDateTime data) {
-        this.data = data;
-    }
+//  private Cliente cliente;
+//    private LocalDateTime data;
+//
+//    public Cliente getCliente() {
+//        return cliente;
+//    }
+//
+//    public void setCliente(Cliente cliente) {
+//        this.cliente = cliente;
+//    }
+//
+//    public LocalDateTime getData() {
+//        return data;
+//    }
+//
+//    public void setData(LocalDateTime data) {
+//        this.data = data;
+//    }
     
     
 }

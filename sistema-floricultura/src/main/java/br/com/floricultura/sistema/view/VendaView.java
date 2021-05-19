@@ -5,7 +5,7 @@
  */
 package br.com.floricultura.sistema.view;
 
-import br.com.floricultura.sistema.model.Cliente;
+//import br.com.floricultura.sistema.model.Cliente;
 import br.com.floricultura.sistema.model.Produto;
 import java.awt.event.KeyEvent;
 import java.util.List;
@@ -25,7 +25,7 @@ public class VendaView extends javax.swing.JFrame {
     private DefaultTableModel tableModel;
     
     //atributos para registro em banco
-    private Cliente cliente;
+   // private Cliente cliente;
     private Produto produto;
     private List<Produto> carrinho;
     
