@@ -5,10 +5,16 @@
  */
 package br.com.floricultura.sistema.view;
 
+import br.com.floricultura.sistema.controller.CadastroClienteController;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import br.com.floricultura.sistema.model.CadastroCliente;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author aureliosantos
@@ -35,6 +41,21 @@ public class CadastroClienteView extends javax.swing.JFrame {
         btnGroupSexo = new javax.swing.ButtonGroup();
         telaCadastroCliente = new javax.swing.JTabbedPane();
         painelCadastrar = new javax.swing.JPanel();
+        jPanelDadosEndereco1 = new javax.swing.JPanel();
+        jLabelRua1 = new javax.swing.JLabel();
+        jTextFieldRua1 = new javax.swing.JTextField();
+        jLabelNumero1 = new javax.swing.JLabel();
+        jTextFieldNumero1 = new javax.swing.JTextField();
+        jLabelBairro1 = new javax.swing.JLabel();
+        jTextFieldBairro1 = new javax.swing.JTextField();
+        jLabelCidade1 = new javax.swing.JLabel();
+        jComboBoxCidade1 = new javax.swing.JComboBox<>();
+        jLabelEstado1 = new javax.swing.JLabel();
+        jComboBoxEstado1 = new javax.swing.JComboBox<>();
+        btn_Salvar = new javax.swing.JButton();
+        btn_AbaPesquisar = new javax.swing.JButton();
+        btn_Sair = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         painelDadosCliente = new javax.swing.JPanel();
         jLabelNomeCliente = new javax.swing.JLabel();
         jTextFieldNomeCliente = new javax.swing.JTextField();
@@ -51,21 +72,6 @@ public class CadastroClienteView extends javax.swing.JFrame {
         jTextFieldEmail = new javax.swing.JTextField();
         jLabel_Telefone = new javax.swing.JLabel();
         telefone_Cliente_jFormattedText = new javax.swing.JFormattedTextField();
-        tipo_Teledone_jComboBox = new javax.swing.JComboBox<>();
-        jPanelDadosEndereco1 = new javax.swing.JPanel();
-        jLabelRua1 = new javax.swing.JLabel();
-        jTextFieldRua1 = new javax.swing.JTextField();
-        jLabelNumero1 = new javax.swing.JLabel();
-        jTextFieldNumero1 = new javax.swing.JTextField();
-        jLabelBairro1 = new javax.swing.JLabel();
-        jTextFieldBairro1 = new javax.swing.JTextField();
-        jLabelCidade1 = new javax.swing.JLabel();
-        jComboBoxCidade1 = new javax.swing.JComboBox<>();
-        jLabelEstado1 = new javax.swing.JLabel();
-        jComboBoxEstado1 = new javax.swing.JComboBox<>();
-        btn_Salvar = new javax.swing.JButton();
-        btn_AbaPesquisar = new javax.swing.JButton();
-        btn_Sair = new javax.swing.JButton();
         painelPesquisar = new javax.swing.JPanel();
         jPanelPesquisa = new javax.swing.JPanel();
         jLabelPesquisaCPF = new javax.swing.JLabel();
@@ -86,6 +92,109 @@ public class CadastroClienteView extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
         setResizable(false);
+
+        jPanelDadosEndereco1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Dados de Endereço\n", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 16))); // NOI18N
+
+        jLabelRua1.setText("Rua :");
+
+        jLabelNumero1.setText("Número : ");
+
+        jTextFieldNumero1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldNumero1ActionPerformed(evt);
+            }
+        });
+        jTextFieldNumero1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldNumero1KeyTyped(evt);
+            }
+        });
+
+        jLabelBairro1.setText("Bairro :");
+
+        jLabelCidade1.setText("Cidade : ");
+
+        jComboBoxCidade1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cidade", "São Paulo", "Guarulhos", "Campinas", "São Bernardo do Campo\t", "São José dos Campos\t", "Santo André\t", "Ribeirão Preto\t", "Osasco\t", "Sorocaba\t", "Mauá\t", "São José do Rio Preto\t", "Mogi das Cruzes\t", "Santos\t", "Diadema\t", "Jundiaí\t", "Piracicaba\t", "Carapicuíba\t", "Bauru\t", "Itaquaquecetuba\t", "São Vicente\t", "Franca\t", "Praia Grande\t", "Guarujá\t", "Taubaté\t\t", "Suzano\t", "Taboão da Serra" }));
+
+        jLabelEstado1.setText("Estado : ");
+
+        jComboBoxEstado1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Estado", "São Paulo", " " }));
+
+        javax.swing.GroupLayout jPanelDadosEndereco1Layout = new javax.swing.GroupLayout(jPanelDadosEndereco1);
+        jPanelDadosEndereco1.setLayout(jPanelDadosEndereco1Layout);
+        jPanelDadosEndereco1Layout.setHorizontalGroup(
+            jPanelDadosEndereco1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelDadosEndereco1Layout.createSequentialGroup()
+                .addGroup(jPanelDadosEndereco1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelDadosEndereco1Layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(jPanelDadosEndereco1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabelRua1)
+                            .addComponent(jLabelBairro1))
+                        .addGap(6, 6, 6)
+                        .addComponent(jTextFieldRua1, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(81, 81, 81)
+                        .addComponent(jLabelNumero1))
+                    .addGroup(jPanelDadosEndereco1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabelCidade1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanelDadosEndereco1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldBairro1, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanelDadosEndereco1Layout.createSequentialGroup()
+                                .addComponent(jComboBoxCidade1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(33, 33, 33)
+                                .addComponent(jLabelEstado1)
+                                .addGap(18, 18, 18)
+                                .addComponent(jComboBoxEstado1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextFieldNumero1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(347, Short.MAX_VALUE))
+        );
+        jPanelDadosEndereco1Layout.setVerticalGroup(
+            jPanelDadosEndereco1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelDadosEndereco1Layout.createSequentialGroup()
+                .addGroup(jPanelDadosEndereco1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelRua1)
+                    .addComponent(jTextFieldRua1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelNumero1)
+                    .addComponent(jTextFieldNumero1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelDadosEndereco1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelBairro1)
+                    .addComponent(jTextFieldBairro1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelDadosEndereco1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelCidade1)
+                    .addComponent(jComboBoxCidade1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelEstado1)
+                    .addComponent(jComboBoxEstado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(35, Short.MAX_VALUE))
+        );
+
+        btn_Salvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/diskette_save_saveas_1514.png"))); // NOI18N
+        btn_Salvar.setText("Salvar");
+        btn_Salvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SalvarActionPerformed(evt);
+            }
+        });
+
+        btn_AbaPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/business_man_usersearch_thesearch_theclient_2356_1.png"))); // NOI18N
+        btn_AbaPesquisar.setText("Pesquisar");
+        btn_AbaPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_AbaPesquisarActionPerformed(evt);
+            }
+        });
+
+        btn_Sair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Users-Exit-icon.png"))); // NOI18N
+        btn_Sair.setText("Sair");
+        btn_Sair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SairActionPerformed(evt);
+            }
+        });
 
         painelDadosCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Dados Cliente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 16))); // NOI18N
 
@@ -161,12 +270,10 @@ public class CadastroClienteView extends javax.swing.JFrame {
         jLabel_Telefone.setText("Telefone : ");
 
         try {
-            telefone_Cliente_jFormattedText.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) #####-####")));
+            telefone_Cliente_jFormattedText.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-
-        tipo_Teledone_jComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tipo", "Celular", "Comercial", "Residencial", " " }));
 
         javax.swing.GroupLayout painelDadosClienteLayout = new javax.swing.GroupLayout(painelDadosCliente);
         painelDadosCliente.setLayout(painelDadosClienteLayout);
@@ -204,10 +311,8 @@ public class CadastroClienteView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel_Telefone)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(telefone_Cliente_jFormattedText, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38)
-                        .addComponent(tipo_Teledone_jComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(telefone_Cliente_jFormattedText, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(109, Short.MAX_VALUE))
         );
         painelDadosClienteLayout.setVerticalGroup(
             painelDadosClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -232,113 +337,22 @@ public class CadastroClienteView extends javax.swing.JFrame {
                     .addComponent(jLabel_Email)
                     .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel_Telefone)
-                    .addComponent(telefone_Cliente_jFormattedText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tipo_Teledone_jComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(telefone_Cliente_jFormattedText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
-        jPanelDadosEndereco1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Dados de Endereço\n", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 16))); // NOI18N
-
-        jLabelRua1.setText("Rua :");
-
-        jLabelNumero1.setText("Número : ");
-
-        jTextFieldNumero1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldNumero1ActionPerformed(evt);
-            }
-        });
-        jTextFieldNumero1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextFieldNumero1KeyTyped(evt);
-            }
-        });
-
-        jLabelBairro1.setText("Bairro :");
-
-        jLabelCidade1.setText("Cidade : ");
-
-        jComboBoxCidade1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cidade", "São Paulo", "Guarulhos", "Campinas", "São Bernardo do Campo\t", "São José dos Campos\t", "Santo André\t", "Ribeirão Preto\t", "Osasco\t", "Sorocaba\t", "Mauá\t", "São José do Rio Preto\t", "Mogi das Cruzes\t", "Santos\t", "Diadema\t", "Jundiaí\t", "Piracicaba\t", "Carapicuíba\t", "Bauru\t", "Itaquaquecetuba\t", "São Vicente\t", "Franca\t", "Praia Grande\t", "Guarujá\t", "Taubaté\t\t", "Suzano\t", "Taboão da Serra" }));
-
-        jLabelEstado1.setText("Estado : ");
-
-        jComboBoxEstado1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Estado", "São Paulo", " " }));
-
-        javax.swing.GroupLayout jPanelDadosEndereco1Layout = new javax.swing.GroupLayout(jPanelDadosEndereco1);
-        jPanelDadosEndereco1.setLayout(jPanelDadosEndereco1Layout);
-        jPanelDadosEndereco1Layout.setHorizontalGroup(
-            jPanelDadosEndereco1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelDadosEndereco1Layout.createSequentialGroup()
-                .addGroup(jPanelDadosEndereco1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelDadosEndereco1Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addGroup(jPanelDadosEndereco1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabelRua1)
-                            .addComponent(jLabelBairro1))
-                        .addGap(6, 6, 6)
-                        .addComponent(jTextFieldRua1, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(81, 81, 81)
-                        .addComponent(jLabelNumero1))
-                    .addGroup(jPanelDadosEndereco1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabelCidade1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanelDadosEndereco1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldBairro1, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanelDadosEndereco1Layout.createSequentialGroup()
-                                .addComponent(jComboBoxCidade1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(33, 33, 33)
-                                .addComponent(jLabelEstado1)
-                                .addGap(18, 18, 18)
-                                .addComponent(jComboBoxEstado1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldNumero1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(268, Short.MAX_VALUE))
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(painelDadosCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanelDadosEndereco1Layout.setVerticalGroup(
-            jPanelDadosEndereco1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelDadosEndereco1Layout.createSequentialGroup()
-                .addGroup(jPanelDadosEndereco1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelRua1)
-                    .addComponent(jTextFieldRua1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelNumero1)
-                    .addComponent(jTextFieldNumero1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelDadosEndereco1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelBairro1)
-                    .addComponent(jTextFieldBairro1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanelDadosEndereco1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelCidade1)
-                    .addComponent(jComboBoxCidade1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelEstado1)
-                    .addComponent(jComboBoxEstado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(35, Short.MAX_VALUE))
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(painelDadosCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
-
-        btn_Salvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/diskette_save_saveas_1514.png"))); // NOI18N
-        btn_Salvar.setText("Salvar");
-        btn_Salvar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_SalvarActionPerformed(evt);
-            }
-        });
-
-        btn_AbaPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/business_man_usersearch_thesearch_theclient_2356_1.png"))); // NOI18N
-        btn_AbaPesquisar.setText("Pesquisar");
-        btn_AbaPesquisar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_AbaPesquisarActionPerformed(evt);
-            }
-        });
-
-        btn_Sair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Users-Exit-icon.png"))); // NOI18N
-        btn_Sair.setText("Sair");
-        btn_Sair.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_SairActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout painelCadastrarLayout = new javax.swing.GroupLayout(painelCadastrar);
         painelCadastrar.setLayout(painelCadastrarLayout);
@@ -353,7 +367,9 @@ public class CadastroClienteView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btn_Sair)
                 .addGap(50, 50, 50))
-            .addComponent(painelDadosCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(painelCadastrarLayout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         painelCadastrarLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btn_AbaPesquisar, btn_Sair, btn_Salvar});
@@ -361,10 +377,10 @@ public class CadastroClienteView extends javax.swing.JFrame {
         painelCadastrarLayout.setVerticalGroup(
             painelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelCadastrarLayout.createSequentialGroup()
-                .addComponent(painelDadosCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jPanelDadosEndereco1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 210, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 193, Short.MAX_VALUE)
                 .addGroup(painelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_Sair)
                     .addComponent(btn_AbaPesquisar)
@@ -410,7 +426,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
                 .addComponent(jTextFieldCPFPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42)
                 .addComponent(btn_Pesquisar)
-                .addContainerGap(450, Short.MAX_VALUE))
+                .addContainerGap(581, Short.MAX_VALUE))
         );
         jPanelPesquisaLayout.setVerticalGroup(
             jPanelPesquisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -425,18 +441,18 @@ public class CadastroClienteView extends javax.swing.JFrame {
 
         jTable_Pesquisa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Nome Cliente", "CPF Cliente", "E-mail"
+                "Id_Cliente", "Nome Cliente", "CPF Cliente", "E-mail", "Título 5"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -462,6 +478,11 @@ public class CadastroClienteView extends javax.swing.JFrame {
 
         btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/delete_delete_deleteusers_delete_male_user_maleclient_2348.png"))); // NOI18N
         btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         btn_Voltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ic_assignment_return_128_28215.png"))); // NOI18N
         btn_Voltar.setText("Voltar");
@@ -475,23 +496,21 @@ public class CadastroClienteView extends javax.swing.JFrame {
         painelPesquisar.setLayout(painelPesquisarLayout);
         painelPesquisarLayout.setHorizontalGroup(
             painelPesquisarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelPesquisarLayout.createSequentialGroup()
+            .addGroup(painelPesquisarLayout.createSequentialGroup()
+                .addGap(40, 40, 40)
                 .addGroup(painelPesquisarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(painelPesquisarLayout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addGroup(painelPesquisarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanelPesquisa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane_Pesquisar)))
-                    .addGroup(painelPesquisarLayout.createSequentialGroup()
-                        .addGap(63, 63, 63)
                         .addComponent(btn_Voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(46, 46, 46)
+                        .addGap(32, 32, 32)
                         .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(29, 29, 29)
                         .addComponent(btnExcluir)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_SairPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(92, 92, 92))
+                        .addGap(475, 475, 475)
+                        .addComponent(btn_SairPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(painelPesquisarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jScrollPane_Pesquisar)
+                        .addComponent(jPanelPesquisa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         painelPesquisarLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnEditar, btnExcluir, btn_SairPesquisar, btn_Voltar});
@@ -610,15 +629,16 @@ public class CadastroClienteView extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_AbaPesquisarActionPerformed
 
     private void btn_SalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalvarActionPerformed
-         CadastroCliente dadosCliente = new CadastroCliente();
+        
 
         String nome = jTextFieldNomeCliente.getText();
+        String sexo = " ";
 
         if(jRadioButtonMasculino.isSelected()){
-            dadosCliente.setSexoCliente("Masculino");
+           sexo = jRadioButtonMasculino.getText();
         }
         else if(jRadioButtonFemino.isSelected()){
-            dadosCliente.setSexoCliente("Feminino");
+           sexo = jRadioButtonFemino.getText();
         }
         String dataRecebida = jFormattedTextDataNascim.getText();
         String cpfRecebido = jFormattedTextCPF.getText();
@@ -629,30 +649,40 @@ public class CadastroClienteView extends javax.swing.JFrame {
         String bairro = jTextFieldBairro1.getText();
         String cidade = jComboBoxCidade1.getSelectedItem().toString();
         String estado = jComboBoxEstado1.getSelectedItem().toString();
+        String telefone = telefone_Cliente_jFormattedText.getText();
 
         if(cpfRecebido.trim().equals("")|| nome.trim().equals("")||dataRecebida.trim().equals("")
-            ||cpfRecebido.trim().equals("")||rua.trim().equals("")||numero.trim().equals("") || bairro.trim().equals("")){
+            ||telefone.trim().equals("")||rua.trim().equals("")||numero.trim().equals("") || bairro.trim().equals("")){
             JOptionPane.showMessageDialog(this, "Por Favor Preencha campos Obrigatorio"," Campos Obrigatórios",JOptionPane.WARNING_MESSAGE);
             jFormattedTextCPF.setBackground(Color.yellow);
             jTextFieldNomeCliente.setBackground(Color.yellow);
             jFormattedTextDataNascim.setBackground(Color.yellow);
+            telefone_Cliente_jFormattedText.setBackground(Color.yellow);
+            
         }
         else{
             jFormattedTextCPF.setBackground(Color.white);
             jTextFieldNomeCliente.setBackground(Color.white);
             jFormattedTextDataNascim.setBackground(Color.white);
+            telefone_Cliente_jFormattedText.setBackground(Color.white);
+            
+            
+            if(CadastroClienteController.SalvarEndereco(rua,numero,bairro,cidade,estado)){
+                
+                                  
+            if(CadastroClienteController.salvarCliente(nome, cpfRecebido, sexo, dataRecebida, email, estadoCivil,telefone)){
+                JOptionPane.showMessageDialog(this, " Cliente Salvo com sucesso!");
+            
+            }
+            }
+            else{ 
+                JOptionPane.showMessageDialog(this, " Error ao Salvar o cliente!");
+            }
+            
         }
 
-        dadosCliente.setNomeCliente(nome);
-        dadosCliente.setDataNascimento(dataRecebida);
-        dadosCliente.setcpfCliente(cpfRecebido);
-        dadosCliente.setestadoCivil(estadoCivil);
-        dadosCliente.setemailCliente(email);
-        dadosCliente.setNumeroC(numero);
-        dadosCliente.setRuaCliente(rua);
-        dadosCliente.setBairroCliente(bairro);
-        dadosCliente.setCidadeCliente(cidade);
-        dadosCliente.setEstadoCliente(estado);
+     
+          
         
         
     }//GEN-LAST:event_btn_SalvarActionPerformed
@@ -680,6 +710,40 @@ public class CadastroClienteView extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldCPFPesquisaKeyTyped
 
     private void btn_PesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_PesquisarActionPerformed
+            
+            String cpfPesquisa = jTextFieldCPFPesquisa.getText();
+            
+             DefaultTableModel tmCliente = (DefaultTableModel) jTable_Pesquisa.getModel();
+            if(cpfPesquisa.equals("")){
+                
+              ArrayList<CadastroCliente> listaClientes = CadastroClienteController.consultarCliente();
+                        
+            tmCliente.setRowCount(0);
+             
+             for(CadastroCliente c : listaClientes){
+                 tmCliente.addRow(new Object[]{
+                 String.valueOf(c.getId_cli()),c.getNomeCliente(),c.getCpfCliente(),c.getEmailCliente(),c.getFk_id_endereco()});
+             }
+             
+            
+    } 
+            else{
+                
+                ArrayList<CadastroCliente> listaClientes = CadastroClienteController.consultarPorCPF(cpfPesquisa);
+                          
+                tmCliente.setRowCount(0);
+             
+             for(CadastroCliente c : listaClientes){
+                 tmCliente.addRow(new Object[]{
+                 String.valueOf(c.getId_cli()),c.getNomeCliente(),c.getCpfCliente(),c.getEmailCliente(),c.getFk_id_endereco()}         
+                 );
+                  
+             }
+             
+            }
+             
+             
+
              
     }//GEN-LAST:event_btn_PesquisarActionPerformed
 
@@ -729,6 +793,37 @@ public class CadastroClienteView extends javax.swing.JFrame {
     private void btn_VoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_VoltarActionPerformed
               telaCadastroCliente.setSelectedIndex(0); 
     }//GEN-LAST:event_btn_VoltarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+       int numeroLinha = -1;
+       
+        if(jTable_Pesquisa.getRowCount()>0){
+            
+            numeroLinha = jTable_Pesquisa.getSelectedRow();
+            
+            if(numeroLinha > -1){
+                
+                int id_cli = Integer.parseInt(jTable_Pesquisa.getModel().getValueAt(numeroLinha,0).toString());
+                
+                int id_end = Integer.parseInt(jTable_Pesquisa.getModel().getValueAt(numeroLinha, 4).toString());
+                
+            if((CadastroClienteController.excluirCliente(id_cli))&& (CadastroClienteController.excluirEndereco(id_end))){
+                
+                JOptionPane.showMessageDialog(this, "Cliente Excluido com Sucesso!");
+                
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "ERRO ao excluir o Cliente selecionado!");
+            }
+                
+            }
+            else {
+                JOptionPane.showMessageDialog(this, "Selecione um Cliente para realizar a Exclusão!");
+            }
+            
+            
+        }
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
 
     /**
@@ -804,6 +899,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem_Sair;
     private javax.swing.JMenu jMenu_Arquivo;
     private javax.swing.JMenu jMenu_Sair;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelDadosEndereco1;
     private javax.swing.JPanel jPanelPesquisa;
     private javax.swing.JRadioButton jRadioButtonFemino;
@@ -823,6 +919,5 @@ public class CadastroClienteView extends javax.swing.JFrame {
     private javax.swing.JPanel painelPesquisar;
     private javax.swing.JTabbedPane telaCadastroCliente;
     private javax.swing.JFormattedTextField telefone_Cliente_jFormattedText;
-    private javax.swing.JComboBox<String> tipo_Teledone_jComboBox;
     // End of variables declaration//GEN-END:variables
 }
