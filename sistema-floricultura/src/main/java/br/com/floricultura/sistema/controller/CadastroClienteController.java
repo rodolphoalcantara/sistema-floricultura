@@ -9,10 +9,8 @@ import br.com.floricultura.sistema.model.CadastroCliente;
 import br.com.floricultura.sistema.model.EnderecoCliente;
 import br.com.floricultura.sistema.utils.ClienteDAO;
 import br.com.floricultura.sistema.utils.EnderecoDAO;
-import java.sql.Date;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
+import java.util.ArrayList;
 
 /**
  *
@@ -35,18 +33,66 @@ public class CadastroClienteController {
       return EnderecoDAO.salvar(cadastraEnd);
   }
   
-    public static boolean salvarCliente(String nomeCliente,String cpfCliente,String sexoCliente,String dataNascimento,String emailCliente,String estadoCivil){
+    public static boolean salvarCliente(String nomeCliente,String cpfCliente,String sexoCliente,String dataNascimento,String emailCliente,String estadoCivil,String telefone){
                                         
        String cpfNumeros = cpfCliente.replace(".", "").replace("-", "");
-     
+       String telefonenumeros = telefone.replace("(","").replace(")", "").replace("-", "");
+      
+        System.out.println(telefonenumeros);
        cadastraCli.setNomeCliente(nomeCliente);
        cadastraCli.setCpfCliente(cpfNumeros);
        cadastraCli.setSexoCliente(sexoCliente);
        cadastraCli.setDataNascimento(dataNascimento);
        cadastraCli.setEmailCliente(emailCliente);
        cadastraCli.setEstadoCivil(estadoCivil);
+       cadastraCli.setTelefoneCliente(telefonenumeros);
    
         return ClienteDAO.salvar(cadastraCli , cadastraEnd);
     }
+ 
+    public static ArrayList<CadastroCliente> consultarCliente (){
+      
+        ArrayList<CadastroCliente> consultaCli = ClienteDAO.consultarCliente();
+        
+        
+        return consultaCli;
+    }
     
+    public static ArrayList<EnderecoCliente> consultarEndereco (){
+      
+        ArrayList<EnderecoCliente> consultaEnd =EnderecoDAO.consultarEndereco();
+        
+        
+        return consultaEnd;
+    }
+    
+    
+    
+        public static ArrayList<CadastroCliente> consultarPorCPF (String cpfPesquisa){
+      
+        ArrayList<CadastroCliente> consultaCli = ClienteDAO.consultarClientePorCPF(cpfPesquisa);
+        
+        
+        return consultaCli;
+    }
+     
+       public static ArrayList<EnderecoCliente> consultarEnderecoid (int id){
+      
+        ArrayList<EnderecoCliente> consultaEnd =EnderecoDAO.consultarEndereco();
+        
+        
+        return consultaEnd;
+    }
+     
+     
+     
+     public static boolean excluirCliente(int id_cli){
+               
+        return ClienteDAO.excluirCliente(id_cli);
+     }
+     
+      public static boolean excluirEndereco(int id_end){
+               
+        return EnderecoDAO.excluirEndereco(id_end);
+     }
 }

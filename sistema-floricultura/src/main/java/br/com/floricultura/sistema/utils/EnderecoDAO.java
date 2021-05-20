@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -84,5 +85,149 @@ public class EnderecoDAO {
     }
     
     
+    public static ArrayList<EnderecoCliente> consultarEndereco() {
+        ResultSet rs = null;
+        Connection conexao = null;
+        PreparedStatement instrucaoSQL = null;
+
+        ArrayList<EnderecoCliente> listaEndereco = new ArrayList<EnderecoCliente>();
+
+        try {
+
+            conexao = GerenciadorConexao.getConnection();
+
+            instrucaoSQL = conexao.prepareStatement("SELECT * FROM Endereco;");
+
+            rs = instrucaoSQL.executeQuery();
+
+            while (rs.next()) {
+                EnderecoCliente c = new EnderecoCliente();
+                
+                c.setId_end(rs.getInt("id_end"));
+               
+                listaEndereco.add(c);
+            }
+
+        } catch (SQLException | ClassNotFoundException ex) {
+            System.out.println(ex.getMessage());
+            listaEndereco = null;
+        } finally {
+
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (instrucaoSQL != null) {
+                    instrucaoSQL.close();
+                }
+
+                conexao.close();
+
+            } catch (SQLException ex) {
+            }
+        }
+
+        return listaEndereco;
+    }
+    
+    
+    
+       public static ArrayList<EnderecoCliente> consultarClientePorCPF(int id) {
+        ResultSet rs = null;
+        Connection conexao = null;
+        PreparedStatement instrucaoSQL = null;
+
+        ArrayList<EnderecoCliente> listaEndereco = new ArrayList<EnderecoCliente>();
+
+        try {
+
+            conexao = GerenciadorConexao.getConnection();
+
+            instrucaoSQL = conexao.prepareStatement("SELECT * FROM endereco WHERE id_end = ?;");
+
+            
+            instrucaoSQL.setInt(1, id);
+            
+            rs = instrucaoSQL.executeQuery();
+
+            while (rs.next()) {
+                EnderecoCliente c = new EnderecoCliente();
+                c.setId_end(rs.getInt("id_end"));
+               
+                listaEndereco.add(c);
+            }
+
+        } catch (SQLException | ClassNotFoundException ex) {
+            System.out.println(ex.getMessage());
+            listaEndereco = null;
+        } finally {
+
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (instrucaoSQL != null) {
+                    instrucaoSQL.close();
+                }
+
+                conexao.close();
+
+            } catch (SQLException ex) {
+            }
+        }
+
+        return listaEndereco;
+    }
+    
+       
+    public static boolean excluirEndereco(int id_end)
+    {
+        boolean retorno = false;
+        Connection conexao = null;
+        PreparedStatement instrucaoSQL = null;
+                
+        try {
+            
+              
+            
+            
+            
+                      
+            conexao = GerenciadorConexao.getConnection();
+            
+            instrucaoSQL = conexao.prepareStatement("DELETE FROM endereco WHERE id_end = ?");
+            
+          
+            instrucaoSQL.setInt(1, id_end);
+
+            
+            int linhasAfetadas = instrucaoSQL.executeUpdate();
+            
+            if(linhasAfetadas>0)
+            {
+                retorno = true;
+            }
+            else{
+                retorno = false;
+            }
+            
+        } catch (SQLException | ClassNotFoundException ex) {
+            System.out.println(ex.getMessage());
+            retorno = false;
+        } finally{
+            
+            
+            try {
+                if(instrucaoSQL!=null)
+                    instrucaoSQL.close();
+                                
+                conexao.close();
+                
+              } catch (SQLException ex) {
+             }
+        }
+        
+        return retorno;
+    }
     
 }

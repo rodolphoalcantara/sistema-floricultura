@@ -32,7 +32,7 @@ public class ClienteDAO {
             //conexao = GerenciadorConexao.abrirConexao();
 
             //Passo 3 - Executar uma instrução SQL
-            instrucaoSQL = conexao.prepareStatement("INSERT INTO cliente (CPF,nome,email,estado_civil,data_nasc,sexo,telefone,fk_id_endereco) VALUES(?, ?, ?, ?, ?, ?, ?, ?)",
+            instrucaoSQL = conexao.prepareStatement("INSERT INTO cliente (CPF,nome,email,estado_civil,data_nasc,sexo,Telefone,fk_id_endereco) VALUES(?, ?, ?, ?, ?, ?, ?, ?)",
                      Statement.RETURN_GENERATED_KEYS);
 
             instrucaoSQL.setString(1, Cd.getCpfCliente());
@@ -102,6 +102,7 @@ public class ClienteDAO {
                 c.setNomeCliente(rs.getString("nome"));
                 c.setCpfCliente(rs.getString("CPF"));
                 c.setEmailCliente(rs.getString("email"));
+                c.setFk_id_endereco(rs.getInt("fk_id_endereco"));
 
                 listaClientes.add(c);
             }
@@ -154,7 +155,7 @@ public class ClienteDAO {
                 c.setNomeCliente(rs.getString("nome"));
                 c.setCpfCliente(rs.getString("CPF"));
                 c.setEmailCliente(rs.getString("email"));
-                
+                c.setFk_id_endereco(rs.getInt("fk_id_endereco"));
 
                 listaClientes.add(c);
             }

@@ -11,8 +11,10 @@ import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import br.com.floricultura.sistema.model.CadastroCliente;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author aureliosantos
@@ -70,7 +72,6 @@ public class CadastroClienteView extends javax.swing.JFrame {
         jTextFieldEmail = new javax.swing.JTextField();
         jLabel_Telefone = new javax.swing.JLabel();
         telefone_Cliente_jFormattedText = new javax.swing.JFormattedTextField();
-        tipo_Teledone_jComboBox = new javax.swing.JComboBox<>();
         painelPesquisar = new javax.swing.JPanel();
         jPanelPesquisa = new javax.swing.JPanel();
         jLabelPesquisaCPF = new javax.swing.JLabel();
@@ -269,12 +270,10 @@ public class CadastroClienteView extends javax.swing.JFrame {
         jLabel_Telefone.setText("Telefone : ");
 
         try {
-            telefone_Cliente_jFormattedText.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) #####-####")));
+            telefone_Cliente_jFormattedText.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-
-        tipo_Teledone_jComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tipo", "Celular", "Comercial", "Residencial", " " }));
 
         javax.swing.GroupLayout painelDadosClienteLayout = new javax.swing.GroupLayout(painelDadosCliente);
         painelDadosCliente.setLayout(painelDadosClienteLayout);
@@ -312,10 +311,8 @@ public class CadastroClienteView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel_Telefone)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(telefone_Cliente_jFormattedText, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38)
-                        .addComponent(tipo_Teledone_jComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(telefone_Cliente_jFormattedText, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(109, Short.MAX_VALUE))
         );
         painelDadosClienteLayout.setVerticalGroup(
             painelDadosClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -340,8 +337,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
                     .addComponent(jLabel_Email)
                     .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel_Telefone)
-                    .addComponent(telefone_Cliente_jFormattedText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tipo_Teledone_jComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(telefone_Cliente_jFormattedText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
@@ -445,18 +441,18 @@ public class CadastroClienteView extends javax.swing.JFrame {
 
         jTable_Pesquisa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Nome Cliente", "CPF Cliente", "E-mail"
+                "Id_Cliente", "Nome Cliente", "CPF Cliente", "E-mail", "Título 5"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -482,6 +478,11 @@ public class CadastroClienteView extends javax.swing.JFrame {
 
         btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/delete_delete_deleteusers_delete_male_user_maleclient_2348.png"))); // NOI18N
         btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         btn_Voltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ic_assignment_return_128_28215.png"))); // NOI18N
         btn_Voltar.setText("Voltar");
@@ -648,27 +649,29 @@ public class CadastroClienteView extends javax.swing.JFrame {
         String bairro = jTextFieldBairro1.getText();
         String cidade = jComboBoxCidade1.getSelectedItem().toString();
         String estado = jComboBoxEstado1.getSelectedItem().toString();
-      //  String tipo = tipo_Teledone_jComboBox.getSelectedItem().toString();
-       // String telefone = telefone_Cliente_jFormattedText.getText();
+        String telefone = telefone_Cliente_jFormattedText.getText();
 
         if(cpfRecebido.trim().equals("")|| nome.trim().equals("")||dataRecebida.trim().equals("")
-            ||cpfRecebido.trim().equals("")||rua.trim().equals("")||numero.trim().equals("") || bairro.trim().equals("")){
+            ||telefone.trim().equals("")||rua.trim().equals("")||numero.trim().equals("") || bairro.trim().equals("")){
             JOptionPane.showMessageDialog(this, "Por Favor Preencha campos Obrigatorio"," Campos Obrigatórios",JOptionPane.WARNING_MESSAGE);
             jFormattedTextCPF.setBackground(Color.yellow);
             jTextFieldNomeCliente.setBackground(Color.yellow);
             jFormattedTextDataNascim.setBackground(Color.yellow);
+            telefone_Cliente_jFormattedText.setBackground(Color.yellow);
+            
         }
         else{
             jFormattedTextCPF.setBackground(Color.white);
             jTextFieldNomeCliente.setBackground(Color.white);
             jFormattedTextDataNascim.setBackground(Color.white);
+            telefone_Cliente_jFormattedText.setBackground(Color.white);
         }
 
      
             if(CadastroClienteController.SalvarEndereco(rua,numero,bairro,cidade,estado)){
                 
                                   
-            if(CadastroClienteController.salvarCliente(nome, cpfRecebido, sexo, dataRecebida, email, estadoCivil)){
+            if(CadastroClienteController.salvarCliente(nome, cpfRecebido, sexo, dataRecebida, email, estadoCivil,telefone)){
                 JOptionPane.showMessageDialog(this, " Cliente Salvo com sucesso!");
             
             }
@@ -704,6 +707,40 @@ public class CadastroClienteView extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldCPFPesquisaKeyTyped
 
     private void btn_PesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_PesquisarActionPerformed
+            
+            String cpfPesquisa = jTextFieldCPFPesquisa.getText();
+            
+             DefaultTableModel tmCliente = (DefaultTableModel) jTable_Pesquisa.getModel();
+            if(cpfPesquisa.equals("")){
+                
+              ArrayList<CadastroCliente> listaClientes = CadastroClienteController.consultarCliente();
+                        
+            tmCliente.setRowCount(0);
+             
+             for(CadastroCliente c : listaClientes){
+                 tmCliente.addRow(new Object[]{
+                 String.valueOf(c.getId_cli()),c.getNomeCliente(),c.getCpfCliente(),c.getEmailCliente(),c.getFk_id_endereco()});
+             }
+             
+            
+    } 
+            else{
+                
+                ArrayList<CadastroCliente> listaClientes = CadastroClienteController.consultarPorCPF(cpfPesquisa);
+                          
+                tmCliente.setRowCount(0);
+             
+             for(CadastroCliente c : listaClientes){
+                 tmCliente.addRow(new Object[]{
+                 String.valueOf(c.getId_cli()),c.getNomeCliente(),c.getCpfCliente(),c.getEmailCliente(),c.getFk_id_endereco()}         
+                 );
+                  
+             }
+             
+            }
+             
+             
+
              
     }//GEN-LAST:event_btn_PesquisarActionPerformed
 
@@ -753,6 +790,37 @@ public class CadastroClienteView extends javax.swing.JFrame {
     private void btn_VoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_VoltarActionPerformed
               telaCadastroCliente.setSelectedIndex(0); 
     }//GEN-LAST:event_btn_VoltarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+       int numeroLinha = -1;
+       
+        if(jTable_Pesquisa.getRowCount()>0){
+            
+            numeroLinha = jTable_Pesquisa.getSelectedRow();
+            
+            if(numeroLinha > -1){
+                
+                int id_cli = Integer.parseInt(jTable_Pesquisa.getModel().getValueAt(numeroLinha,0).toString());
+                
+                int id_end = Integer.parseInt(jTable_Pesquisa.getModel().getValueAt(numeroLinha, 4).toString());
+                
+            if((CadastroClienteController.excluirCliente(id_cli))&& (CadastroClienteController.excluirEndereco(id_end))){
+                
+                JOptionPane.showMessageDialog(this, "Cliente Excluido com Sucesso!");
+                
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "ERRO ao excluir o Cliente selecionado!");
+            }
+                
+            }
+            else {
+                JOptionPane.showMessageDialog(this, "Selecione um Cliente para realizar a Exclusão!");
+            }
+            
+            
+        }
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
 
     /**
@@ -848,6 +916,5 @@ public class CadastroClienteView extends javax.swing.JFrame {
     private javax.swing.JPanel painelPesquisar;
     private javax.swing.JTabbedPane telaCadastroCliente;
     private javax.swing.JFormattedTextField telefone_Cliente_jFormattedText;
-    private javax.swing.JComboBox<String> tipo_Teledone_jComboBox;
     // End of variables declaration//GEN-END:variables
 }

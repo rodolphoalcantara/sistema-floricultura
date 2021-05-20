@@ -183,6 +183,7 @@ public class LojaInformaticaConsultaView extends javax.swing.JFrame {
             numeroLinha = tbl_computador.getSelectedRow();
             
             if(numeroLinha > -1){
+                
                 int ID_computador = Integer.parseInt(tbl_computador.getModel().getValueAt(numeroLinha,0).toString());
             
           

@@ -12,9 +12,17 @@ import javax.swing.JOptionPane;
 public class CadastroCliente {
 
     private String cpfCliente, nomeCliente, sexoCliente, emailCliente, estadoCivil, 
-                   tipotelefone,telefoneCliente, dataNascimento;
+                   telefoneCliente, dataNascimento;
     
-    private int id_cli;
+    private int id_cli , fk_id_endereco;
+
+    public int getFk_id_endereco() {
+        return fk_id_endereco;
+    }
+
+    public void setFk_id_endereco(int fk_id_endereco) {
+        this.fk_id_endereco = fk_id_endereco;
+    }
 
     public int getId_cli() {
         return id_cli;
@@ -52,10 +60,7 @@ public class CadastroCliente {
         return estadoCivil;
     }
 
-    public String getTipotelefone() {
-        return tipotelefone;
-    }
-
+  
     public String getTelefoneCliente() {
         return telefoneCliente;
     }
@@ -84,10 +89,7 @@ public class CadastroCliente {
         this.estadoCivil = estadoCivil;
     }
 
-    public void setTipotelefone(String tipotelefone) {
-        this.tipotelefone = tipotelefone;
-    }
-
+   
     public void setTelefoneCliente(String telefoneCliente) {
         this.telefoneCliente = telefoneCliente;
     }
@@ -95,7 +97,7 @@ public class CadastroCliente {
     
     public CadastroCliente(String nomeCliente,String cpfCliente,String sexoCliente,
             String dataNascimento,String emailCliente,String estadoCivil,String ruaCliente,String numeroC,
-    String bairroCliente,String cidadeCliente,String estadoCliente,String tipotelefone,String telefoneCliente){
+    String bairroCliente,String cidadeCliente,String estadoCliente,String telefoneCliente){
         
       this.cpfCliente = cpfCliente;
       this.nomeCliente = nomeCliente;
@@ -103,7 +105,6 @@ public class CadastroCliente {
       this.emailCliente = emailCliente; 
       this.dataNascimento = dataNascimento;
       this.estadoCivil = estadoCivil;
-      this.tipotelefone = tipotelefone;
       this.telefoneCliente = telefoneCliente;
       
     }
