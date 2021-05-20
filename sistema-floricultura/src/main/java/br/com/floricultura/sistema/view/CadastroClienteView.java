@@ -665,9 +665,8 @@ public class CadastroClienteView extends javax.swing.JFrame {
             jTextFieldNomeCliente.setBackground(Color.white);
             jFormattedTextDataNascim.setBackground(Color.white);
             telefone_Cliente_jFormattedText.setBackground(Color.white);
-        }
-
-     
+            
+            
             if(CadastroClienteController.SalvarEndereco(rua,numero,bairro,cidade,estado)){
                 
                                   
@@ -679,7 +678,11 @@ public class CadastroClienteView extends javax.swing.JFrame {
             else{ 
                 JOptionPane.showMessageDialog(this, " Error ao Salvar o cliente!");
             }
-      
+            
+        }
+
+     
+          
         
         
     }//GEN-LAST:event_btn_SalvarActionPerformed
