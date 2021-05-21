@@ -20,10 +20,11 @@ import javax.swing.table.DefaultTableModel;
  * @author aureliosantos
  */
 public class CadastroClienteView extends javax.swing.JFrame {
-
-    /**
-     * Creates new form TeleClienteFloricultura
-     */
+        
+    public String Modo = "Criação";
+    public int id_editar_cliente;
+    public int id_editar_endereço;
+    
     public CadastroClienteView() {
         initComponents();
         setLocationRelativeTo(null);
@@ -441,18 +442,18 @@ public class CadastroClienteView extends javax.swing.JFrame {
 
         jTable_Pesquisa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Id_Cliente", "Nome Cliente", "CPF Cliente", "E-mail", "Título 5"
+                "Id_Cliente", "Nome Cliente", "CPF Cliente", "E-mail"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -475,6 +476,11 @@ public class CadastroClienteView extends javax.swing.JFrame {
 
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/businessapplication_edit_male_user_thepencil_theclient_negocio_2321.png"))); // NOI18N
         btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
         btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/delete_delete_deleteusers_delete_male_user_maleclient_2348.png"))); // NOI18N
         btnExcluir.setText("Excluir");
@@ -625,12 +631,13 @@ public class CadastroClienteView extends javax.swing.JFrame {
 
     private void btn_AbaPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AbaPesquisarActionPerformed
         telaCadastroCliente.setSelectedIndex(1); // Alterar entre as telas
+        Modo = "Criação";
         
     }//GEN-LAST:event_btn_AbaPesquisarActionPerformed
 
     private void btn_SalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalvarActionPerformed
         
-
+        
         String nome = jTextFieldNomeCliente.getText();
         String sexo = " ";
 
@@ -666,19 +673,68 @@ public class CadastroClienteView extends javax.swing.JFrame {
             jFormattedTextDataNascim.setBackground(Color.white);
             telefone_Cliente_jFormattedText.setBackground(Color.white);
             
-            
+            if(Modo.equals("Criação")){
             if(CadastroClienteController.SalvarEndereco(rua,numero,bairro,cidade,estado)){
                 
                                   
             if(CadastroClienteController.salvarCliente(nome, cpfRecebido, sexo, dataRecebida, email, estadoCivil,telefone)){
                 JOptionPane.showMessageDialog(this, " Cliente Salvo com sucesso!");
+                
+        jTextFieldNomeCliente.setText("");
+        jFormattedTextCPF.setText("");
+        jFormattedTextDataNascim.setText("");
+        jFormattedTextCPF.setText("");
+        jComboBox_Estadocivil.setSelectedIndex(0);
+        jTextFieldEmail.setText("");
+        jTextFieldRua1.setText("");
+        jTextFieldNumero1.setText("");
+        jTextFieldBairro1.setText("");
+        jComboBoxCidade1.setSelectedIndex(0);
+        jComboBoxEstado1.setSelectedIndex(0);
+        telefone_Cliente_jFormattedText.setText("");
             
             }
             }
             else{ 
                 JOptionPane.showMessageDialog(this, " Error ao Salvar o cliente!");
             }
+        }
+        
+        
+        if(Modo.equals("Edição")){
             
+            JOptionPane.showMessageDialog(this, " Atualize todos os campos e preencha novamente os campos em branco");
+            
+            if(CadastroClienteController.atualizarEndereco(id_editar_endereço, cidade, numero, bairro, cidade, estadoCivil)){
+               
+            if(CadastroClienteController.atualizaCliente(id_editar_cliente,nome, cidade, sexo, dataRecebida, email, estadoCivil, telefone)){
+                
+                    JOptionPane.showMessageDialog(this, " Cliente Atualizado com sucesso!");
+                
+        jTextFieldNomeCliente.setText("");
+        jFormattedTextCPF.setText("");
+        jFormattedTextDataNascim.setText("");
+        jFormattedTextCPF.setText("");
+        jComboBox_Estadocivil.setSelectedIndex(0);
+        jTextFieldEmail.setText("");
+        jTextFieldRua1.setText("");
+        jTextFieldNumero1.setText("");
+        jTextFieldBairro1.setText("");
+        jComboBoxCidade1.setSelectedIndex(0);
+        jComboBoxEstado1.setSelectedIndex(0);
+        telefone_Cliente_jFormattedText.setText("");
+                    
+                }
+            }
+            
+            else{
+                
+                JOptionPane.showMessageDialog(this, " Não foi possivel atualizar o cliente!");
+            }
+            
+            
+            
+        }
         }
 
      
@@ -710,19 +766,21 @@ public class CadastroClienteView extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldCPFPesquisaKeyTyped
 
     private void btn_PesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_PesquisarActionPerformed
-            
+           
             String cpfPesquisa = jTextFieldCPFPesquisa.getText();
             
+                                   
              DefaultTableModel tmCliente = (DefaultTableModel) jTable_Pesquisa.getModel();
             if(cpfPesquisa.equals("")){
                 
               ArrayList<CadastroCliente> listaClientes = CadastroClienteController.consultarCliente();
-                        
+              
+             
             tmCliente.setRowCount(0);
              
              for(CadastroCliente c : listaClientes){
                  tmCliente.addRow(new Object[]{
-                 String.valueOf(c.getId_cli()),c.getNomeCliente(),c.getCpfCliente(),c.getEmailCliente(),c.getFk_id_endereco()});
+                 String.valueOf(c.getId_cli()),c.getNomeCliente(),c.getCpfCliente(),c.getEmailCliente()});
              }
              
             
@@ -735,7 +793,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
              
              for(CadastroCliente c : listaClientes){
                  tmCliente.addRow(new Object[]{
-                 String.valueOf(c.getId_cli()),c.getNomeCliente(),c.getCpfCliente(),c.getEmailCliente(),c.getFk_id_endereco()}         
+                 String.valueOf(c.getId_cli()),c.getNomeCliente(),c.getCpfCliente(),c.getEmailCliente()}         
                  );
                   
              }
@@ -796,6 +854,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
        int numeroLinha = -1;
+       ArrayList<CadastroCliente> listaCliente = CadastroClienteController.consultarCliente();
        
         if(jTable_Pesquisa.getRowCount()>0){
             
@@ -805,7 +864,15 @@ public class CadastroClienteView extends javax.swing.JFrame {
                 
                 int id_cli = Integer.parseInt(jTable_Pesquisa.getModel().getValueAt(numeroLinha,0).toString());
                 
-                int id_end = Integer.parseInt(jTable_Pesquisa.getModel().getValueAt(numeroLinha, 4).toString());
+                int id_end =  -1;
+                
+                for(CadastroCliente c : listaCliente){
+                     if(c.getId_cli() == id_cli){
+                         id_end = c.getFk_id_endereco();
+                     }
+                    
+                 }
+              
                 
             if((CadastroClienteController.excluirCliente(id_cli))&& (CadastroClienteController.excluirEndereco(id_end))){
                 
@@ -825,7 +892,35 @@ public class CadastroClienteView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
-
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+            int numeroLinha = -1;
+       ArrayList<CadastroCliente> listaCliente = CadastroClienteController.consultarCliente();
+       
+        if(jTable_Pesquisa.getRowCount()>0){
+            
+            numeroLinha = jTable_Pesquisa.getSelectedRow();
+            
+            if(numeroLinha > -1){
+                
+                int id_cli = Integer.parseInt(jTable_Pesquisa.getModel().getValueAt(numeroLinha,0).toString());
+                int id_end =  -1;
+                
+                
+                for(CadastroCliente c : listaCliente){
+                     if(c.getId_cli() == id_cli){
+                        id_end = c.getFk_id_endereco();
+                        jTextFieldNomeCliente.setText(c.getNomeCliente());
+                        jTextFieldEmail.setText(c.getEmailCliente());
+                        jFormattedTextCPF.setText(c.getCpfCliente());
+                     }
+                }
+              telaCadastroCliente.setSelectedIndex(0);
+              Modo = "Edição";
+              id_editar_cliente = id_cli;
+              id_editar_endereço = id_end;
+    }//GEN-LAST:event_btnEditarActionPerformed
+        }
+    }
     /**
      * @param args the command line arguments
      */

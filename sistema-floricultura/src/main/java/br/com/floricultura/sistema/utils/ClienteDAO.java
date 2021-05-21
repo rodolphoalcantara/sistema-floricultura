@@ -142,10 +142,10 @@ public class ClienteDAO {
 
             conexao = GerenciadorConexao.getConnection();
 
-            instrucaoSQL = conexao.prepareStatement("SELECT * FROM cliente WHERE CPF = ?;");
+            instrucaoSQL = conexao.prepareStatement("SELECT * FROM cliente WHERE CPF  LIKE ?;");
 
             
-            instrucaoSQL.setString(1, cpfPesquisa);
+            instrucaoSQL.setString(1,"%"+cpfPesquisa+"%");
             
             rs = instrucaoSQL.executeQuery();
 
@@ -224,6 +224,61 @@ public class ClienteDAO {
                 if(instrucaoSQL!=null)
                     instrucaoSQL.close();
                                 
+                conexao.close();
+                
+              } catch (SQLException ex) {
+             }
+        }
+        
+        return retorno;
+    }
+       
+       
+       public static boolean atualizarCliente(CadastroCliente aC)
+    {
+        boolean retorno = false;
+        Connection conexao = null;
+        PreparedStatement instrucaoSQL = null;
+                
+        try {
+          
+                       
+            conexao = GerenciadorConexao.getConnection();
+            
+            instrucaoSQL = conexao.prepareStatement("UPDATE cliente SET CPF = ?, nome=?, email=?, estado_civil=?, data_nasc=?, sexto=?, Telefone=? WHERE id_cli =? ");
+            
+            //Adiciono os parâmetros ao meu comando SQL
+            instrucaoSQL.setString(1, aC.getCpfCliente());
+            instrucaoSQL.setString(2, aC.getNomeCliente());
+            instrucaoSQL.setString(3, aC.getEmailCliente());
+            instrucaoSQL.setString(4, aC.getEstadoCivil());
+            instrucaoSQL.setString(5, aC.getDataNascimento());
+            instrucaoSQL.setString(6, aC.getSexoCliente());
+            instrucaoSQL.setString(7, aC.getTelefoneCliente());
+            instrucaoSQL.setInt(8, aC.getId_cli());
+            
+            //Mando executar a instrução SQL
+            int linhasAfetadas = instrucaoSQL.executeUpdate();
+            
+            if(linhasAfetadas>0)
+            {
+                retorno = true;
+            }
+            else{
+                retorno = false;
+            }
+            
+        } catch (SQLException | ClassNotFoundException ex) {
+            System.out.println(ex.getMessage());
+            retorno = false;
+        } finally{
+            
+            //Libero os recursos da memória
+            try {
+                if(instrucaoSQL!=null)
+                    instrucaoSQL.close();
+                
+                //GerenciadorConexao.fecharConexao();
                 conexao.close();
                 
               } catch (SQLException ex) {

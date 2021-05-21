@@ -678,12 +678,11 @@
                 <Component class="javax.swing.JTable" name="jTable_Pesquisa">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="5" rowCount="2">
+                      <Table columnCount="4" rowCount="2">
                         <Column editable="false" title="Id_Cliente" type="java.lang.Integer"/>
                         <Column editable="false" title="Nome Cliente" type="java.lang.String"/>
                         <Column editable="false" title="CPF Cliente" type="java.lang.String"/>
                         <Column editable="false" title="E-mail" type="java.lang.String"/>
-                        <Column editable="true" title="T&#xed;tulo 5" type="java.lang.Integer"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -735,6 +734,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Editar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditarActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnExcluir">
               <Properties>

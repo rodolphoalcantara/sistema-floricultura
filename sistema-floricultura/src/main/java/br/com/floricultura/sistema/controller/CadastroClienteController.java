@@ -38,7 +38,6 @@ public class CadastroClienteController {
        String cpfNumeros = cpfCliente.replace(".", "").replace("-", "");
        String telefonenumeros = telefone.replace("(","").replace(")", "").replace("-", "");
       
-        System.out.println(telefonenumeros);
        cadastraCli.setNomeCliente(nomeCliente);
        cadastraCli.setCpfCliente(cpfNumeros);
        cadastraCli.setSexoCliente(sexoCliente);
@@ -95,4 +94,33 @@ public class CadastroClienteController {
                
         return EnderecoDAO.excluirEndereco(id_end);
      }
+      //Metodos para Atualizar endereco
+      public static boolean atualizarEndereco(int id_end, String ruaCliente,String numeroC,String bairroCliente,String cidadeCliente,String estadoCliente){
+      cadastraEnd.setId_end(id_end);
+      cadastraEnd.setRuaCliente(ruaCliente);
+      cadastraEnd.setNumeroC(numeroC);
+      cadastraEnd.setBairroCliente(bairroCliente);
+      cadastraEnd.setCidadeCliente(cidadeCliente);
+      cadastraEnd.setEstadoCliente(estadoCliente);
+      
+      
+      return EnderecoDAO.salvar(cadastraEnd);
+  }
+      //Metodo para Atualizar para atualizadar dados do cliente
+    public static boolean atualizaCliente(int id_cli,String nomeCliente,String cpfCliente,String sexoCliente,String dataNascimento,String emailCliente,String estadoCivil,String telefone){
+                                        
+       String cpfNumeros = cpfCliente.replace(".", "").replace("-", "");
+       String telefonenumeros = telefone.replace("(","").replace(")", "").replace("-", "");
+      
+       cadastraCli.setId_cli(id_cli);
+       cadastraCli.setNomeCliente(nomeCliente);
+       cadastraCli.setCpfCliente(cpfNumeros);
+       cadastraCli.setSexoCliente(sexoCliente);
+       cadastraCli.setDataNascimento(dataNascimento);
+       cadastraCli.setEmailCliente(emailCliente);
+       cadastraCli.setEstadoCivil(estadoCivil);
+       cadastraCli.setTelefoneCliente(telefonenumeros);
+   
+        return ClienteDAO.salvar(cadastraCli , cadastraEnd);
+    }
 }
