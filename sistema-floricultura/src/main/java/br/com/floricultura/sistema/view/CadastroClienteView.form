@@ -507,11 +507,11 @@
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                           <StringArray count="6">
                             <StringItem index="0" value="Selecione seu estado civil"/>
-                            <StringItem index="1" value="Casado"/>
-                            <StringItem index="2" value="Divorciado"/>
-                            <StringItem index="3" value="Solteiro"/>
-                            <StringItem index="4" value="Separado"/>
-                            <StringItem index="5" value="Vi&#xfa;vo"/>
+                            <StringItem index="1" value="Casado(a)"/>
+                            <StringItem index="2" value="Divorciado(a)"/>
+                            <StringItem index="3" value="Solteiro(a)"/>
+                            <StringItem index="4" value="Separado(a)"/>
+                            <StringItem index="5" value="Vi&#xfa;vo(a)"/>
                           </StringArray>
                         </Property>
                       </Properties>

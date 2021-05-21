@@ -253,7 +253,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
 
         jLabel_EstadoCivil.setText("Estado Civil :");
 
-        jComboBox_Estadocivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione seu estado civil", "Casado", "Divorciado", "Solteiro", "Separado", "Viúvo" }));
+        jComboBox_Estadocivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione seu estado civil", "Casado(a)", "Divorciado(a)", "Solteiro(a)", "Separado(a)", "Viúvo(a)" }));
 
         jLabel_Email.setText("E-mail :");
 
@@ -703,11 +703,10 @@ public class CadastroClienteView extends javax.swing.JFrame {
         
         if(Modo.equals("Edição")){
             
-            JOptionPane.showMessageDialog(this, " Atualize todos os campos e preencha novamente os campos em branco");
-            
+                        
             if(CadastroClienteController.atualizarEndereco(id_editar_endereço, cidade, numero, bairro, cidade, estadoCivil)){
                
-            if(CadastroClienteController.atualizaCliente(id_editar_cliente,nome, cidade, sexo, dataRecebida, email, estadoCivil, telefone)){
+            if(CadastroClienteController.atualizarCliente(id_editar_cliente,nome, cpfRecebido , sexo, dataRecebida, email, estadoCivil, telefone)){
                 
                     JOptionPane.showMessageDialog(this, " Cliente Atualizado com sucesso!");
                 
@@ -850,6 +849,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
 
     private void btn_VoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_VoltarActionPerformed
               telaCadastroCliente.setSelectedIndex(0); 
+              Modo = "Criação";
     }//GEN-LAST:event_btn_VoltarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
@@ -918,6 +918,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
               Modo = "Edição";
               id_editar_cliente = id_cli;
               id_editar_endereço = id_end;
+              JOptionPane.showMessageDialog(this, " Atualize todos os campos e preencha novamente os campos em branco");
     }//GEN-LAST:event_btnEditarActionPerformed
         }
     }
