@@ -230,7 +230,7 @@ public class EnderecoDAO {
         return retorno;
     }
     
-    public static boolean atualizarCliente(EnderecoCliente eC)
+    public static boolean atualizarEnderecoCliente(EnderecoCliente eC)
     {
         boolean retorno = false;
         Connection conexao = null;

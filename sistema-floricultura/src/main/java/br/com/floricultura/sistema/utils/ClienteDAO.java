@@ -245,7 +245,7 @@ public class ClienteDAO {
                        
             conexao = GerenciadorConexao.getConnection();
             
-            instrucaoSQL = conexao.prepareStatement("UPDATE cliente SET CPF = ?, nome=?, email=?, estado_civil=?, data_nasc=?, sexto=?, Telefone=? WHERE id_cli =? ");
+            instrucaoSQL = conexao.prepareStatement("UPDATE cliente SET CPF = ?, nome=?, email=?, estado_civil=?, data_nasc=?, sexo=?, Telefone=? WHERE id_cli =?");
             
             //Adiciono os parâmetros ao meu comando SQL
             instrucaoSQL.setString(1, aC.getCpfCliente());
@@ -256,6 +256,7 @@ public class ClienteDAO {
             instrucaoSQL.setString(6, aC.getSexoCliente());
             instrucaoSQL.setString(7, aC.getTelefoneCliente());
             instrucaoSQL.setInt(8, aC.getId_cli());
+            
             
             //Mando executar a instrução SQL
             int linhasAfetadas = instrucaoSQL.executeUpdate();

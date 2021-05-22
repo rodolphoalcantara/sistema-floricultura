@@ -104,10 +104,10 @@ public class CadastroClienteController {
       cadastraEnd.setEstadoCliente(estadoCliente);
       
       
-      return EnderecoDAO.salvar(cadastraEnd);
+      return EnderecoDAO.atualizarEnderecoCliente(cadastraEnd);
   }
       //Metodo para Atualizar para atualizadar dados do cliente
-    public static boolean atualizaCliente(int id_cli,String nomeCliente,String cpfCliente,String sexoCliente,String dataNascimento,String emailCliente,String estadoCivil,String telefone){
+    public static boolean atualizarCliente(int id_cli,String nomeCliente,String cpfCliente,String sexoCliente,String dataNascimento,String emailCliente,String estadoCivil,String telefone){
                                         
        String cpfNumeros = cpfCliente.replace(".", "").replace("-", "");
        String telefonenumeros = telefone.replace("(","").replace(")", "").replace("-", "");
@@ -121,6 +121,6 @@ public class CadastroClienteController {
        cadastraCli.setEstadoCivil(estadoCivil);
        cadastraCli.setTelefoneCliente(telefonenumeros);
    
-        return ClienteDAO.salvar(cadastraCli , cadastraEnd);
+        return ClienteDAO.atualizarCliente(cadastraCli );
     }
 }
