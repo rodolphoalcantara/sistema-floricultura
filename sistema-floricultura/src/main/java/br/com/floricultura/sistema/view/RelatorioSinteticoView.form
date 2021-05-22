@@ -116,10 +116,9 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="btnSelecionar" linkSize="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnSelecionar" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="btnSair" linkSize="2" min="-2" pref="107" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="btnSair" min="-2" pref="122" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -138,6 +137,9 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="btnSair">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/img/Users-Exit-icon.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Sair"/>
           </Properties>
           <Events>
@@ -146,6 +148,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnSelecionar">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/img/select-icon.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Selecionar"/>
           </Properties>
           <Events>
@@ -300,6 +305,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnFiltrar">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/img/Filter-List-icon.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Filtrar"/>
               </Properties>
               <Events>

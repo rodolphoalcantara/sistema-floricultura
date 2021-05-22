@@ -83,6 +83,7 @@ public class VendaView extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Venda de Flores", javax.swing.border.TitledBorder.LEADING, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 1, 14))); // NOI18N
 
+        btnAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Add-item-icon (1).png"))); // NOI18N
         btnAdicionar.setText("Adicionar");
         btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -135,7 +136,7 @@ public class VendaView extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(31, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(lblTipo)
@@ -149,7 +150,7 @@ public class VendaView extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblProduto)
                     .addComponent(lblQuantidade))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(txtQuantidade)
@@ -223,6 +224,7 @@ public class VendaView extends javax.swing.JFrame {
             tblCarrinho.getColumnModel().getColumn(3).setPreferredWidth(35);
         }
 
+        btnDeletar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Close-icon.png"))); // NOI18N
         btnDeletar.setText("Deletar");
         btnDeletar.setPreferredSize(new java.awt.Dimension(74, 28));
         btnDeletar.addActionListener(new java.awt.event.ActionListener() {
@@ -272,6 +274,7 @@ public class VendaView extends javax.swing.JFrame {
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnDeletar, txtTotal});
 
+        btnConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/check-icon.png"))); // NOI18N
         btnConfirmar.setText("Confirmar");
         btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -279,6 +282,7 @@ public class VendaView extends javax.swing.JFrame {
             }
         });
 
+        btn_Sair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Users-Exit-icon.png"))); // NOI18N
         btn_Sair.setText("Sair");
         btn_Sair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -290,6 +294,7 @@ public class VendaView extends javax.swing.JFrame {
 
         lblCliente.setText("Nome:");
 
+        btnProcurarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/business_man_usersearch_thesearch_theclient_2356_1.png"))); // NOI18N
         btnProcurarCliente.setText("Procurar");
         btnProcurarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
