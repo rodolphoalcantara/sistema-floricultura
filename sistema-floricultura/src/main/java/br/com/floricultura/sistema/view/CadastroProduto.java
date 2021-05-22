@@ -5,7 +5,7 @@
  */
 package br.com.floricultura.sistema.view;
 
-import br.com.floricultura.sistema.model.DAO.ProdutoDAO;
+import br.com.floricultura.sistema.dao.ProdutoDAO;
 import br.com.floricultura.sistema.model.Produto;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;

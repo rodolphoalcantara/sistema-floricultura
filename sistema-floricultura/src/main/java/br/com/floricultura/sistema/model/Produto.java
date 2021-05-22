@@ -21,6 +21,17 @@ public class Produto {
     public Produto(){
     
     }
+
+    public Produto(int id, String nome, Double valor, int estoque, String tipo, String descricao) {
+        this.id = id;
+        this.nome = nome;
+        this.valor = valor;
+        this.estoque = estoque;
+        this.tipo = tipo;
+        this.descricao = descricao;
+    }
+    
+    
     
     public int getId() {
         return id;
@@ -73,7 +84,7 @@ public class Produto {
     
     @Override
     public String toString() {
-        return "Computador{" + "id=" + id + ", nome=" + nome + ", valor=" + valor + ", estoque=" + estoque + ", tipo=" + tipo + ", descricao=" + descricao + '}';
+        return "Flor{" + "id=" + id + ", nome=" + nome + ", valor=" + valor + ", estoque=" + estoque + ", tipo=" + tipo + ", descricao=" + descricao + '}';
     }
     
 }
