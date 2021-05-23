@@ -7,8 +7,8 @@ package br.com.floricultura.sistema.controller;
 
 import br.com.floricultura.sistema.model.CadastroCliente;
 import br.com.floricultura.sistema.model.EnderecoCliente;
-import br.com.floricultura.sistema.utils.ClienteDAO;
-import br.com.floricultura.sistema.utils.EnderecoDAO;
+import br.com.floricultura.sistema.dao.ClienteDAO;
+import br.com.floricultura.sistema.dao.EnderecoDAO;
 import java.text.ParseException;
 import java.util.ArrayList;
 

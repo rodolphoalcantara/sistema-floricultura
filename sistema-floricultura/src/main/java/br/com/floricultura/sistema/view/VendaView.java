@@ -6,11 +6,26 @@
 package br.com.floricultura.sistema.view;
 
 //import br.com.floricultura.sistema.model.Cliente;
+import br.com.floricultura.sistema.controller.CadastroClienteController;
+import br.com.floricultura.sistema.controller.VendaController;
+import br.com.floricultura.sistema.dao.ItemVendaDAO;
+import br.com.floricultura.sistema.dao.ProdutoDAO;
+import br.com.floricultura.sistema.model.CadastroCliente;
+import br.com.floricultura.sistema.model.ItemVenda;
 import br.com.floricultura.sistema.model.Produto;
+import br.com.floricultura.sistema.model.Venda;
 import java.awt.event.KeyEvent;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -18,25 +33,26 @@ import javax.swing.table.DefaultTableModel;
  */
 public class VendaView extends javax.swing.JFrame {
 
-    /**
-     * Creates new form VendaView
-     */
-    
     private DefaultTableModel tableModel;
-    
+
     //atributos para registro em banco
-   // private Cliente cliente;
-    private Produto produto;
-    private List<Produto> carrinho;
-    
+    // private Cliente cliente;
+    private Produto prodEmDestaque;
+    private List<Produto> listaProdutosCbo;
+    private List<ItemVenda> carrinho = new ArrayList<ItemVenda>();
+    private CadastroCliente cliente;
+
     public VendaView() {
         initComponents();
-        
+
         setLocationRelativeTo(null);
         //setando para alguns campos ficarem desabilitados
         cboProduto.setEnabled(false);
         btnDeletar.setEnabled(false);
-        tableModel = (DefaultTableModel)tblCarrinho.getModel();
+        tableModel = (DefaultTableModel) tblCarrinho.getModel();
+
+        List<String> listaTipo = ProdutoDAO.listarTipos();
+        preencherCbo(cboTipo, listaTipo);
     }
 
     /**
@@ -96,6 +112,11 @@ public class VendaView extends javax.swing.JFrame {
         lblQuantidade.setText("Quantidade");
 
         cboProduto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Selecione o produto --", "Tulipa", "Rosa", "Lírio", " " }));
+        cboProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboProdutoActionPerformed(evt);
+            }
+        });
 
         cboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Selecione o tipo --", "Buque", "Unidade" }));
         cboTipo.addActionListener(new java.awt.event.ActionListener() {
@@ -122,7 +143,7 @@ public class VendaView extends javax.swing.JFrame {
             }
         });
 
-        lblPreco.setText("Preço:           R$");
+        lblPreco.setText("Preço Unitário:         R$");
 
         txtPreco.setEditable(false);
         txtPreco.addActionListener(new java.awt.event.ActionListener() {
@@ -312,6 +333,16 @@ public class VendaView extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtCPF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCPFActionPerformed(evt);
+            }
+        });
+        txtCPF.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCPFKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -412,33 +443,45 @@ public class VendaView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnProcurarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcurarClienteActionPerformed
-        
-        // logica de procurar no banco o cliente e preencher txtNomeCliente
-        //adicionar no atributo cliente
+
+        String cpf = txtCPF.getText().replace(".", "").replace("-", "");
+        if (cpf.length() == 11 && !cpf.trim().equals("")) {
+            try {
+                cliente = CadastroClienteController.consultarPorCPF(cpf).get(0);
+                if (cliente != null) {
+                    txtNomeCliente.setText(cliente.getNomeCliente());
+                }
+            } catch (IndexOutOfBoundsException e) {
+                JOptionPane.showMessageDialog(this, "OPS! Não consegui encontrar nenhum cliente com este CPF", "Falha ao procurar", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Por favor, preencha o CPF corretamente!", "", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btnProcurarClienteActionPerformed
 
     private void txtTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalActionPerformed
         double total = 0.0;
         //atualiza o valor total de acordo com os itens do carrinho 
         for (int i = 0; i < tableModel.getRowCount(); i++) {
-            int quantidade = (int)tableModel.getValueAt(i, 2);
-            double preco = (double)tableModel.getValueAt(i, 3);
-            total += preco*quantidade;
+            int quantidade = (int) tableModel.getValueAt(i, 2);
+            double preco = (double) tableModel.getValueAt(i, 3);
+            total += preco * quantidade;
         }
-        
-        txtTotal.setText(String.format("%.2f", total));   
+
+        txtTotal.setText(String.format("%.2f", total));
     }//GEN-LAST:event_txtTotalActionPerformed
 
     private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
         int linhaSelecionada = tblCarrinho.getSelectedRow();
-        if(tblCarrinho.getSelectedRow() >= 0){
+        if (tblCarrinho.getSelectedRow() >= 0) {
             tableModel.removeRow(linhaSelecionada);
-        }else{
-            JOptionPane.showMessageDialog(this, "Selecione uma linha","Erro ao Deletar", JOptionPane.ERROR_MESSAGE);
+            carrinho.remove(linhaSelecionada);
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione uma linha", "Erro ao Deletar", JOptionPane.ERROR_MESSAGE);
         }
         txtTotalActionPerformed(evt);
         btnDeletar.setEnabled(false);
-        
+
     }//GEN-LAST:event_btnDeletarActionPerformed
 
     private void tblCarrinhoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tblCarrinhoFocusGained
@@ -447,34 +490,67 @@ public class VendaView extends javax.swing.JFrame {
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         //verifica se existe um cliente selecionado e se existe algum item no carrinho
-        if(tableModel.getRowCount() != 0 && !txtNomeCliente.getText().equals("Por gentileza, procure o cliente pelo CPF")){
-            int dialogConfirmacao = JOptionPane.showConfirmDialog(this, "Deseja finalizar venda ?","Finalização de venda", JOptionPane.YES_NO_OPTION);
-            if(dialogConfirmacao == 0 /*yes*/){
-                JOptionPane.showMessageDialog(this, "Venda Finalizada");
-                this.dispose();
+        if (tableModel.getRowCount() != 0 && !txtNomeCliente.getText().equals("Por gentileza, procure o cliente pelo CPF")) {
+            int dialogConfirmacao = JOptionPane.showConfirmDialog(this, "Deseja finalizar venda ?", "Finalização de venda", JOptionPane.YES_NO_OPTION);
+            if (dialogConfirmacao == 0 /*yes*/) {
+                /*LOGICA DE VENDA*/
+                List<ItemVenda> finalizacaoVenda = carrinho;
+                //Instanciando uma venda
+                Venda venda = VendaController.salvar(cliente, new Date());
+
+                //Preenchendo a lista de itens venda com o id da venda criada e salvando no banco
+                Boolean tudoOk = true;
+                String produtosSemEstoque = "";
+                for (int i = 0; i < finalizacaoVenda.size(); i++) {
+                    finalizacaoVenda.get(i).setFk_id_venda(venda.getId());
+                    int deducaoEstoque = finalizacaoVenda.get(i).getProduto().getEstoque() - finalizacaoVenda.get(i).getQuantidade();
+                    if (deducaoEstoque >= 0) {
+                        finalizacaoVenda.get(i).getProduto().setEstoque(deducaoEstoque);
+                    } else {
+                        produtosSemEstoque += i +" "
+                                + finalizacaoVenda.get(i).getProduto().getTipo()+
+                                " "+ finalizacaoVenda.get(i).getProduto().getNome() +
+                                        " " + finalizacaoVenda.get(i).getQuantidade() + " |";
+                        tudoOk = false;
+                    }
+                }
+                if (tudoOk) {
+                    /*Logica de atualizacao da table produtos e adicao dos itens na table itens_venda*/
+                    for (ItemVenda item : finalizacaoVenda) {
+                        try{
+                        ProdutoDAO.atualizar(item.getProduto());
+                        ItemVendaDAO.save(item);
+                        } catch (ClassNotFoundException ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+                    JOptionPane.showMessageDialog(this, "Venda Finalizada");
+                    this.dispose();
+                }else{
+                    JOptionPane.showMessageDialog(this, "Não foi possível finalizar pois os seguintes itens não possuem estoque: " + produtosSemEstoque, "Erro ao finalizar venda.", JOptionPane.ERROR_MESSAGE);
+                }
             }
-        }else{
-            if(tableModel.getRowCount() == 0){
-                JOptionPane.showMessageDialog(this, "Não é possível finalizar uma venda sem itens no carrinho !","Erro ao finalizar venda.", JOptionPane.ERROR_MESSAGE);
-            }else{
-                JOptionPane.showMessageDialog(this, "Não é possível finalizar uma venda sem um cliente !","Erro ao finalizar venda.", JOptionPane.ERROR_MESSAGE); 
+        } else {
+            if (tableModel.getRowCount() == 0) {
+                JOptionPane.showMessageDialog(this, "Não é possível finalizar uma venda sem itens no carrinho !", "Erro ao finalizar venda.", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Não é possível finalizar uma venda sem um cliente !", "Erro ao finalizar venda.", JOptionPane.ERROR_MESSAGE);
             }
         }
-        
-   
-        
+
+
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btn_SairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SairActionPerformed
-        int retorno = JOptionPane.showConfirmDialog(null, "Deseja realmente SAIR ? ", " Deseja Sair ?",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-        if ( retorno == 0 ){
+        int retorno = JOptionPane.showConfirmDialog(null, "Deseja realmente SAIR ? ", " Deseja Sair ?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (retorno == 0) {
             this.dispose();
         }
     }//GEN-LAST:event_btn_SairActionPerformed
 
     private void jMenuItem_SairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_SairActionPerformed
-        int retorno = JOptionPane.showConfirmDialog(null, "Deseja realmente SAIR ? Os dados não salvos serão perdidos!", " Deseja Sair ?",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-        if ( retorno ==0 ){
+        int retorno = JOptionPane.showConfirmDialog(null, "Deseja realmente SAIR ? Os dados não salvos serão perdidos!", " Deseja Sair ?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (retorno == 0) {
             System.exit(0);
         }
 
@@ -488,22 +564,28 @@ public class VendaView extends javax.swing.JFrame {
         //validação do campo quantidade para aceitar apenas numeros
         char c = evt.getKeyChar();
 
-        if( ((c < '0') || (c > '9')) && ((c !=KeyEvent.VK_BACK_SPACE) || (c !=KeyEvent.VK_DELETE))){
+        if (((c < '0') || (c > '9')) && ((c != KeyEvent.VK_BACK_SPACE) || (c != KeyEvent.VK_DELETE))) {
             evt.consume();
-            JOptionPane.showMessageDialog(this, "O campo quantidade aceita apenas números","Formato incorreto", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "O campo quantidade aceita apenas números", "Formato incorreto", JOptionPane.ERROR_MESSAGE);
         }
         //validação do campo quantidade para ter um maximo de caracteres
-        if(txtQuantidade.getText().length() >= 4){
+        if (txtQuantidade.getText().length() >= 4) {
             evt.consume();
-            JOptionPane.showMessageDialog(this, "Você ultrapassou o limite de 4 digitos","Limite ultrapassado", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Você ultrapassou o limite de 4 digitos", "Limite ultrapassado", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_txtQuantidadeKeyTyped
 
     private void cboTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTipoActionPerformed
         //verifica se foi escolhido algum tipo para que possa habilitar a escolha do produto
-        if(cboTipo.getSelectedIndex() != 0){
+        if (cboTipo.getSelectedIndex() != 0) {
             cboProduto.setEnabled(true);
-        }else{
+
+            listaProdutosCbo = ProdutoDAO.listarPorTipo(String.valueOf(cboTipo.getSelectedItem()));
+            List<String> nomesProdutos = listaProdutosCbo.stream().map(prod -> prod.getNome()).collect(Collectors.toList());
+
+            preencherCbo(cboProduto, nomesProdutos);
+
+        } else {
             cboProduto.setSelectedIndex(0);
             cboProduto.setEnabled(false);
         }
@@ -511,20 +593,27 @@ public class VendaView extends javax.swing.JFrame {
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
         //checa se os campos estão preenchidos corretamente e adiciona na tabela de carrinho
-        if((cboTipo.getSelectedIndex()!= 0)&&(cboProduto.getSelectedIndex()!= 0)&&(Integer.parseInt(txtQuantidade.getText())!= 0)){
-            tableModel.addRow(new Object[] {
-                cboTipo.getSelectedItem().toString(),
-                cboProduto.getSelectedItem().toString(),
-                Integer.parseInt(txtQuantidade.getText()),
-                5.00
-            });
-            //reseta valores
-            cboTipo.setSelectedIndex(0);
-            txtQuantidade.setValue(0);
+        int qtdSolicitada = Integer.parseInt(txtQuantidade.getText());
+        if (qtdSolicitada <= prodEmDestaque.getEstoque()) {
+            if ((cboTipo.getSelectedIndex() != 0) && (cboProduto.getSelectedIndex() != 0) && (Integer.parseInt(txtQuantidade.getText()) != 0)) {
+                tableModel.addRow(new Object[]{
+                    prodEmDestaque.getTipo(),
+                    prodEmDestaque.getNome(),
+                    qtdSolicitada,
+                    prodEmDestaque.getValor()
+                });
+                //adiciona um itemvenda no carrinho
+                carrinho.add(new ItemVenda(qtdSolicitada, new BigDecimal(prodEmDestaque.getValor() * qtdSolicitada), prodEmDestaque));
+                //reseta valores
+                cboTipo.setSelectedIndex(0);
+                txtQuantidade.setValue(0);
 
-            txtTotalActionPerformed(evt);
-        }else{
-            JOptionPane.showMessageDialog(this, "Por favor, realize o preenchimento dos dados corretamente","Preenchimento Incompleto",JOptionPane.ERROR_MESSAGE);
+                txtTotalActionPerformed(evt);
+            } else {
+                JOptionPane.showMessageDialog(this, "Por favor, realize o preenchimento dos dados corretamente", "Preenchimento Incompleto", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Infelizmente só possímos " + prodEmDestaque.getEstoque() + " unidades deste produto em estoque", "Oops...", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
@@ -533,16 +622,40 @@ public class VendaView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPrecoActionPerformed
 
     private void txtQuantidadeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtQuantidadeFocusGained
-        if(txtQuantidade.getText().equals("0")){
+        if (txtQuantidade.getText().equals("0")) {
             txtQuantidade.setText("");
         }
     }//GEN-LAST:event_txtQuantidadeFocusGained
 
     private void txtQuantidadeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtQuantidadeFocusLost
-        if(txtQuantidade.getText().equals("")){
+        if (txtQuantidade.getText().equals("")) {
             txtQuantidade.setText("0");
         }
     }//GEN-LAST:event_txtQuantidadeFocusLost
+
+    private void txtCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCPFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCPFActionPerformed
+
+    private void txtCPFKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCPFKeyTyped
+        char caracter = evt.getKeyChar();
+
+        if (((caracter < '0') || (caracter > '9')) && ((caracter != KeyEvent.VK_BACK_SPACE) || (caracter != KeyEvent.VK_BACK_SPACE))) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Ops! Informe apenas os numeros do seu CPF ok ?!",
+                    "Dados Pessoais ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_txtCPFKeyTyped
+
+    private void cboProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboProdutoActionPerformed
+
+        if (cboProduto.getSelectedIndex() != 0) {
+            prodEmDestaque = listaProdutosCbo.get(cboProduto.getSelectedIndex() - 1);
+
+            txtPreco.setText(String.format("%.2f", prodEmDestaque.getValor()));
+
+        }
+    }//GEN-LAST:event_cboProdutoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -611,4 +724,28 @@ public class VendaView extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField txtQuantidade;
     private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables
+
+    public List<String> listarParaComboBox(List<String> lista) {
+        List<String> listaCBO = new ArrayList<String>();
+
+        for (int i = 0; i <= lista.size(); i++) {
+            if (i == 0) {
+                listaCBO.add("-- Selecione --");
+            } else {
+                listaCBO.add(lista.get(i - 1));
+            }
+        }
+
+        return listaCBO;
+    }
+
+    public void preencherCbo(JComboBox cbo, List<String> lista) {
+
+        List<String> listaTipos = listarParaComboBox(lista);
+
+        if (!listaTipos.isEmpty()) {
+            cbo.setModel(new DefaultComboBoxModel<String>(listaTipos.toArray(new String[0])));
+        }
+    }
+
 }

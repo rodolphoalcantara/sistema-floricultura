@@ -7,14 +7,41 @@ import java.math.BigDecimal;
  *
  * @author rodolpho
  */
-class ItemVenda {
+public class ItemVenda {
     
     private int id;
     private int quantidade;
     private BigDecimal valorTotal; 
     private Produto produto;
-    private Venda venda;
+    private int fk_id_venda;
 
+    public ItemVenda(int id, int quantidade, BigDecimal valorTotal, Produto produto, int fk_id_venda) {
+        this.id = id;
+        this.quantidade = quantidade;
+        this.valorTotal = valorTotal;
+        this.produto = produto;
+        this.fk_id_venda = fk_id_venda;
+    }
+
+    public ItemVenda(int quantidade, BigDecimal valorTotal, Produto produto, int fk_id_venda) {
+        this.quantidade = quantidade;
+        this.valorTotal = valorTotal;
+        this.produto = produto;
+        this.fk_id_venda = fk_id_venda;
+    }
+
+    public ItemVenda(int quantidade, BigDecimal valorTotal, Produto produto) {
+        this.quantidade = quantidade;
+        this.valorTotal = valorTotal;
+        this.produto = produto;
+    }
+    
+    
+    
+    public ItemVenda() {
+    }
+   
+    
     public int getId() {
         return id;
     }
@@ -47,12 +74,12 @@ class ItemVenda {
         this.produto = produto;
     }
 
-    public Venda getVenda() {
-        return venda;
+    public int getFk_id_venda() {
+        return fk_id_venda;
     }
 
-    public void setVenda(Venda venda) {
-        this.venda = venda;
+    public void setFk_id_venda(int fk_id_venda) {
+        this.fk_id_venda = fk_id_venda;
     }
         
 }

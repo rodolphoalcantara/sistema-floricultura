@@ -6,29 +6,56 @@
 package br.com.floricultura.sistema.model;
 
 import java.time.LocalDateTime;
-
+import java.util.Date;
+import java.util.List;
 
 public class Venda {
-    
+
     private int id;
-//  private Cliente cliente;
-//    private LocalDateTime data;
-//
-//    public Cliente getCliente() {
-//        return cliente;
-//    }
-//
-//    public void setCliente(Cliente cliente) {
-//        this.cliente = cliente;
-//    }
-//
-//    public LocalDateTime getData() {
-//        return data;
-//    }
-//
-//    public void setData(LocalDateTime data) {
-//        this.data = data;
-//    }
+    private CadastroCliente cliente;
+    private Date data;
+    private List<ItemVenda> itens;
+
+    public Venda(){
+        
+    }
+    
+    public Venda(CadastroCliente cliente, Date data){
+        this.cliente = cliente;
+        this.data = data;
+    }
     
     
+    public void adicionar(ItemVenda item){
+        itens.add(item);
+    }
+    
+    public List<ItemVenda> getItens() {
+        return itens;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public CadastroCliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(CadastroCliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Date getData() {
+        return data;
+    }
+
+    public void setData(Date data) {
+        this.data = data;
+    }
+
 }

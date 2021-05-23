@@ -3,11 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.floricultura.sistema.utils;
+package br.com.floricultura.sistema.dao;
 
 import br.com.floricultura.sistema.model.CadastroCliente;
 import br.com.floricultura.sistema.model.EnderecoCliente;
+import br.com.floricultura.sistema.utils.GerenciadorConexao;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,99 +20,97 @@ import java.util.ArrayList;
  *
  * @author aureliosantos
  */
-public class EnderecoDAO {
-    public static boolean salvar(EnderecoCliente edC)
-    {
+public class ClienteDAO {
+
+    public static boolean salvar(CadastroCliente Cd, EnderecoCliente eC) {
         boolean retorno = false;
         Connection conexao = null;
         PreparedStatement instrucaoSQL = null;
-                
+
         try {
-       
+
             conexao = GerenciadorConexao.getConnection();
             //conexao = GerenciadorConexao.abrirConexao();
-            
-            
+
             //Passo 3 - Executar uma instrução SQL
-          
-            instrucaoSQL = conexao.prepareStatement("INSERT INTO endereco (rua,numero,bairro,cidade,estado) VALUES(?, ?, ?, ?, ?)"
-                                                    , Statement.RETURN_GENERATED_KEYS);
-            
-  
-            instrucaoSQL.setString(1, edC.getRuaCliente());
-            instrucaoSQL.setString(2, edC.getNumeroC());
-            instrucaoSQL.setString(3, edC.getBairroCliente());
-            instrucaoSQL.setString(4, edC.getCidadeCliente());
-            instrucaoSQL.setString(5, edC.getEstadoCliente());
-           
-            
-            
+            instrucaoSQL = conexao.prepareStatement("INSERT INTO cliente (CPF,nome,email,estado_civil,data_nasc,sexo,Telefone,fk_id_endereco) VALUES(?, ?, ?, ?, ?, ?, ?, ?)",
+                     Statement.RETURN_GENERATED_KEYS);
+
+            instrucaoSQL.setString(1, Cd.getCpfCliente());
+            instrucaoSQL.setString(2, Cd.getNomeCliente());
+            instrucaoSQL.setString(3, Cd.getEmailCliente());
+            instrucaoSQL.setString(4, Cd.getEstadoCivil());
+            instrucaoSQL.setString(5, Cd.getDataNascimento());
+            instrucaoSQL.setString(6, Cd.getSexoCliente());
+            instrucaoSQL.setString(7, Cd.getTelefoneCliente());
+            instrucaoSQL.setInt(8, eC.getId_end());
+
             //Executar a instrução SQL
             int linhasAfetadas = instrucaoSQL.executeUpdate();
-            
-            if(linhasAfetadas>0)
-            {
+
+            if (linhasAfetadas > 0) {
                 retorno = true;
-                
+
                 ResultSet generatedKeys = instrucaoSQL.getGeneratedKeys(); //Recupero o ID do cliente
                 if (generatedKeys.next()) {
-                        edC.setId_end(generatedKeys.getInt(1));
-                }
-                else {
+                    Cd.setId_cli(generatedKeys.getInt(1));
+                } else {
                     throw new SQLException("Falha ao obter o ID do cliente.");
                 }
-            }
-            else{
+            } else {
                 retorno = false;
             }
-            
+
         } catch (SQLException | ClassNotFoundException ex) {
             System.out.println(ex.getMessage());
             retorno = false;
-        } finally{
-            
+        } finally {
+
             //Libero os recursos da memória
             try {
-                if(instrucaoSQL!=null)
+                if (instrucaoSQL != null) {
                     instrucaoSQL.close();
-                
+                }
+
 //                GerenciadorConexao.fecharConexao();
                 conexao.close();
-                
-              } catch (SQLException ex) {
-             }
+
+            } catch (SQLException ex) {
+            }
         }
-      
+
         return retorno;
     }
-    
-    
-    public static ArrayList<EnderecoCliente> consultarEndereco() {
+
+    public static ArrayList<CadastroCliente> consultarCliente() {
         ResultSet rs = null;
         Connection conexao = null;
         PreparedStatement instrucaoSQL = null;
 
-        ArrayList<EnderecoCliente> listaEndereco = new ArrayList<EnderecoCliente>();
+        ArrayList<CadastroCliente> listaClientes = new ArrayList<CadastroCliente>();
 
         try {
 
             conexao = GerenciadorConexao.getConnection();
 
-            instrucaoSQL = conexao.prepareStatement("SELECT * FROM Endereco;");
+            instrucaoSQL = conexao.prepareStatement("SELECT * FROM cliente;");
 
             rs = instrucaoSQL.executeQuery();
 
             while (rs.next()) {
-                EnderecoCliente c = new EnderecoCliente();
-                
-                c.setId_end(rs.getInt("id_end"));
-               
-                listaEndereco.add(c);
+                CadastroCliente c = new CadastroCliente();
+                c.setId_cli(rs.getInt("id_cli"));
+                c.setNomeCliente(rs.getString("nome"));
+                c.setCpfCliente(rs.getString("CPF"));
+                c.setEmailCliente(rs.getString("email"));
+                c.setFk_id_endereco(rs.getInt("fk_id_endereco"));
+
+                listaClientes.add(c);
             }
 
         } catch (SQLException | ClassNotFoundException ex) {
             System.out.println(ex.getMessage());
-            listaEndereco = null;
+            listaClientes = null;
         } finally {
 
             try {
@@ -127,39 +127,43 @@ public class EnderecoDAO {
             }
         }
 
-        return listaEndereco;
+        return listaClientes;
     }
     
     
     
-       public static ArrayList<EnderecoCliente> consultarClientePorCPF(int id) {
+       public static ArrayList<CadastroCliente> consultarClientePorCPF(String cpfPesquisa ) {
         ResultSet rs = null;
         Connection conexao = null;
         PreparedStatement instrucaoSQL = null;
 
-        ArrayList<EnderecoCliente> listaEndereco = new ArrayList<EnderecoCliente>();
+        ArrayList<CadastroCliente> listaClientes = new ArrayList<CadastroCliente>();
 
         try {
 
             conexao = GerenciadorConexao.getConnection();
 
-            instrucaoSQL = conexao.prepareStatement("SELECT * FROM endereco WHERE id_end = ?;");
+            instrucaoSQL = conexao.prepareStatement("SELECT * FROM cliente WHERE CPF  LIKE ?;");
 
             
-            instrucaoSQL.setInt(1, id);
+            instrucaoSQL.setString(1,"%"+cpfPesquisa+"%");
             
             rs = instrucaoSQL.executeQuery();
 
             while (rs.next()) {
-                EnderecoCliente c = new EnderecoCliente();
-                c.setId_end(rs.getInt("id_end"));
-               
-                listaEndereco.add(c);
+                CadastroCliente c = new CadastroCliente();
+                c.setId_cli(rs.getInt("id_cli"));
+                c.setNomeCliente(rs.getString("nome"));
+                c.setCpfCliente(rs.getString("CPF"));
+                c.setEmailCliente(rs.getString("email"));
+                c.setFk_id_endereco(rs.getInt("fk_id_endereco"));
+
+                listaClientes.add(c);
             }
 
         } catch (SQLException | ClassNotFoundException ex) {
             System.out.println(ex.getMessage());
-            listaEndereco = null;
+            listaClientes = null;
         } finally {
 
             try {
@@ -176,11 +180,11 @@ public class EnderecoDAO {
             }
         }
 
-        return listaEndereco;
+        return listaClientes;
     }
-    
        
-    public static boolean excluirEndereco(int id_end)
+       
+       public static boolean excluirCliente(int id_cli)
     {
         boolean retorno = false;
         Connection conexao = null;
@@ -195,10 +199,10 @@ public class EnderecoDAO {
                       
             conexao = GerenciadorConexao.getConnection();
             
-            instrucaoSQL = conexao.prepareStatement("DELETE FROM endereco WHERE id_end = ?");
+            instrucaoSQL = conexao.prepareStatement("DELETE FROM cliente WHERE id_cli = ?");
             
           
-            instrucaoSQL.setInt(1, id_end);
+            instrucaoSQL.setInt(1, id_cli);
 
             
             int linhasAfetadas = instrucaoSQL.executeUpdate();
@@ -229,8 +233,9 @@ public class EnderecoDAO {
         
         return retorno;
     }
-    
-    public static boolean atualizarEnderecoCliente(EnderecoCliente eC)
+       
+       
+       public static boolean atualizarCliente(CadastroCliente aC)
     {
         boolean retorno = false;
         Connection conexao = null;
@@ -241,15 +246,18 @@ public class EnderecoDAO {
                        
             conexao = GerenciadorConexao.getConnection();
             
-            instrucaoSQL = conexao.prepareStatement("UPDATE endereco SET rua = ?, numero=?, bairro=?, cidade=?, estado=? WHERE id_end =? ");
+            instrucaoSQL = conexao.prepareStatement("UPDATE cliente SET CPF = ?, nome=?, email=?, estado_civil=?, data_nasc=?, sexo=?, Telefone=? WHERE id_cli =?");
             
             //Adiciono os parâmetros ao meu comando SQL
-            instrucaoSQL.setString(1, eC.getRuaCliente());
-            instrucaoSQL.setString(2, eC.getNumeroC());
-            instrucaoSQL.setString(3, eC.getBairroCliente());
-            instrucaoSQL.setString(4, eC.getCidadeCliente());
-            instrucaoSQL.setString(5, eC.getEstadoCliente());
-            instrucaoSQL.setInt(6, eC.getId_end());
+            instrucaoSQL.setString(1, aC.getCpfCliente());
+            instrucaoSQL.setString(2, aC.getNomeCliente());
+            instrucaoSQL.setString(3, aC.getEmailCliente());
+            instrucaoSQL.setString(4, aC.getEstadoCivil());
+            instrucaoSQL.setString(5, aC.getDataNascimento());
+            instrucaoSQL.setString(6, aC.getSexoCliente());
+            instrucaoSQL.setString(7, aC.getTelefoneCliente());
+            instrucaoSQL.setInt(8, aC.getId_cli());
+            
             
             //Mando executar a instrução SQL
             int linhasAfetadas = instrucaoSQL.executeUpdate();
@@ -281,5 +289,5 @@ public class EnderecoDAO {
         
         return retorno;
     }
-    
+
 }

@@ -98,16 +98,30 @@ public class CadastroCliente {
     
     
     public CadastroCliente(String nomeCliente,String cpfCliente,String sexoCliente,
-            String dataNascimento,String emailCliente,String estadoCivil,String ruaCliente,String numeroC,
-    String bairroCliente,String cidadeCliente,String estadoCliente,String telefoneCliente){
+            String dataNascimento,String emailCliente,String estadoCivil,String telefoneCliente, int fk_id_endereco){
         
       this.cpfCliente = cpfCliente;
       this.nomeCliente = nomeCliente;
       this.sexoCliente = sexoCliente;
-      this.emailCliente = emailCliente; 
+      this.emailCliente = emailCliente;
       this.dataNascimento = dataNascimento;
       this.estadoCivil = estadoCivil;
       this.telefoneCliente = telefoneCliente;
+      this.fk_id_endereco = fk_id_endereco;
+      
+    }
+    public CadastroCliente(int id_cli,String nomeCliente,String cpfCliente,String sexoCliente,
+            String dataNascimento,String emailCliente,String estadoCivil,String telefoneCliente, int fk_id_endereco){
+        
+      this.id_cli = id_cli;  
+      this.cpfCliente = cpfCliente;
+      this.nomeCliente = nomeCliente;
+      this.sexoCliente = sexoCliente;
+      this.emailCliente = emailCliente;
+      this.dataNascimento = dataNascimento;
+      this.estadoCivil = estadoCivil;
+      this.telefoneCliente = telefoneCliente;
+      this.fk_id_endereco = fk_id_endereco;
       
     }
         
