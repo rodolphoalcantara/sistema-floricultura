@@ -9,6 +9,7 @@ import br.com.floricultura.sistema.model.CadastroCliente;
 import br.com.floricultura.sistema.model.EnderecoCliente;
 import br.com.floricultura.sistema.dao.ClienteDAO;
 import br.com.floricultura.sistema.dao.EnderecoDAO;
+import br.com.floricultura.sistema.view.CadastroClienteView;
 import java.text.ParseException;
 import java.util.ArrayList;
 
@@ -18,8 +19,15 @@ import java.util.ArrayList;
  * Manipulação do dados cliente, Salvar, Editar e Excluir cliente
  */
 public class CadastroClienteController {
-     public static  CadastroCliente cadastraCli ;
+       public static  CadastroCliente cadastraCli ;
        public static EnderecoCliente cadastraEnd ;
+       
+  /** 
+    * @param
+    * Metodo salvar primeiro o endereço para gerar a fk_endereco e passar como parametro para salvar cliente, recebe como paramentro
+    * dados da view
+    * @see CadastroClienteView
+   */
 
     public static boolean SalvarEndereco(String ruaCliente, String numeroC, String bairroCliente, String cidadeCliente, String estadoCliente) {
 
@@ -31,9 +39,14 @@ public class CadastroClienteController {
         cadastraEnd.setCidadeCliente(cidadeCliente);
         cadastraEnd.setEstadoCliente(estadoCliente);
 
-        return EnderecoDAO.salvar(cadastraEnd);
+        return EnderecoDAO.salvar(cadastraEnd); 
     }
-
+ /** 
+    * @param
+    * Metodo para salvar informações de dados pessoais de cliente recebidos da view
+    * 
+    * @see CadastroClienteView
+   */
     public static boolean salvarCliente(String nomeCliente, String cpfCliente, String sexoCliente, String dataNascimento, String emailCliente, String estadoCivil, String telefone) {
 
         cadastraCli = new CadastroCliente();
@@ -52,6 +65,13 @@ public class CadastroClienteController {
 
         return ClienteDAO.salvar(cadastraCli, cadastraEnd);
     }
+    
+    /** 
+    * @param
+    * Metodo para Pesquisar todos os itens do banco, não sendo necessário passar o CPF como parametro ele vai listar todos os clientes
+    * 
+    * @see CadastroClienteView
+   */
 
     public static ArrayList<CadastroCliente> consultarCliente() {
 
@@ -59,6 +79,13 @@ public class CadastroClienteController {
 
         return consultaCli;
     }
+    
+    /** 
+    * @param
+    * Metodo para consultar o endereco
+    * 
+    * @see CadastroClienteView
+   */
 
     public static ArrayList<EnderecoCliente> consultarEndereco() {
 
@@ -67,12 +94,26 @@ public class CadastroClienteController {
         return consultaEnd;
     }
 
+    
+    /** 
+    * @param
+    * Metodo para Pesquisar cliente passamos como parametro cpf ou parte dele
+    * 
+    * @see ClienteDAO
+   */
     public static ArrayList<CadastroCliente> consultarPorCPF(String cpfPesquisa) {
 
         ArrayList<CadastroCliente> consultaCli = ClienteDAO.consultarClientePorCPF(cpfPesquisa);
 
         return consultaCli;
     }
+    
+     /** 
+    * @param
+    * Metodo para pesquisar o endereco que seja igual a fk_id_endereco obtido na pesquisa do cliente
+    * 
+    * @see EnderecoDAO
+   */
 
     public static ArrayList<EnderecoCliente> consultarEnderecoid(int id) {
 
@@ -90,7 +131,12 @@ public class CadastroClienteController {
 
         return EnderecoDAO.excluirEndereco(id_end);
     }
-    //Metodos para Atualizar endereco
+   /** 
+    * @param
+    * Metodo para atualizar endereco, pegando o fk_id_endereco
+    * 
+    * @see CadastroClienteView
+   */
 
     public static boolean atualizarEndereco(int id_end, String ruaCliente, String numeroC, String bairroCliente, String cidadeCliente, String estadoCliente) {
         
@@ -105,7 +151,12 @@ public class CadastroClienteController {
 
         return EnderecoDAO.atualizarEnderecoCliente(cadastraEnd);
     }
-    //Metodo para Atualizar para atualizadar dados do cliente
+     /** 
+    * @param
+    * Metodo para atualizar cliente, passando como paramentro o id_endereco 
+    * 
+    * @see CadastroClienteView
+   */
 
     public static boolean atualizarCliente(int id_cli, String nomeCliente, String cpfCliente, String sexoCliente, String dataNascimento, String emailCliente, String estadoCivil, String telefone) {
         

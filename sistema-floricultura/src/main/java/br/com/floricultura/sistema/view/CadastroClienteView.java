@@ -15,15 +15,15 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
-/**
- *
+/** Classe com toda lógica para salvar,pesquisa, editar  e excluir clientes
+ * 
  * @author aureliosantos
  */
 public class CadastroClienteView extends javax.swing.JFrame {
         
     public String Modo = "Criação";
-    public int id_editar_cliente;
-    public int id_editar_endereço;
+    public int id_editar_cliente; // variavel ultizada para obter o id login no momento da edição
+    public int id_editar_endereço; // variavel ultizada para obter o id endereço para edição do mesmo
     
     public CadastroClienteView() {
         initComponents();

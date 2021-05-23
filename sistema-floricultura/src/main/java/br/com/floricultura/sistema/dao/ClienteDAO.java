@@ -32,7 +32,7 @@ public class ClienteDAO {
             conexao = GerenciadorConexao.getConnection();
             //conexao = GerenciadorConexao.abrirConexao();
 
-            //Passo 3 - Executar uma instrução SQL
+            //Executar uma instrução SQL
             instrucaoSQL = conexao.prepareStatement("INSERT INTO cliente (CPF,nome,email,estado_civil,data_nasc,sexo,Telefone,fk_id_endereco) VALUES(?, ?, ?, ?, ?, ?, ?, ?)",
                      Statement.RETURN_GENERATED_KEYS);
 
