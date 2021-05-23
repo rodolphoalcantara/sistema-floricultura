@@ -41,6 +41,17 @@ public class CadastroClienteView extends javax.swing.JFrame {
 
         btnGroupSexo = new javax.swing.ButtonGroup();
         telaCadastroCliente = new javax.swing.JTabbedPane();
+        painelPesquisar = new javax.swing.JPanel();
+        jPanelPesquisa = new javax.swing.JPanel();
+        jLabelPesquisaCPF = new javax.swing.JLabel();
+        jTextFieldCPFPesquisa = new javax.swing.JTextField();
+        btn_Pesquisar = new javax.swing.JButton();
+        jScrollPane_Pesquisar = new javax.swing.JScrollPane();
+        jTable_Pesquisa = new javax.swing.JTable();
+        btn_SairPesquisar = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
+        btn_Voltar = new javax.swing.JButton();
         painelCadastrar = new javax.swing.JPanel();
         jPanelDadosEndereco1 = new javax.swing.JPanel();
         jLabelRua1 = new javax.swing.JLabel();
@@ -73,17 +84,6 @@ public class CadastroClienteView extends javax.swing.JFrame {
         jTextFieldEmail = new javax.swing.JTextField();
         jLabel_Telefone = new javax.swing.JLabel();
         telefone_Cliente_jFormattedText = new javax.swing.JFormattedTextField();
-        painelPesquisar = new javax.swing.JPanel();
-        jPanelPesquisa = new javax.swing.JPanel();
-        jLabelPesquisaCPF = new javax.swing.JLabel();
-        jTextFieldCPFPesquisa = new javax.swing.JTextField();
-        btn_Pesquisar = new javax.swing.JButton();
-        jScrollPane_Pesquisar = new javax.swing.JScrollPane();
-        jTable_Pesquisa = new javax.swing.JTable();
-        btn_SairPesquisar = new javax.swing.JButton();
-        btnEditar = new javax.swing.JButton();
-        btnExcluir = new javax.swing.JButton();
-        btn_Voltar = new javax.swing.JButton();
         menuTelaCadastroCliente = new javax.swing.JMenuBar();
         jMenu_Arquivo = new javax.swing.JMenu();
         menu = new javax.swing.JMenuItem();
@@ -94,9 +94,157 @@ public class CadastroClienteView extends javax.swing.JFrame {
         setAlwaysOnTop(true);
         setResizable(false);
 
+        jPanelPesquisa.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Pesquisar", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
+
+        jLabelPesquisaCPF.setText("Digite o CPF :");
+
+        jTextFieldCPFPesquisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldCPFPesquisaActionPerformed(evt);
+            }
+        });
+        jTextFieldCPFPesquisa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldCPFPesquisaKeyTyped(evt);
+            }
+        });
+
+        btn_Pesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/business_man_usersearch_thesearch_theclient_2356_1.png"))); // NOI18N
+        btn_Pesquisar.setText("Pesquisar");
+        btn_Pesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_PesquisarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelPesquisaLayout = new javax.swing.GroupLayout(jPanelPesquisa);
+        jPanelPesquisa.setLayout(jPanelPesquisaLayout);
+        jPanelPesquisaLayout.setHorizontalGroup(
+            jPanelPesquisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelPesquisaLayout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addComponent(jLabelPesquisaCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jTextFieldCPFPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
+                .addComponent(btn_Pesquisar)
+                .addContainerGap(581, Short.MAX_VALUE))
+        );
+        jPanelPesquisaLayout.setVerticalGroup(
+            jPanelPesquisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelPesquisaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelPesquisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelPesquisaCPF)
+                    .addComponent(jTextFieldCPFPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_Pesquisar))
+                .addContainerGap(35, Short.MAX_VALUE))
+        );
+
+        jTable_Pesquisa.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Id_Cliente", "Nome Cliente", "CPF Cliente", "E-mail"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane_Pesquisar.setViewportView(jTable_Pesquisa);
+
+        btn_SairPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Users-Exit-icon.png"))); // NOI18N
+        btn_SairPesquisar.setText("Sair");
+        btn_SairPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SairPesquisarActionPerformed(evt);
+            }
+        });
+
+        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/businessapplication_edit_male_user_thepencil_theclient_negocio_2321.png"))); // NOI18N
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+
+        btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/delete_delete_deleteusers_delete_male_user_maleclient_2348.png"))); // NOI18N
+        btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
+
+        btn_Voltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ic_assignment_return_128_28215.png"))); // NOI18N
+        btn_Voltar.setText("Voltar");
+        btn_Voltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_VoltarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout painelPesquisarLayout = new javax.swing.GroupLayout(painelPesquisar);
+        painelPesquisar.setLayout(painelPesquisarLayout);
+        painelPesquisarLayout.setHorizontalGroup(
+            painelPesquisarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelPesquisarLayout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(painelPesquisarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(painelPesquisarLayout.createSequentialGroup()
+                        .addComponent(btn_Voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addComponent(btnExcluir)
+                        .addGap(475, 475, 475)
+                        .addComponent(btn_SairPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(painelPesquisarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jScrollPane_Pesquisar)
+                        .addComponent(jPanelPesquisa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(40, Short.MAX_VALUE))
+        );
+
+        painelPesquisarLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnEditar, btnExcluir, btn_SairPesquisar, btn_Voltar});
+
+        painelPesquisarLayout.setVerticalGroup(
+            painelPesquisarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelPesquisarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanelPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane_Pesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                .addGroup(painelPesquisarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnEditar)
+                    .addComponent(btnExcluir)
+                    .addComponent(btn_SairPesquisar)
+                    .addComponent(btn_Voltar))
+                .addContainerGap())
+        );
+
+        painelPesquisarLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnEditar, btnExcluir, btn_SairPesquisar, btn_Voltar});
+
+        telaCadastroCliente.addTab("Pesquisar", painelPesquisar);
+
         jPanelDadosEndereco1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Dados de Endereço\n", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 16))); // NOI18N
 
-        jLabelRua1.setText("Rua :");
+        jLabelRua1.setText("Logradouro :");
 
         jLabelNumero1.setText("Número : ");
 
@@ -129,17 +277,20 @@ public class CadastroClienteView extends javax.swing.JFrame {
                 .addGroup(jPanelDadosEndereco1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelDadosEndereco1Layout.createSequentialGroup()
                         .addGap(26, 26, 26)
-                        .addGroup(jPanelDadosEndereco1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabelRua1)
-                            .addComponent(jLabelBairro1))
+                        .addComponent(jLabelRua1)
                         .addGap(6, 6, 6)
                         .addComponent(jTextFieldRua1, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(81, 81, 81)
                         .addComponent(jLabelNumero1))
                     .addGroup(jPanelDadosEndereco1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabelCidade1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanelDadosEndereco1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelDadosEndereco1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabelCidade1))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelDadosEndereco1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabelBairro1)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelDadosEndereco1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextFieldBairro1, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanelDadosEndereco1Layout.createSequentialGroup()
@@ -150,7 +301,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
                                 .addComponent(jComboBoxEstado1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldNumero1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(347, Short.MAX_VALUE))
+                .addContainerGap(307, Short.MAX_VALUE))
         );
         jPanelDadosEndereco1Layout.setVerticalGroup(
             jPanelDadosEndereco1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -392,154 +543,6 @@ public class CadastroClienteView extends javax.swing.JFrame {
         painelCadastrarLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btn_AbaPesquisar, btn_Sair, btn_Salvar});
 
         telaCadastroCliente.addTab("Cadastrar Cliente", painelCadastrar);
-
-        jPanelPesquisa.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Pesquisar", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
-
-        jLabelPesquisaCPF.setText("Digite o CPF :");
-
-        jTextFieldCPFPesquisa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldCPFPesquisaActionPerformed(evt);
-            }
-        });
-        jTextFieldCPFPesquisa.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextFieldCPFPesquisaKeyTyped(evt);
-            }
-        });
-
-        btn_Pesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/business_man_usersearch_thesearch_theclient_2356_1.png"))); // NOI18N
-        btn_Pesquisar.setText("Pesquisar");
-        btn_Pesquisar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_PesquisarActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanelPesquisaLayout = new javax.swing.GroupLayout(jPanelPesquisa);
-        jPanelPesquisa.setLayout(jPanelPesquisaLayout);
-        jPanelPesquisaLayout.setHorizontalGroup(
-            jPanelPesquisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelPesquisaLayout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(jLabelPesquisaCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jTextFieldCPFPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addComponent(btn_Pesquisar)
-                .addContainerGap(581, Short.MAX_VALUE))
-        );
-        jPanelPesquisaLayout.setVerticalGroup(
-            jPanelPesquisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelPesquisaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelPesquisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelPesquisaCPF)
-                    .addComponent(jTextFieldCPFPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_Pesquisar))
-                .addContainerGap(35, Short.MAX_VALUE))
-        );
-
-        jTable_Pesquisa.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Id_Cliente", "Nome Cliente", "CPF Cliente", "E-mail"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane_Pesquisar.setViewportView(jTable_Pesquisa);
-
-        btn_SairPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Users-Exit-icon.png"))); // NOI18N
-        btn_SairPesquisar.setText("Sair");
-        btn_SairPesquisar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_SairPesquisarActionPerformed(evt);
-            }
-        });
-
-        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/businessapplication_edit_male_user_thepencil_theclient_negocio_2321.png"))); // NOI18N
-        btnEditar.setText("Editar");
-        btnEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarActionPerformed(evt);
-            }
-        });
-
-        btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/delete_delete_deleteusers_delete_male_user_maleclient_2348.png"))); // NOI18N
-        btnExcluir.setText("Excluir");
-        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExcluirActionPerformed(evt);
-            }
-        });
-
-        btn_Voltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ic_assignment_return_128_28215.png"))); // NOI18N
-        btn_Voltar.setText("Voltar");
-        btn_Voltar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_VoltarActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout painelPesquisarLayout = new javax.swing.GroupLayout(painelPesquisar);
-        painelPesquisar.setLayout(painelPesquisarLayout);
-        painelPesquisarLayout.setHorizontalGroup(
-            painelPesquisarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(painelPesquisarLayout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addGroup(painelPesquisarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(painelPesquisarLayout.createSequentialGroup()
-                        .addComponent(btn_Voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
-                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addComponent(btnExcluir)
-                        .addGap(475, 475, 475)
-                        .addComponent(btn_SairPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(painelPesquisarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jScrollPane_Pesquisar)
-                        .addComponent(jPanelPesquisa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(40, Short.MAX_VALUE))
-        );
-
-        painelPesquisarLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnEditar, btnExcluir, btn_SairPesquisar, btn_Voltar});
-
-        painelPesquisarLayout.setVerticalGroup(
-            painelPesquisarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(painelPesquisarLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanelPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane_Pesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
-                .addGroup(painelPesquisarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEditar)
-                    .addComponent(btnExcluir)
-                    .addComponent(btn_SairPesquisar)
-                    .addComponent(btn_Voltar))
-                .addContainerGap())
-        );
-
-        painelPesquisarLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnEditar, btnExcluir, btn_SairPesquisar, btn_Voltar});
-
-        telaCadastroCliente.addTab("Pesquisar", painelPesquisar);
 
         jMenu_Arquivo.setText("Arquivo");
 
