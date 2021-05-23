@@ -231,4 +231,56 @@ public class EnderecoDAO {
         return retorno;
     }
     
+    public static boolean atualizarEnderecoCliente(EnderecoCliente eC)
+    {
+        boolean retorno = false;
+        Connection conexao = null;
+        PreparedStatement instrucaoSQL = null;
+                
+        try {
+          
+                       
+            conexao = GerenciadorConexao.getConnection();
+            
+            instrucaoSQL = conexao.prepareStatement("UPDATE endereco SET rua = ?, numero=?, bairro=?, cidade=?, estado=? WHERE id_end =? ");
+            
+            //Adiciono os parâmetros ao meu comando SQL
+            instrucaoSQL.setString(1, eC.getRuaCliente());
+            instrucaoSQL.setString(2, eC.getNumeroC());
+            instrucaoSQL.setString(3, eC.getBairroCliente());
+            instrucaoSQL.setString(4, eC.getCidadeCliente());
+            instrucaoSQL.setString(5, eC.getEstadoCliente());
+            instrucaoSQL.setInt(6, eC.getId_end());
+            
+            //Mando executar a instrução SQL
+            int linhasAfetadas = instrucaoSQL.executeUpdate();
+            
+            if(linhasAfetadas>0)
+            {
+                retorno = true;
+            }
+            else{
+                retorno = false;
+            }
+            
+        } catch (SQLException | ClassNotFoundException ex) {
+            System.out.println(ex.getMessage());
+            retorno = false;
+        } finally{
+            
+            //Libero os recursos da memória
+            try {
+                if(instrucaoSQL!=null)
+                    instrucaoSQL.close();
+                
+                //GerenciadorConexao.fecharConexao();
+                conexao.close();
+                
+              } catch (SQLException ex) {
+             }
+        }
+        
+        return retorno;
+    }
+    
 }

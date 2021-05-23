@@ -51,12 +51,10 @@ public class RelatorioAnaliticoView extends javax.swing.JFrame {
         lblCliente.setText("Cliente");
 
         txtCliente.setEditable(false);
-        txtCliente.setBackground(java.awt.SystemColor.window);
 
         lblCPF.setText("CPF");
 
         txtCPF.setEditable(false);
-        txtCPF.setBackground(java.awt.SystemColor.window);
         txtCPF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCPFActionPerformed(evt);
@@ -64,7 +62,6 @@ public class RelatorioAnaliticoView extends javax.swing.JFrame {
         });
 
         txtEmail.setEditable(false);
-        txtEmail.setBackground(java.awt.SystemColor.window);
 
         lblEmail.setText("email:");
 
@@ -102,12 +99,10 @@ public class RelatorioAnaliticoView extends javax.swing.JFrame {
         lblData.setText("Data da venda");
 
         txtData.setEditable(false);
-        txtData.setBackground(java.awt.SystemColor.window);
 
         lblTotalCompra.setText("Total da Compra");
 
         txtTotalCompra.setEditable(false);
-        txtTotalCompra.setBackground(java.awt.SystemColor.window);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -130,7 +125,7 @@ public class RelatorioAnaliticoView extends javax.swing.JFrame {
                             .addComponent(txtCPF)
                             .addComponent(txtEmail)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 12, Short.MAX_VALUE)
+                        .addGap(0, 36, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()

@@ -16,12 +16,14 @@ public class CadastroCliente {
     
     private int id_cli , fk_id_endereco;
 
-    public int getFk_id_endereco() {
-        return fk_id_endereco;
-    }
+   
 
     public void setFk_id_endereco(int fk_id_endereco) {
         this.fk_id_endereco = fk_id_endereco;
+    }
+    
+     public int getFk_id_endereco() {
+        return fk_id_endereco;
     }
 
     public int getId_cli() {

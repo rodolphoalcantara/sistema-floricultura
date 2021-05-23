@@ -62,8 +62,8 @@ public class CadastroProduto extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
-        jScrollPane2 = new javax.swing.JScrollPane();
+             
+	jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         telaCadastrarProduto = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
@@ -378,7 +378,8 @@ public class CadastroProduto extends javax.swing.JFrame {
         telaCadastrarProduto.getAccessibleContext().setAccessibleDescription("");
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+
+            }// </editor-fold>//GEN-END:initComponents
 
     private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
         // TODO add your handling code here:
