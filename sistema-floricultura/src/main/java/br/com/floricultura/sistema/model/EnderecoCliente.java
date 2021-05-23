@@ -1,12 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.floricultura.sistema.model;
 
 /**
- *
+ *Metodos gueters e setters e metodos de endereco para o setar os valores na model
  * @author aureliosantos
  */
 public class EnderecoCliente {

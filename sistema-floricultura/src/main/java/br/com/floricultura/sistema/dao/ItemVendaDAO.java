@@ -14,7 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
-import sun.jvm.hotspot.utilities.soql.SOQLException;
+//import sun.jvm.hotspot.utilities.soql.SOQLException;
 
 /**
  *

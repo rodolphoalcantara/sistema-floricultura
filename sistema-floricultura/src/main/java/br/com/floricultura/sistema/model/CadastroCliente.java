@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import javax.swing.JOptionPane;
 
 /**
- *
+ *Metodos gueters e setters e metodos de cliente para o setar os valores na model
  * @author aureliosantos
  */
 public class CadastroCliente {
