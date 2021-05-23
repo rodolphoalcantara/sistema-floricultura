@@ -7,13 +7,20 @@ package br.com.floricultura.sistema.view;
 
 //import br.com.floricultura.sistema.model.Cliente;
 import br.com.floricultura.sistema.controller.CadastroClienteController;
+import br.com.floricultura.sistema.controller.VendaController;
+import br.com.floricultura.sistema.dao.ItemVendaDAO;
 import br.com.floricultura.sistema.dao.ProdutoDAO;
 import br.com.floricultura.sistema.model.CadastroCliente;
 import br.com.floricultura.sistema.model.ItemVenda;
 import br.com.floricultura.sistema.model.Produto;
+import br.com.floricultura.sistema.model.Venda;
 import java.awt.event.KeyEvent;
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -32,7 +39,7 @@ public class VendaView extends javax.swing.JFrame {
     // private Cliente cliente;
     private Produto prodEmDestaque;
     private List<Produto> listaProdutosCbo;
-    private List<ItemVenda> carrinho;
+    private List<ItemVenda> carrinho = new ArrayList<ItemVenda>();
     private CadastroCliente cliente;
 
     public VendaView() {
@@ -463,6 +470,7 @@ public class VendaView extends javax.swing.JFrame {
         int linhaSelecionada = tblCarrinho.getSelectedRow();
         if (tblCarrinho.getSelectedRow() >= 0) {
             tableModel.removeRow(linhaSelecionada);
+            carrinho.remove(linhaSelecionada);
         } else {
             JOptionPane.showMessageDialog(this, "Selecione uma linha", "Erro ao Deletar", JOptionPane.ERROR_MESSAGE);
         }
@@ -481,14 +489,41 @@ public class VendaView extends javax.swing.JFrame {
             int dialogConfirmacao = JOptionPane.showConfirmDialog(this, "Deseja finalizar venda ?", "Finalização de venda", JOptionPane.YES_NO_OPTION);
             if (dialogConfirmacao == 0 /*yes*/) {
                 /*LOGICA DE VENDA*/
+                List<ItemVenda> finalizacaoVenda = carrinho;
                 //Instanciando uma venda
-                
-                //Preenchendo
-                
-                
-                
-                JOptionPane.showMessageDialog(this, "Venda Finalizada");
-                this.dispose();
+                Venda venda = VendaController.salvar(cliente, new Date());
+
+                //Preenchendo a lista de itens venda com o id da venda criada e salvando no banco
+                Boolean tudoOk = true;
+                String produtosSemEstoque = "";
+                for (int i = 0; i < finalizacaoVenda.size(); i++) {
+                    finalizacaoVenda.get(i).setFk_id_venda(venda.getId());
+                    int deducaoEstoque = finalizacaoVenda.get(i).getProduto().getEstoque() - finalizacaoVenda.get(i).getQuantidade();
+                    if (deducaoEstoque >= 0) {
+                        finalizacaoVenda.get(i).getProduto().setEstoque(deducaoEstoque);
+                    } else {
+                        produtosSemEstoque += i +" "
+                                + finalizacaoVenda.get(i).getProduto().getTipo()+
+                                " "+ finalizacaoVenda.get(i).getProduto().getNome() +
+                                        " " + finalizacaoVenda.get(i).getQuantidade() + " |";
+                        tudoOk = false;
+                    }
+                }
+                if (tudoOk) {
+                    /*Logica de atualizacao da table produtos e adicao dos itens na table itens_venda*/
+                    for (ItemVenda item : finalizacaoVenda) {
+                        try{
+                        ProdutoDAO.atualizar(item.getProduto());
+                        ItemVendaDAO.save(item);
+                        } catch (ClassNotFoundException ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+                    JOptionPane.showMessageDialog(this, "Venda Finalizada");
+                    this.dispose();
+                }else{
+                    JOptionPane.showMessageDialog(this, "Não foi possível finalizar pois os seguintes itens não possuem estoque: " + produtosSemEstoque, "Erro ao finalizar venda.", JOptionPane.ERROR_MESSAGE);
+                }
             }
         } else {
             if (tableModel.getRowCount() == 0) {
@@ -562,6 +597,8 @@ public class VendaView extends javax.swing.JFrame {
                     qtdSolicitada,
                     prodEmDestaque.getValor()
                 });
+                //adiciona um itemvenda no carrinho
+                carrinho.add(new ItemVenda(qtdSolicitada, new BigDecimal(prodEmDestaque.getValor() * qtdSolicitada), prodEmDestaque));
                 //reseta valores
                 cboTipo.setSelectedIndex(0);
                 txtQuantidade.setValue(0);
@@ -570,7 +607,7 @@ public class VendaView extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "Por favor, realize o preenchimento dos dados corretamente", "Preenchimento Incompleto", JOptionPane.ERROR_MESSAGE);
             }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "Infelizmente só possímos " + prodEmDestaque.getEstoque() + " unidades deste produto em estoque", "Oops...", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnAdicionarActionPerformed
@@ -601,7 +638,7 @@ public class VendaView extends javax.swing.JFrame {
         if (((caracter < '0') || (caracter > '9')) && ((caracter != KeyEvent.VK_BACK_SPACE) || (caracter != KeyEvent.VK_BACK_SPACE))) {
             evt.consume();
             JOptionPane.showMessageDialog(this, "Ops! Informe apenas os numeros do seu CPF ok ?!",
-                     "Dados Pessoais ", JOptionPane.WARNING_MESSAGE);
+                    "Dados Pessoais ", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_txtCPFKeyTyped
 

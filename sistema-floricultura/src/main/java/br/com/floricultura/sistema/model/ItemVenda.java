@@ -23,6 +23,21 @@ public class ItemVenda {
         this.fk_id_venda = fk_id_venda;
     }
 
+    public ItemVenda(int quantidade, BigDecimal valorTotal, Produto produto, int fk_id_venda) {
+        this.quantidade = quantidade;
+        this.valorTotal = valorTotal;
+        this.produto = produto;
+        this.fk_id_venda = fk_id_venda;
+    }
+
+    public ItemVenda(int quantidade, BigDecimal valorTotal, Produto produto) {
+        this.quantidade = quantidade;
+        this.valorTotal = valorTotal;
+        this.produto = produto;
+    }
+    
+    
+    
     public ItemVenda() {
     }
    

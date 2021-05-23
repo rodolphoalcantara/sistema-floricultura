@@ -80,7 +80,7 @@ public class ProdutoDAO {
 
             conexao = GerenciadorConexao.getConnection();
 
-            instrucaoSQL = conexao.prepareStatement("UPDATE produto SET nome = ?, valor_unitario=?,estoque=?,tipo=?,descricao=? WHERE id_produto =? ");
+            instrucaoSQL = conexao.prepareStatement("UPDATE produto SET nome = ?, valor_unitario=?,estoque=?,tipo=?,descricao=? WHERE id_produto =?");
 
             //Adiciono os parâmetros ao meu comando SQL
             instrucaoSQL.setInt(6, p.getId());
@@ -363,7 +363,7 @@ public class ProdutoDAO {
 
         return listaTipos;
     }
-    
+        
 }
     
     

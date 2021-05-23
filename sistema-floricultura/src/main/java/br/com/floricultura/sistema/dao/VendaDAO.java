@@ -25,7 +25,7 @@ import java.util.List;
  */
 public class VendaDAO {
     
-    public List<Venda> listarVendasComItens() throws ClassNotFoundException{
+    public static List<Venda> listarVendasComItens() throws ClassNotFoundException{
         try{
             Venda anterior = null;
             List<Venda> vendas = new ArrayList<Venda>();
@@ -62,7 +62,7 @@ public class VendaDAO {
         }
     }
     
-    public void save(Venda venda) throws ClassNotFoundException{
+    public static Venda save(Venda venda) throws ClassNotFoundException{
         
          try{
             String query = "insert into venda (data_venda, fk_id_cli) values (?,?)";
@@ -80,11 +80,11 @@ public class VendaDAO {
                         venda.setId(rst.getInt(1));
                     }
                 }
-                        
+               return venda;         
             }
             
         }catch(SQLException ex){
-            ex.printStackTrace();
+            throw new RuntimeException(ex);
         }
         
     }
