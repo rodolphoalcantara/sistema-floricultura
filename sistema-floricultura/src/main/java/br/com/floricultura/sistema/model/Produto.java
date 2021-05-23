@@ -31,6 +31,14 @@ public class Produto {
         this.descricao = descricao;
     }
     
+    public Produto(String nome, Double valor, int estoque, String tipo, String descricao) {
+        this.nome = nome;
+        this.valor = valor;
+        this.estoque = estoque;
+        this.tipo = tipo;
+        this.descricao = descricao;
+    }
+    
     
     
     public int getId() {
