@@ -5,6 +5,12 @@
  */
 package br.com.floricultura.sistema.view;
 
+import br.com.floricultura.sistema.model.ItemVenda;
+import br.com.floricultura.sistema.model.Venda;
+import java.math.BigDecimal;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author rodolpho
@@ -14,9 +20,26 @@ public class RelatorioAnaliticoView extends javax.swing.JFrame {
     /**
      * Creates new form RelatorioAnaliticoView
      */
+    DefaultTableModel tableModel;
+
     public RelatorioAnaliticoView() {
         initComponents();
         setLocationRelativeTo(null);
+
+    }
+
+    public RelatorioAnaliticoView(Venda venda) {
+        initComponents();
+        setLocationRelativeTo(null);
+        tableModel = (DefaultTableModel) tblRelAnalitico.getModel();
+        txtCliente.setText(venda.getCliente().getNomeCliente());
+        txtCPF.setText(venda.getCliente().getCpfCliente());
+        if (venda.getCliente().getEmailCliente() != null) {
+            txtEmail.setText(venda.getCliente().getEmailCliente());
+        }
+        txtData.setText(venda.getData().toString());
+        listarTabela(tableModel, venda.getItens());
+        txtTotalCompra.setText(String.valueOf(venda.getItens().stream().map(item -> item.getValorTotal()).reduce(BigDecimal.ZERO, BigDecimal::add)));
     }
 
     /**
@@ -36,7 +59,7 @@ public class RelatorioAnaliticoView extends javax.swing.JFrame {
         txtEmail = new javax.swing.JTextField();
         lblEmail = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblRelAnalitico = new javax.swing.JTable();
         lblData = new javax.swing.JLabel();
         txtData = new javax.swing.JTextField();
         lblTotalCompra = new javax.swing.JLabel();
@@ -51,10 +74,12 @@ public class RelatorioAnaliticoView extends javax.swing.JFrame {
         lblCliente.setText("Cliente");
 
         txtCliente.setEditable(false);
+        txtCliente.setBackground(java.awt.SystemColor.window);
 
         lblCPF.setText("CPF");
 
         txtCPF.setEditable(false);
+        txtCPF.setBackground(java.awt.SystemColor.window);
         txtCPF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCPFActionPerformed(evt);
@@ -62,10 +87,11 @@ public class RelatorioAnaliticoView extends javax.swing.JFrame {
         });
 
         txtEmail.setEditable(false);
+        txtEmail.setBackground(java.awt.SystemColor.window);
 
         lblEmail.setText("email:");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblRelAnalitico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -88,21 +114,23 @@ public class RelatorioAnaliticoView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(90);
-            jTable1.getColumnModel().getColumn(1).setPreferredWidth(40);
-            jTable1.getColumnModel().getColumn(2).setPreferredWidth(30);
-            jTable1.getColumnModel().getColumn(3).setPreferredWidth(20);
+        jScrollPane1.setViewportView(tblRelAnalitico);
+        if (tblRelAnalitico.getColumnModel().getColumnCount() > 0) {
+            tblRelAnalitico.getColumnModel().getColumn(0).setPreferredWidth(90);
+            tblRelAnalitico.getColumnModel().getColumn(1).setPreferredWidth(40);
+            tblRelAnalitico.getColumnModel().getColumn(2).setPreferredWidth(30);
+            tblRelAnalitico.getColumnModel().getColumn(3).setPreferredWidth(20);
         }
 
         lblData.setText("Data da venda");
 
         txtData.setEditable(false);
+        txtData.setBackground(java.awt.SystemColor.window);
 
         lblTotalCompra.setText("Total da Compra");
 
         txtTotalCompra.setEditable(false);
+        txtTotalCompra.setBackground(java.awt.SystemColor.window);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -240,16 +268,29 @@ public class RelatorioAnaliticoView extends javax.swing.JFrame {
     private javax.swing.JButton btnFechar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblCPF;
     private javax.swing.JLabel lblCliente;
     private javax.swing.JLabel lblData;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblTotalCompra;
+    private javax.swing.JTable tblRelAnalitico;
     private javax.swing.JTextField txtCPF;
     private javax.swing.JTextField txtCliente;
     private javax.swing.JTextField txtData;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtTotalCompra;
     // End of variables declaration//GEN-END:variables
+
+    static void listarTabela(DefaultTableModel tableModel, List<ItemVenda> itens) {
+
+        for (ItemVenda item : itens) {
+            tableModel.addRow(new Object[]{
+                item.getProduto().getNome(),
+                item.getProduto().getValor(),
+                item.getQuantidade(),
+                item.getValorTotal()
+            });
+        }
+
+    }
 }
