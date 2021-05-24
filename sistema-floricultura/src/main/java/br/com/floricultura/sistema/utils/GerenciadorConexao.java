@@ -10,7 +10,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- *
+ * Gerencia as conexoes ao <b>banco de dados</b>
+ * @see com.mysql.cj.jdbc.Driver
  * @author rodolpho
  */
 public class GerenciadorConexao {
@@ -26,6 +27,12 @@ public class GerenciadorConexao {
     public GerenciadorConexao() {
     }
 
+    /**
+     * Método utilizado para receber uma conexão
+     * @return um obj Connection para ser utilizado pelas classes DAO's
+     * @throws ClassNotFoundException Caso não encontre o Driver de conexao com o MySQL
+     * @throws SQLException Caso haja algum erro ao tentar estabelecer conexao
+     */
     public static Connection getConnection() throws ClassNotFoundException, SQLException {
 
         URL = "jdbc:mysql://" + SERVER + ":3306/" + DATABASE + "?useTimezone=true&serverTimezone=UTC&useSSL=false";
@@ -65,6 +72,11 @@ public class GerenciadorConexao {
         return STATUS;
     }
 
+    /**
+     * Método utilizado fechar uma conexão
+     * @return <b>boolean</b> True: Sucesso ao fechar a conexao , False: Não foi possível fechar conexão
+     * @throws SQLException Caso haja algum erro ao tentar fechar a conexao
+     */
     public static Boolean closeConnection() throws SQLException {
         Boolean success = false;
 

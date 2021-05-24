@@ -28,7 +28,7 @@ import javax.swing.table.DefaultTableModel;
 import java.util.stream.Collectors;
 
 /**
- *
+ * Tela de Vendas do sistema
  * @author rodolpho
  */
 public class VendaView extends javax.swing.JFrame {

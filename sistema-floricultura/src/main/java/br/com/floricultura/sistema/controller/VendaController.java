@@ -12,11 +12,20 @@ import java.util.Date;
 
 
 /**
- *
+ * Classe Controller para vendas
+ * @see CadastroClienteController
+ * @see ProdutoController
  * @author rodolpho
  */
 public class VendaController {
     
+    /**
+     * 
+     * @param cliente pertencenta a classe CadastroCliente 
+     * @param data Data em formato java.uti.Date
+     * @return Objeto Venda atualizado com o id
+     * @see java.util.Date
+     */
     public static Venda salvar(CadastroCliente cliente, Date data){
         Venda venda = new Venda(cliente, data);
         

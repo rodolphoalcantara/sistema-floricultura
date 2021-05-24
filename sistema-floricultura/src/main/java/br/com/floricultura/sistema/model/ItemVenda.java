@@ -4,7 +4,12 @@ package br.com.floricultura.sistema.model;
 import java.math.BigDecimal;
 
 /**
- *
+ * Classe modelo de um ItemVenda
+ * @see CadastroCliente 
+ * @see EnderecoCliente 
+ * @see Produto 
+ * @see Relatorio
+ * @see Venda
  * @author rodolpho
  */
 public class ItemVenda {
