@@ -14,14 +14,23 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
-//import sun.jvm.hotspot.utilities.soql.SOQLException;
 
 /**
- *
+ * Classe de persistencia ao banco de dados
+ * @see ProdutoDAO 
+ * @see VendaDAO 
+ * @see ClienteDAO 
+ * @see EnderecoDAO 
  * @author rodolpho
  */
 public class ItemVendaDAO {
-
+    
+    
+    /**
+     * Salva um ItemVenda no banco de dados
+     * @param item Objeto da classe ItemVenda
+     * @throws ClassNotFoundException caso não encontre o Drive de conexao com o mySQL
+     */
     public static void save(ItemVenda item) throws ClassNotFoundException {
         try {
             String query = "insert into item_venda (quantidade, valor_total, fk_id_venda, fk_id_produto) values (?,?,?,?)";

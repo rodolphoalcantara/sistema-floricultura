@@ -20,11 +20,16 @@ import java.util.List;
 
 
 /**
- *
+ *Classe de persistencia de vendas ao banco de dados
  * @author rodolpho
  */
 public class VendaDAO {
     
+    /**
+     * lista todas as vendas 
+     * @return uma lista de vendas, cada uma preenchida com uma lista de itens relacionados
+     * @throws ClassNotFoundException Caso não encontre o Driver de conexão com o MySQL
+     */
     public static List<Venda> listarVendasComItens() throws ClassNotFoundException{
         try{
             Venda anterior = null;
@@ -63,6 +68,11 @@ public class VendaDAO {
         }
     }
     
+    /**
+     * lista todas as vendas em um certo periodo de tempo
+     * @return uma lista de vendas em um certo periodo de venda, cada uma preenchida com uma lista de itens relacionados
+     * @throws ClassNotFoundException Caso não encontre o Driver de conexão com o MySQL
+     */
     public static List<Venda> listarVendasComItensEmUmPeriodo(Date dataInicial, Date dataFinal) throws ClassNotFoundException{
         try{
             Venda anterior = null;
@@ -106,6 +116,11 @@ public class VendaDAO {
         }
     }
     
+    /**
+     * lista todas as vendas em um certo periodo de tempo de um determinado cliente
+     * @return uma lista de vendas, em um certo periodo de venda de um determinado cliente, cada uma preenchida com uma lista de itens relacionados
+     * @throws ClassNotFoundException Caso não encontre o Driver de conexão com o MySQL
+     */
     public static List<Venda> listarVendasComItensEmUmPeriodoPorCliente(Date dataInicial, Date dataFinal, String nomeCliente) throws ClassNotFoundException{
         try{
             Venda anterior = null;
@@ -149,7 +164,11 @@ public class VendaDAO {
             throw new RuntimeException(ex);
         }
     }
-    
+    /**
+     * lista todas as vendas de um determinado cliente
+     * @return uma lista de vendas de um determinado cliente, cada uma preenchida com uma lista de itens relacionados
+     * @throws ClassNotFoundException Caso não encontre o Driver de conexão com o MySQL
+     */
     public static List<Venda> listarVendasComItensPorCliente(String nomeCliente) throws ClassNotFoundException{
         try{
             Venda anterior = null;
@@ -192,6 +211,12 @@ public class VendaDAO {
         }
     }
     
+    /**
+     * Salva uma venda no banco de dados
+     * @param venda obj da classe Venda devidamente preenchido
+     * @return Obj Venda com id preenchido
+     * @throws ClassNotFoundException Caso não encontre o Driver de conexão com o MySQL
+     */
     public static Venda save(Venda venda) throws ClassNotFoundException{
         
          try{

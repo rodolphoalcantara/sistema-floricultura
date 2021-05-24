@@ -9,6 +9,15 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Classe modelo de uma Venda
+ * @see CadastroCliente 
+ * @see EnderecoCliente 
+ * @see Produto 
+ * @see Relatorio
+ * @see ItemVenda
+ * @author rodolpho
+ */
 public class Venda {
 
     private int id;
