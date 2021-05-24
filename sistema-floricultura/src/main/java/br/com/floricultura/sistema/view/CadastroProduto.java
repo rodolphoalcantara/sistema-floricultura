@@ -17,6 +17,8 @@ import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author Naga
+ * Tela de cadastrar produto/pesquisar
+ * 
  */
 public class CadastroProduto extends javax.swing.JFrame {
 

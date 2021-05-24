@@ -8,6 +8,12 @@ package br.com.floricultura.sistema.model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe modelo produto
+ * Metodos gueters, setters e construtores
+ * @author Naga
+ */
+
 
 public class Produto {
     private int id;
