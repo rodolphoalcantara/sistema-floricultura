@@ -59,3 +59,19 @@ create table item_venda(
     foreign key (fk_id_venda) references venda(id_venda),
     foreign key (fk_id_produto) references produto(id_produto)
 );
+
+
+
+/*INSERTIONS*/
+insert into endereco (estado,cidade,bairro,rua, numero) values
+	('São Paulo','Campinas','Jardim orion', 'Rua dos Malas','123'),
+	('São Paulo','Campinas','Jardim orion', 'Rua dos Malas','123'),
+	('São Paulo','Campinas','Jardim orion', 'Rua dos Malas','123'),
+	('São Paulo','Campinas','Jardim orion', 'Rua dos Malas','123');
+
+
+Insert into CLIENTE(CPF, nome,email,estado_civil,sexo,data_nasc,Telefone,fk_id_endereco) values
+('10320106500','Rita','funciorio10@floricultura.COM','Casado','Feminino','10/05/2021','11989993321',1),
+('10333306500','Maria','funciorio11@floricultura.COM','Casado','Feminino','10/05/2021','11989993321',2),
+('10324406500','Pedro','funciorio12@floricultura.COM','Casado','Feminino','10/05/2021','11989993321',3),
+('10123456500','Carlos','funciorio13@floricultura.COM','Casado','Feminino','10/05/2021','11989993321',4);
