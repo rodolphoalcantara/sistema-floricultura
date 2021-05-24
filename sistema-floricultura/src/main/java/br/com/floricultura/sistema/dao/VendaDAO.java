@@ -106,7 +106,7 @@ public class VendaDAO {
         }
     }
     
-    public static List<Venda> listarVendasComItensEmUmPeriodoPorCliente(Date dataInicial, Date dataFinal, int idCliente) throws ClassNotFoundException{
+    public static List<Venda> listarVendasComItensEmUmPeriodoPorCliente(Date dataInicial, Date dataFinal, String nomeCliente) throws ClassNotFoundException{
         try{
             Venda anterior = null;
             List<Venda> vendas = new ArrayList<Venda>();
@@ -118,11 +118,12 @@ public class VendaDAO {
                     + "inner join cliente c on c.id_cli = v.fk_id_cli "
                     + "inner join item_venda i on v.id_venda = i.fk_id_venda "
                     + "inner join produto p on p.id_produto = i.fk_id_produto "
-                    + "where c.id_cli like ? and v.data_venda between ? and ? "
+                    + "where c.nome like ? and v.data_venda between ? and ? "
                     + "order by v.data_venda desc ";
             
             try(PreparedStatement pstm = GerenciadorConexao.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)){
                 
+                pstm.setString(1, "%" + nomeCliente + "%");
                 pstm.setDate(2, dataInicial);
                 pstm.setDate(3, dataFinal);
                 
@@ -149,7 +150,7 @@ public class VendaDAO {
         }
     }
     
-    public static List<Venda> listarVendasComItensPorCliente(int idCliente) throws ClassNotFoundException{
+    public static List<Venda> listarVendasComItensPorCliente(String nomeCliente) throws ClassNotFoundException{
         try{
             Venda anterior = null;
             List<Venda> vendas = new ArrayList<Venda>();
@@ -161,12 +162,12 @@ public class VendaDAO {
                     + "inner join cliente c on c.id_cli = v.fk_id_cli "
                     + "inner join item_venda i on v.id_venda = i.fk_id_venda "
                     + "inner join produto p on p.id_produto = i.fk_id_produto "
-                    + "where c.id_cli like ?"
+                    + "where c.nome like ?"
                     + "order by v.data_venda desc ";
             
             try(PreparedStatement pstm = GerenciadorConexao.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)){
                 
-                pstm.setInt(1, idCliente);
+                pstm.setString(1, nomeCliente);
                 
                 pstm.execute();
                 
