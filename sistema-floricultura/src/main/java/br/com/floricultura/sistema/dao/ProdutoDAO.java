@@ -16,10 +16,17 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
- *
+ *Classe de persistencia de vendas ao banco de dados
  * @author gesouza
  */
 public class ProdutoDAO {
+    
+    /**
+     * 
+     * Salvar um Produto
+     * @return Obj Produto com id preenchido
+     * @throws ClassNotFoundException Caso não encontre o Driver de conexão com o MySQL
+     */
     
        public static boolean salvar(Produto p) {
         boolean retorno = false;
@@ -71,6 +78,11 @@ public class ProdutoDAO {
         return retorno;
     }
 
+       
+       /**
+        * Atualiza o produto        * 
+        * @throws ClassNotFoundException Caso não encontre o Driver de conexão com o MySQL
+        */
     public static boolean atualizar(Produto p) {
         boolean retorno = false;
         Connection conexao = null;
@@ -125,6 +137,12 @@ public class ProdutoDAO {
 
         return retorno;
     }
+    
+    /**
+     * 
+     * Excluir um produto 
+     * @throws ClassNotFoundException Caso não encontre o Driver de conexão com o MySQL
+     */
 
     public static boolean excluir(int pID) {
         boolean retorno = false;
@@ -173,6 +191,12 @@ public class ProdutoDAO {
 
         return retorno;
     }
+    
+    /**
+     * Consulta tabela
+     * @throws ClassNotFoundException Caso não encontre o Driver de conexão com o MySQL
+     * @return listaProduto para consulta
+     */
 
     public static ArrayList<Produto> consultarProduto() {
         ResultSet rs = null;
@@ -232,6 +256,13 @@ public class ProdutoDAO {
         return listaProduto;
     }
 
+    
+    /**
+     * Fazer pesquisa atraves do nome
+     * @param pNome
+     * @return listaProduto
+     * @throws ClassNotFoundException Caso não encontre o Driver de conexão com o MySQL
+     */
     public static ArrayList<Produto> consultarProduto(String pNome) {
         ResultSet rs = null;
         Connection conexao = null;
@@ -288,6 +319,12 @@ public class ProdutoDAO {
         return listaProduto;
     }
     
+    /**
+     * Listagem por tipo
+     * @param tipo    
+     * @throws ClassNotFoundException Caso não encontre o Driver de conexão com o MySQL
+     */
+    
     public static ArrayList<Produto> listarPorTipo(String tipo) {
         ResultSet rs = null;
         Connection conexao = null;
@@ -340,6 +377,11 @@ public class ProdutoDAO {
 
         return listaProduto;
     }
+    
+     /**
+     * Listagem por tipos  ]
+     *  @throws ClassNotFoundException Caso não encontre o Driver de conexão com o MySQL
+     */
     
     public static ArrayList<String> listarTipos() {
         ResultSet rs = null;
