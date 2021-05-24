@@ -5,6 +5,7 @@
  */
 package br.com.floricultura.sistema.view;
 
+import br.com.floricultura.sistema.controller.ProdutoController;
 import br.com.floricultura.sistema.dao.ProdutoDAO;
 import br.com.floricultura.sistema.model.Produto;
 import java.awt.event.KeyEvent;
@@ -19,46 +20,47 @@ import javax.swing.table.DefaultTableModel;
  */
 public class CadastroProduto extends javax.swing.JFrame {
 
+    //ATRIBUTOS
     public String modoTela = "Criacao";
-    //private Consultar consultar;
     Produto objProduto;
-    
-    public CadastroProduto() {
-        initComponents();        
-        objProduto = new Produto();
-        model = (DefaultTableModel)tblCadastro.getModel();
-        setLocationRelativeTo(null);
-        lista = ProdutoDAO.consultarProduto();
-        configuraTabela(lista);
-        
-    }
-     
-      //criando lista
-      ArrayList<Produto> lista = new ArrayList<>();
-      DefaultTableModel model;
-      
-       private void configuraTabela(ArrayList<Produto> lista) {
-        model.setRowCount(0);
-        criaTabela(lista);
-    }
-      private void criaTabela(ArrayList<Produto> lista) {
+
+    //criando lista
+    ArrayList<Produto> lista = new ArrayList<>();
+    DefaultTableModel model;
+
+    //METODO 
+    private void criaTabela(ArrayList<Produto> lista) {
         for (Produto c : lista) {
-            model.addRow(new Object[]{ c.getId(),c.getNome(),c.getTipo(),c.getEstoque(),c.getDescricao(),c.getValor()});
+            model.addRow(new Object[]{c.getId(), c.getNome(), c.getTipo(), c.getEstoque(), c.getDescricao(), c.getValor()});
         }
     }
-      
-      public static int compararItensEmCBO(JComboBox cbo, String str){
+
+    public static int compararItensEmCBO(JComboBox cbo, String str) {
 
         for (int i = 0; i < cbo.getItemCount(); i++) {
-            if(str.equals(String.valueOf(cbo.getItemAt(i)))){
+            if (str.equals(String.valueOf(cbo.getItemAt(i)))) {
                 return i;
             }
         }
 
-       return -1; 
+        return -1;
     }
-    
-      
+
+    private void configuraTabela(ArrayList<Produto> lista) {
+        model.setRowCount(0);
+        criaTabela(lista);
+    }
+        
+    //CONSTRUTOR
+    public CadastroProduto() {
+        initComponents();
+        objProduto = new Produto();
+        model = (DefaultTableModel) tblCadastro.getModel();
+        setLocationRelativeTo(null);
+        lista = ProdutoDAO.consultarProduto();
+        configuraTabela(lista);
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -412,7 +414,7 @@ public class CadastroProduto extends javax.swing.JFrame {
 
         try {
 //Tento executar um código passível de erro 
-            if(!txtPreco.getText().trim().isEmpty()){
+            if (!txtPreco.getText().trim().isEmpty()) {
                 double retorno = Double.parseDouble(txtPreco.getText().replace(",", "."));
             }
         } catch (Exception e) {
@@ -427,12 +429,12 @@ public class CadastroProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPrecoActionPerformed
 
     private void cboTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTipoActionPerformed
-        
+
     }//GEN-LAST:event_cboTipoActionPerformed
 
     private void jMenuItem_SairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_SairActionPerformed
-        int retorno = JOptionPane.showConfirmDialog(null, "Deseja realmente SAIR ? Os dados não salvos serão perdidos!", " Deseja Sair ?",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-        if ( retorno ==0 ){
+        int retorno = JOptionPane.showConfirmDialog(null, "Deseja realmente SAIR ? Os dados não salvos serão perdidos!", " Deseja Sair ?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (retorno == 0) {
             System.exit(0);
         }
 
@@ -453,16 +455,15 @@ public class CadastroProduto extends javax.swing.JFrame {
         if (numeroLinha >= 0) {
             objProduto = lista.get(numeroLinha);
             telaCadastrarProduto.setSelectedIndex(0);
-            
-         
-        this.txtNome.setText(objProduto.getNome());
-        this.txtQuantidade.setText(String.valueOf(objProduto.getEstoque()));
-        this.txtDescricao.setText(objProduto.getDescricao());
-        this.cboTipo.setSelectedIndex(compararItensEmCBO(cboTipo, objProduto.getTipo()));
-        this.txtPreco.setText(String.valueOf(objProduto.getValor()));
 
-        modoTela="Alterar";         
-           
+            this.txtNome.setText(objProduto.getNome());
+            this.txtQuantidade.setText(String.valueOf(objProduto.getEstoque()));
+            this.txtDescricao.setText(objProduto.getDescricao());
+            this.cboTipo.setSelectedIndex(compararItensEmCBO(cboTipo, objProduto.getTipo()));
+            this.txtPreco.setText(String.valueOf(objProduto.getValor()));
+
+            modoTela = "Alterar";
+
         } else {
             JOptionPane.showMessageDialog(this, "Selecione um campo da tabela!");
         }
@@ -474,7 +475,7 @@ public class CadastroProduto extends javax.swing.JFrame {
         //Resgato o número da linha pelo JTable
         int numeroLinha = tblCadastro.getSelectedRow();
         if (numeroLinha >= 0) {
-            if (ProdutoDAO.excluir(lista.get(numeroLinha).getId())) {
+            if (ProdutoController.ExcluirProduto(lista.get(numeroLinha).getId())) {
                 JOptionPane.showMessageDialog(this, "Produto excluído com sucesso!");
                 //Consulto novamente a base de dados
                 lista = ProdutoDAO.consultarProduto();
@@ -493,43 +494,38 @@ public class CadastroProduto extends javax.swing.JFrame {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         try {
-            
-            objProduto.setNome(txtNome.getText());
-            objProduto.setEstoque(Integer.parseInt(txtQuantidade.getText()));
-            objProduto.setTipo(String.valueOf(cboTipo.getSelectedItem()));
-            objProduto.setDescricao(txtDescricao.getText());
-            objProduto.setValor(Double.parseDouble(txtPreco.getText().replace(",",".")));
-            
-            System.out.println("salvar: "+objProduto.toString());
+            //Salvar                      
             if (modoTela == "Criacao") {
-                ProdutoDAO.salvar(objProduto);
+                ProdutoController.SalvarProduto(txtNome.getText(), Integer.parseInt(txtQuantidade.getText()), String.valueOf(cboTipo.getSelectedItem()), txtDescricao.getText(), Double.parseDouble(txtPreco.getText().replace(",", ".")));
                 JOptionPane.showMessageDialog(this, "Produto cadastrado com sucesso!", "Produto Cadastrado", JOptionPane.INFORMATION_MESSAGE);
                 lista = ProdutoDAO.consultarProduto();
                 configuraTabela(lista);
-                txtNome.setText("");
-                txtDescricao.setText("");
-                txtPreco.setText("");
-                txtQuantidade.setText("");
-                cboTipo.setSelectedIndex(0);
+                Atualizar();
             } else { //Modo de alteração
-                ProdutoDAO.atualizar(objProduto);
+                ProdutoController.AlterarProduto(objProduto.getId(), txtNome.getText(), Integer.parseInt(txtQuantidade.getText()), String.valueOf(cboTipo.getSelectedItem()), txtDescricao.getText(), Double.parseDouble(txtPreco.getText().replace(",", ".")));
                 modoTela = "Criacao";
                 JOptionPane.showMessageDialog(this, "Produto alterado com sucesso!", "Produto Cadastrado", JOptionPane.INFORMATION_MESSAGE);
                 lista = ProdutoDAO.consultarProduto();
                 configuraTabela(lista);
-                txtNome.setText("");
-                txtDescricao.setText("");
-                txtPreco.setText("");
-                txtQuantidade.setText("");
-                cboTipo.setSelectedIndex(0);
+                Atualizar();
             }
-           
+
         } catch (Exception e) {
-            System.out.println("Erro: "+e.toString());
+            System.out.println("Erro: " + e.toString());
             JOptionPane.showMessageDialog(this, "Falha ao gravar no banco de dados\n" + e.getMessage(),
-                "Aviso de Falha", JOptionPane.ERROR_MESSAGE);
+                    "Aviso de Falha", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
+    /**
+     * Metodo de atualizar tabela
+     */
+    private void Atualizar() {
+        txtNome.setText("");
+        txtDescricao.setText("");
+        txtPreco.setText("");
+        txtQuantidade.setText("");
+        cboTipo.setSelectedIndex(0);
+    }
 
     /**
      * @param args the command line arguments

@@ -27,15 +27,13 @@ public class ProdutoDAO {
         PreparedStatement instrucaoSQL = null;
 
         try {
-
-            //Passo 1
-            //Class.forName("com.mysql.cj.jdbc.Driver");
-
-            //conexao = DriverManager.getConnection(GerenciadorConexao.URL, "root", "");
-            conexao = GerenciadorConexao.getConnection();
+            
+            //Abrir conexão
             //conexao = GerenciadorConexao.abrirConexao();
+            conexao = GerenciadorConexao.getConnection();
+           
 
-            //Passo 3 - Executar uma instrução SQL
+            //Executar uma instrução SQL
             instrucaoSQL = conexao.prepareStatement("INSERT INTO produto (nome,valor_unitario,estoque,descricao,tipo) VALUES(?, ?, ?, ?, ?)",
                     Statement.RETURN_GENERATED_KEYS);
 
@@ -59,8 +57,10 @@ public class ProdutoDAO {
                 if (instrucaoSQL != null) {
                     instrucaoSQL.close();
                 }
+                
                 conexao.close();
 //              GerenciadorConexao.fecharConexao();
+                //fechar conexão
 
             } catch (SQLException ex) {
                 ex.printStackTrace();
@@ -77,7 +77,9 @@ public class ProdutoDAO {
         PreparedStatement instrucaoSQL = null;
 
         try {
-
+            
+            //Abrir conexão
+            //conexao = GerenciadorConexao.abrirConexao()
             conexao = GerenciadorConexao.getConnection();
 
             instrucaoSQL = conexao.prepareStatement("UPDATE produto SET nome = ?, valor_unitario=?,estoque=?,tipo=?,descricao=? WHERE id_produto =?");
@@ -111,7 +113,8 @@ public class ProdutoDAO {
                 if (instrucaoSQL != null) {
                     instrucaoSQL.close();
                 }
-
+                 
+                //Fechar conexão
                 //GerenciadorConexao.fecharConexao();
                 conexao.close();
 
@@ -129,9 +132,12 @@ public class ProdutoDAO {
         PreparedStatement instrucaoSQL = null;
 
         try {
-
+            
+            //Abrir conexão
+            //conexao = GerenciadorConexao.abrirConexao()
             conexao = GerenciadorConexao.getConnection();
-
+            
+            //instrução no MYSQL
             instrucaoSQL = conexao.prepareStatement("DELETE FROM produto WHERE id_produto = ?");
 
             //Adiciono os parâmetros ao meu comando SQL
@@ -156,7 +162,8 @@ public class ProdutoDAO {
                 if (instrucaoSQL != null) {
                     instrucaoSQL.close();
                 }
-
+                 
+                //Fechar conexão
                 //GerenciadorConexao.fecharConexao();
                 conexao.close();
 
@@ -176,10 +183,11 @@ public class ProdutoDAO {
         ArrayList<Produto> listaProduto = new ArrayList<>();
 
         try {
-
+                
+            //Abrir conexão
            conexao = GerenciadorConexao.getConnection();
 
-            //Passo 3 - Executo a instrução SQL
+            //Executo a instrução SQL
             instrucaoSQL = conexao.prepareStatement("SELECT * FROM produto;");
 
             //Executa a Query (Consulta) - Retorna um objeto da classe ResultSet
@@ -195,7 +203,7 @@ public class ProdutoDAO {
                 c.setTipo(rs.getString("tipo"));
                 c.setDescricao(rs.getString("descricao"));
 
-                //Adiciono na listaClientes
+                //Adiciono na listaProdutos
                 System.out.println(" teste: "+c.toString());
                 listaProduto.add(c);
             }
@@ -215,6 +223,7 @@ public class ProdutoDAO {
 
                 conexao.close();
                 //GerenciadorConexao.fecharConexao();
+                //Fechar conexão
 
             } catch (SQLException ex) {
             }
@@ -231,8 +240,11 @@ public class ProdutoDAO {
         ArrayList<Produto> listaProduto = new ArrayList<Produto>();
 
         try {
-
+            
+            ////Abrir conexão
             conexao = GerenciadorConexao.getConnection();
+            
+            ////Executo a instrução SQL
             instrucaoSQL = conexao.prepareStatement("SELECT * FROM produto WHERE nome LIKE ?;");
 
             //Adiciono os parâmetros ao meu comando SQL
@@ -265,6 +277,9 @@ public class ProdutoDAO {
                 }
 
                 GerenciadorConexao.closeConnection();
+                //GerenciadorConexao.fecharConexao();
+                //Fechar conexão
+                    
 
             } catch (SQLException ex) {
             }
@@ -281,8 +296,11 @@ public class ProdutoDAO {
         ArrayList<Produto> listaProduto = new ArrayList<Produto>();
 
         try {
-
+            
+            //Abrir conexão
             conexao = GerenciadorConexao.getConnection();
+            
+            //Executo a instrução SQL
             instrucaoSQL = conexao.prepareStatement("SELECT * FROM produto WHERE tipo LIKE ?;");
 
             //Adiciono os parâmetros ao meu comando SQL
@@ -331,8 +349,11 @@ public class ProdutoDAO {
         ArrayList<String> listaTipos = new ArrayList<String>();
 
         try {
-
+            
+            //abrir conecção
             conexao = GerenciadorConexao.getConnection();
+            
+            //Executo a instrução SQL
             instrucaoSQL = conexao.prepareStatement("SELECT tipo FROM produto group by tipo");
 
 
