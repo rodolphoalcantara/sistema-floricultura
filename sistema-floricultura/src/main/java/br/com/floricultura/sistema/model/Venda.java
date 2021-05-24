@@ -6,6 +6,7 @@
 package br.com.floricultura.sistema.model;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -26,12 +27,13 @@ public class Venda {
     private List<ItemVenda> itens;
 
     public Venda(){
-        
+       itens = new ArrayList<ItemVenda>(); 
     }
     
     public Venda(CadastroCliente cliente, Date data){
         this.cliente = cliente;
         this.data = data;
+        itens = new ArrayList<ItemVenda>();
     }
     
     

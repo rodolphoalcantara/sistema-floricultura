@@ -5,7 +5,17 @@
  */
 package br.com.floricultura.sistema.view;
 
+import br.com.floricultura.sistema.controller.ProdutoController;
+import br.com.floricultura.sistema.dao.ProdutoDAO;
+import br.com.floricultura.sistema.dao.VendaDAO;
+import br.com.floricultura.sistema.model.ItemVenda;
+import br.com.floricultura.sistema.model.Venda;
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,9 +26,21 @@ public class RelatorioSinteticoView extends javax.swing.JFrame {
     /**
      * Creates new form RelatorioSinteticoView
      */
+    
+    List<Venda> vendas;
+    DefaultTableModel tableModel;
+    
     public RelatorioSinteticoView() {
         initComponents();
         setLocationRelativeTo(null);
+        tableModel = (DefaultTableModel) tblRelSintetico.getModel();
+        try {
+            vendas = VendaDAO.listarVendasComItens();
+            listarTabela(tableModel, vendas);
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        
     }
 
     /**
@@ -46,7 +68,7 @@ public class RelatorioSinteticoView extends javax.swing.JFrame {
         btnFiltrar = new javax.swing.JButton();
         lblExemplo = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tblRelSintetico = new javax.swing.JTable();
         menuTelaCadastroCliente = new javax.swing.JMenuBar();
         jMenu_Arquivo = new javax.swing.JMenu();
         menu = new javax.swing.JMenuItem();
@@ -66,7 +88,7 @@ public class RelatorioSinteticoView extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         btnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Users-Exit-icon.png"))); // NOI18N
         btnSair.setText("Sair");
@@ -197,7 +219,7 @@ public class RelatorioSinteticoView extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tblRelSintetico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -220,11 +242,11 @@ public class RelatorioSinteticoView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
-        if (jTable2.getColumnModel().getColumnCount() > 0) {
-            jTable2.getColumnModel().getColumn(0).setPreferredWidth(150);
-            jTable2.getColumnModel().getColumn(1).setPreferredWidth(50);
-            jTable2.getColumnModel().getColumn(2).setPreferredWidth(50);
+        jScrollPane2.setViewportView(tblRelSintetico);
+        if (tblRelSintetico.getColumnModel().getColumnCount() > 0) {
+            tblRelSintetico.getColumnModel().getColumn(0).setPreferredWidth(150);
+            tblRelSintetico.getColumnModel().getColumn(1).setPreferredWidth(50);
+            tblRelSintetico.getColumnModel().getColumn(2).setPreferredWidth(50);
         }
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -320,8 +342,14 @@ public class RelatorioSinteticoView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarActionPerformed
-        //placeholder
-        new RelatorioAnaliticoView().setVisible(true);
+        
+        int numeroLinha = tblRelSintetico.getSelectedRow();
+        if (numeroLinha >= 0) {
+            Venda venda = vendas.get(numeroLinha);
+            new RelatorioAnaliticoView(venda).setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione um produto da tabela!");
+        }
     }//GEN-LAST:event_btnSelecionarActionPerformed
 
     private void btnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarActionPerformed
@@ -391,15 +419,29 @@ public class RelatorioSinteticoView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JLabel lblAte;
     private javax.swing.JLabel lblCliente;
     private javax.swing.JLabel lblData;
     private javax.swing.JLabel lblExemplo;
     private javax.swing.JMenuItem menu;
     private javax.swing.JMenuBar menuTelaCadastroCliente;
+    private javax.swing.JTable tblRelSintetico;
     private javax.swing.JTextField txtCliente;
     private javax.swing.JFormattedTextField txtfData1;
     private javax.swing.JFormattedTextField txtfData2;
     // End of variables declaration//GEN-END:variables
+
+    static void listarTabela(DefaultTableModel tableModel, List<Venda> vendas) {
+
+        for (Venda venda : vendas) {
+            tableModel.addRow(new Object[]{
+                venda.getCliente().getNomeCliente(),
+                venda.getData(),
+                venda.getItens().stream().map(item -> item.getValorTotal()).reduce(BigDecimal.ZERO, BigDecimal::add)
+            });
+        }
+    }
+    
+    
+
 }
